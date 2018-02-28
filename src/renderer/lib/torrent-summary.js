@@ -12,8 +12,8 @@ const config = require('../../config')
 // Expects a torrentSummary
 // Returns an absolute path to the torrent file, or null if unavailable
 function getTorrentPath (torrentSummary) {
-  if (!torrentSummary || !torrentSummary.torrentFileName) return null
-  return path.join(config.TORRENT_PATH, torrentSummary.torrentFileName)
+  if (!torrentSummary || !torrentSummary.genericContentFileName) return null
+  return path.join(config.TORRENT_PATH, torrentSummary.genericContentFileName)
 }
 
 // Expects a torrentSummary
@@ -30,7 +30,7 @@ function getPosterPath (torrentSummary) {
 // Returns a torrentID: filename, magnet URI, or infohash
 function getTorrentId (torrentSummary) {
   const s = torrentSummary
-  if (s.torrentFileName) { // Load torrent file from disk
+  if (s.genericContentFileName) { // Load torrent file from disk
     return getTorrentPath(s)
   } else { // Load torrent from DHT
     return s.magnetURI || s.infoHash

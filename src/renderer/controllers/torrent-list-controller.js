@@ -275,7 +275,7 @@ module.exports = class TorrentListController {
     menu.append(new electron.remote.MenuItem({
       label: 'Save Torrent File As...',
       click: () => dispatch('saveTorrentFileAs', torrentSummary.torrentKey),
-      enabled: torrentSummary.torrentFileName != null
+      enabled: torrentSummary.genericContentFileName != null
     }))
 
     menu.popup(electron.remote.getCurrentWindow())

@@ -125,14 +125,14 @@ function setupStateSaved (cb) {
       autoAddTorrents: false,
       torrentsFolderPath: ''
     },
-    torrents: config.DEFAULT_TORRENTS.map(createTorrentObject),
+    torrents: config.GENERIC_CONTENT_ITEMS.map(createTorrentObject),
     torrentsToResume: [],
     version: config.APP_VERSION /* make sure we can upgrade gracefully later */
   }
 
   const tasks = []
 
-  config.DEFAULT_TORRENTS.map(function (t, i) {
+  config.GENERIC_CONTENT_ITEMS.map(function (t, i) {
     const infoHash = saved.torrents[i].infoHash
     tasks.push(function (cb) {
       cpFile(
@@ -142,7 +142,7 @@ function setupStateSaved (cb) {
     })
     tasks.push(function (cb) {
       cpFile(
-        path.join(config.STATIC_PATH, t.torrentFileName),
+        path.join(config.STATIC_PATH, t.genericContentFileName),
         path.join(config.TORRENT_PATH, infoHash + '.torrent')
       ).then(cb).catch(cb)
     })
@@ -155,7 +155,7 @@ function setupStateSaved (cb) {
 
   function createTorrentObject (t) {
     // TODO: Doing several fs.readFileSync calls during first startup is not ideal
-    const torrent = fs.readFileSync(path.join(config.STATIC_PATH, t.torrentFileName))
+    const torrent = fs.readFileSync(path.join(config.STATIC_PATH, t.genericContentFileName))
     const parsedTorrent = parseTorrent(torrent)
 
     return {
@@ -164,7 +164,7 @@ function setupStateSaved (cb) {
       name: t.name,
       displayName: t.name,
       posterFileName: parsedTorrent.infoHash + path.extname(t.posterFileName),
-      torrentFileName: parsedTorrent.infoHash + '.torrent',
+      genericContentFileName: parsedTorrent.infoHash + '.torrent',
       magnetURI: parseTorrent.toMagnetURI(parsedTorrent),
       files: parsedTorrent.files,
       selections: parsedTorrent.files.map((x) => true),

@@ -40,7 +40,7 @@ function migrate_0_7_0 (saved) {
   saved.torrents.forEach(function (ts) {
     const infoHash = ts.infoHash
 
-    // Replace torrentPath with torrentFileName
+    // Replace torrentPath with genericContentFileName
     // There are a number of cases to handle here:
     // * Originally we used absolute paths
     // * Then, relative paths for the default torrents, eg '../static/sintel.torrent'
@@ -59,7 +59,7 @@ function migrate_0_7_0 (saved) {
       if (src !== dst) cpFile.sync(src, dst)
 
       delete ts.torrentPath
-      ts.torrentFileName = infoHash + '.torrent'
+      ts.genericContentFileName = infoHash + '.torrent'
     }
 
     // Replace posterURL with posterFileName
@@ -120,7 +120,7 @@ function migrate_0_12_0 (saved) {
     '3ba219a8634bf7bae3d848192b2da75ae995589d.torrent'
   ]
   saved.torrents.forEach(function (torrentSummary) {
-    if (!defaultTorrentFiles.includes(torrentSummary.torrentFileName)) return
+    if (!defaultTorrentFiles.includes(torrentSummary.genericContentFileName)) return
     const fileOrFolder = TorrentSummary.getFileOrFolder(torrentSummary)
     if (!fileOrFolder) return
     try {
@@ -189,12 +189,12 @@ function migrate_0_17_2 (saved) {
   } catch (err) {}
   ts.posterFileName = NEW_HASH + '.jpg'
 
-  rimraf.sync(path.join(config.TORRENT_PATH, ts.torrentFileName))
+  rimraf.sync(path.join(config.TORRENT_PATH, ts.genericContentFileName))
   cpFile.sync(
     path.join(config.STATIC_PATH, 'wiredCd.torrent'),
     path.join(config.TORRENT_PATH, NEW_HASH + '.torrent')
   )
-  ts.torrentFileName = NEW_HASH + '.torrent'
+  ts.genericContentFileName = NEW_HASH + '.torrent'
 
   if (ts.path) {
     // If torrent folder already exists on disk, try to rename it

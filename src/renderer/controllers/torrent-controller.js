@@ -75,7 +75,7 @@ module.exports = class TorrentController {
     dispatch('update')
 
     // Save the .torrent file, if it hasn't been saved already
-    if (!torrentSummary.torrentFileName) ipcRenderer.send('wt-save-torrent-file', torrentKey)
+    if (!torrentSummary.genericContentFileName) ipcRenderer.send('wt-save-torrent-file', torrentKey)
 
     // Auto-generate a poster image, if it hasn't been generated already
     if (!torrentSummary.posterFileName) ipcRenderer.send('wt-generate-torrent-poster', torrentKey)
@@ -132,10 +132,10 @@ module.exports = class TorrentController {
     dispatch('stateSave')
   }
 
-  torrentFileSaved (torrentKey, torrentFileName) {
-    console.log('torrent file saved %s: %s', torrentKey, torrentFileName)
+  torrentFileSaved (torrentKey, genericContentFileName) {
+    console.log('torrent file saved %s: %s', torrentKey, genericContentFileName)
     const torrentSummary = this.getTorrentSummary(torrentKey)
-    torrentSummary.torrentFileName = torrentFileName
+    torrentSummary.genericContentFileName = genericContentFileName
     dispatch('stateSave')
   }
 
