@@ -65,8 +65,8 @@ RUN echo '$UDPServerRun 514' >> /etc/rsyslog.conf
 # RUN apt-get install -y git
 # RUN git clone https://github.com/BenjaminFaal/apprtc
 
-EXPOSE 80
-EXPOSE 8080
+# EXPOSE 80
+# EXPOSE 8080
 EXPOSE 9175
 
 # COPY . apprtc
