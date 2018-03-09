@@ -48,15 +48,14 @@ MAINTAINER Dean Cirielli
 # Install & configure haproxy
 # Create pem file like this:
 #   openssl genrsa -out key.pem 2048
-#   openssl req -new -x509 -key key.pem -out cert.pem -days 1095
+#   cat mvapprtc-ssh-answers.txt | openssl req -new -x509 -key key.pem -out cert.pem -days 1095
 #   cat key.pem cert.pem > mvapprtc.pem
-#   or ....
+#   ... or ....
 #   cat mvapprtc-ssh-answers.txt | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mvapprtc.key -out mvapprtc.crt
 #   cat mvapprtc.crt mvapprtc.key > mvapprtc.pem
 ADD mvapprtc.pem /etc/ssl/private/mvapprtc.pem
 RUN apt-get install -y haproxy
 ADD haproxy.cfg /etc/haproxy/haproxy.cfg
-# RUN touch /var/lib/haproxy/dev/log
 RUN apt-get install -y rsyslog
 RUN echo '$ModLoad imudp' >> /etc/rsyslog.conf
 RUN echo '$UDPServerRun 514' >> /etc/rsyslog.conf
