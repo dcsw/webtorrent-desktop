@@ -63,27 +63,31 @@ RUN echo '$UDPServerRun 514' >> /etc/rsyslog.conf
 # GIT
 # RUN apt-get install -y git
 # RUN git clone https://github.com/BenjaminFaal/apprtc
+# ADD src/apprtc apprtc
+# ADD src/apprtc/src/web_app/js/appcontroller.js /apprtc/src/web_app/js/appcontroller.js
+RUN sed -i -e 's/\(window\.history\.pushState\)/roomLink = roomLink.replace("http", "https");\1/' /apprtc/src/web_app/js/appcontroller.js
 
 # EXPOSE 80
-# EXPOSE 8080
+EXPOSE 8080
 EXPOSE 9175
 
-# COPY . apprtc
-# WORKDIR apprtc
 
 # # RUN npm install -g npm
 # RUN npm install -g npm@4.6.1
 # RUN npm install -g grunt-cli
 
+# Dependencies
+# RUN apt-get install -y -f
+
 # RUN npm install
-# RUN grunt build
+WORKDIR /apprtc
+RUN grunt build
+WORKDIR /
 
 # Add utils
-#RUN apt-get install -y curl
+# RUN apt-get install -y curl
 
-COPY run.sh /
-
-WORKDIR /
+ADD run.sh /
 RUN chmod +x /run.sh
 CMD /run.sh
 
