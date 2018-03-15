@@ -39,30 +39,6 @@ module.exports = {
       name: 'Big Buck Bunny',
       posterFileName: 'bigBuckBunny.jpg',
       genericContentFileName: 'bigBuckBunny.torrent'
-    },
-    {
-      testID: 'cosmos',
-      name: 'Cosmos Laundromat (Preview)',
-      posterFileName: 'cosmosLaundromat.jpg',
-      genericContentFileName: 'cosmosLaundromat.torrent'
-    },
-    {
-      testID: 'sintel',
-      name: 'Sintel',
-      posterFileName: 'sintel.jpg',
-      genericContentFileName: 'sintel.torrent'
-    },
-    {
-      testID: 'tears',
-      name: 'Tears of Steel',
-      posterFileName: 'tearsOfSteel.jpg',
-      genericContentFileName: 'tearsOfSteel.torrent'
-    },
-    {
-      testID: 'wired',
-      name: 'The WIRED CD - Rip. Sample. Mash. Share',
-      posterFileName: 'wiredCd.jpg',
-      genericContentFileName: 'wiredCd.torrent'
     }
   ],
 

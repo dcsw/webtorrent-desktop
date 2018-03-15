@@ -19,10 +19,7 @@ module.exports = class Player extends React.Component {
     return (
       <div
         className='player'
-        onWheel={handleVolumeWheel}
         onMouseMove={dispatcher('mediaMouseMoved')}>
-        {showVideo ? renderMedia(state) : renderCastScreen(state)}
-        {showControls ? renderPlayerControls(state) : null}
       </div>
     )
   }
