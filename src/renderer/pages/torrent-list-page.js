@@ -4,8 +4,8 @@ const prettyBytes = require('prettier-bytes')
 const Checkbox = require('material-ui/Checkbox').default
 const LinearProgress = require('material-ui/LinearProgress').default
 
-const TorrentSummary = require('../lib/torrent-summary')
-const TorrentPlayer = require('../lib/torrent-player')
+const ImageSummary = require('../lib/image-summary')
+const ImagePlayer = require('../lib/image-player')
 const {dispatcher} = require('../lib/dispatcher')
 
 module.exports = class TorrentList extends React.Component {
@@ -25,7 +25,7 @@ module.exports = class TorrentList extends React.Component {
       )
     }
     const torrentElems = state.saved.torrents.map(
-      (torrentSummary) => this.renderTorrent(torrentSummary)
+      (imageSummary) => this.renderTorrent(imageSummary)
     )
     contents.push(...torrentElems)
     contents.push(
@@ -41,16 +41,16 @@ module.exports = class TorrentList extends React.Component {
     )
   }
 
-  renderTorrent (torrentSummary) {
+  renderTorrent (imageSummary) {
     const state = this.props.state
-    const infoHash = torrentSummary.infoHash
+    const infoHash = imageSummary.infoHash
     const isSelected = infoHash && state.selectedInfoHash === infoHash
 
     // Background image: show some nice visuals, like a frame from the movie, if possible
     const style = {}
-    if (torrentSummary.posterFileName) {
+    if (imageSummary.posterFileName) {
       const gradient = 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%)'
-      const posterPath = TorrentSummary.getPosterPath(torrentSummary)
+      const posterPath = ImageSummary.getPosterPath(imageSummary)
       style.backgroundImage = `${gradient}, url('${posterPath}')`
     }
 
@@ -59,36 +59,36 @@ module.exports = class TorrentList extends React.Component {
     const classes = ['torrent']
     if (isSelected) classes.push('selected')
     if (!infoHash) classes.push('disabled')
-    if (!torrentSummary.torrentKey) throw new Error('Missing torrentKey')
+    if (!imageSummary.torrentKey) throw new Error('Missing torrentKey')
     return (
       <div
-        id={torrentSummary.testID && ('torrent-' + torrentSummary.testID)}
-        key={torrentSummary.torrentKey}
+        id={imageSummary.testID && ('torrent-' + imageSummary.testID)}
+        key={imageSummary.torrentKey}
         style={style}
         className={classes.join(' ')}
         onContextMenu={infoHash && dispatcher('openTorrentContextMenu', infoHash)}
         onClick={infoHash && dispatcher('toggleSelectTorrent', infoHash)}>
-        {this.renderTorrentMetadata(torrentSummary)}
-        {infoHash ? this.renderTorrentButtons(torrentSummary) : null}
-        {isSelected ? this.renderTorrentDetails(torrentSummary) : null}
+        {this.renderTorrentMetadata(imageSummary)}
+        {infoHash ? this.renderTorrentButtons(imageSummary) : null}
+        {isSelected ? this.renderTorrentDetails(imageSummary) : null}
         <hr />
       </div>
     )
   }
 
   // Show name, download status, % complete
-  renderTorrentMetadata (torrentSummary) {
-    const name = torrentSummary.name || 'Loading torrent...'
+  renderTorrentMetadata (imageSummary) {
+    const name = imageSummary.name || 'Loading torrent...'
     const elements = [(
       <div key='name' className='name ellipsis'>{name}</div>
     )]
 
     // If it's downloading/seeding then show progress info
-    const prog = torrentSummary.progress
+    const prog = imageSummary.progress
     let progElems
-    if (torrentSummary.error) {
-      progElems = [getErrorMessage(torrentSummary)]
-    } else if (torrentSummary.status !== 'paused' && prog) {
+    if (imageSummary.error) {
+      progElems = [getErrorMessage(imageSummary)]
+    } else if (imageSummary.status !== 'paused' && prog) {
       progElems = [
         renderDownloadCheckbox(),
         renderTorrentStatus(),
@@ -114,12 +114,12 @@ module.exports = class TorrentList extends React.Component {
     return (<div key='metadata' className='metadata'>{elements}</div>)
 
     function renderDownloadCheckbox () {
-      const infoHash = torrentSummary.infoHash
-      const isActive = ['downloading', 'seeding'].includes(torrentSummary.status)
+      const infoHash = imageSummary.infoHash
+      const isActive = ['downloading', 'seeding'].includes(imageSummary.status)
       return (
         <Checkbox
           key='download-button'
-          className={'control download ' + torrentSummary.status}
+          className={'control download ' + imageSummary.status}
           style={{
             display: 'inline-block',
             width: 32
@@ -205,15 +205,15 @@ module.exports = class TorrentList extends React.Component {
 
     function renderTorrentStatus () {
       let status
-      if (torrentSummary.status === 'paused') {
-        if (!torrentSummary.progress) status = ''
-        else if (torrentSummary.progress.progress === 1) status = 'Not seeding'
+      if (imageSummary.status === 'paused') {
+        if (!imageSummary.progress) status = ''
+        else if (imageSummary.progress.progress === 1) status = 'Not seeding'
         else status = 'Paused'
-      } else if (torrentSummary.status === 'downloading') {
+      } else if (imageSummary.status === 'downloading') {
         status = 'Downloading'
-      } else if (torrentSummary.status === 'seeding') {
+      } else if (imageSummary.status === 'seeding') {
         status = 'Seeding'
-      } else { // torrentSummary.status is 'new' or something unexpected
+      } else { // imageSummary.status is 'new' or something unexpected
         status = ''
       }
       return (<span>{status}</span>)
@@ -222,12 +222,12 @@ module.exports = class TorrentList extends React.Component {
 
   // Download button toggles between torrenting (DL/seed) and paused
   // Play button starts streaming the torrent immediately, unpausing if needed
-  renderTorrentButtons (torrentSummary) {
-    const infoHash = torrentSummary.infoHash
+  renderTorrentButtons (imageSummary) {
+    const infoHash = imageSummary.infoHash
 
     // Only show the play/dowload buttons for torrents that contain playable media
     let playButton
-    if (!torrentSummary.error && TorrentPlayer.isPlayableTorrentSummary(torrentSummary)) {
+    if (!imageSummary.error && ImagePlayer.isPlayableImageSummary(imageSummary)) {
       playButton = (
         <i
           key='play-button'
@@ -254,17 +254,17 @@ module.exports = class TorrentList extends React.Component {
   }
 
   // Show files, per-file download status and play buttons, and so on
-  renderTorrentDetails (torrentSummary) {
+  renderTorrentDetails (imageSummary) {
     let filesElement
-    if (torrentSummary.error || !torrentSummary.files) {
+    if (imageSummary.error || !imageSummary.files) {
       let message = ''
-      if (torrentSummary.error === 'path-missing') {
+      if (imageSummary.error === 'path-missing') {
         // Special case error: this torrent's download dir or file is missing
-        message = 'Missing path: ' + TorrentSummary.getFileOrFolder(torrentSummary)
-      } else if (torrentSummary.error) {
+        message = 'Missing path: ' + ImageSummary.getFileOrFolder(imageSummary)
+      } else if (imageSummary.error) {
         // General error for this torrent: just show the message
-        message = torrentSummary.error.message || torrentSummary.error
-      } else if (torrentSummary.status === 'paused') {
+        message = imageSummary.error.message || imageSummary.error
+      } else if (imageSummary.status === 'paused') {
         // No file info, no infohash, and we're not trying to download from the DHT
         message = 'Failed to load torrent info. Click the download button to try again...'
       } else {
@@ -278,10 +278,10 @@ module.exports = class TorrentList extends React.Component {
       )
     } else {
       // We do know the files. List them and show download stats for each one
-      const fileRows = torrentSummary.files
+      const fileRows = imageSummary.files
         .filter((file) => !file.path.includes('/.____padding_file/'))
         .map((file, index) => ({ file, index }))
-        .map((object) => this.renderFileRow(torrentSummary, object.file, object.index))
+        .map((object) => this.renderFileRow(imageSummary, object.file, object.index))
 
       filesElement = (
         <div key='files' className='files'>
@@ -301,16 +301,16 @@ module.exports = class TorrentList extends React.Component {
     )
   }
 
-  // Show a single torrentSummary file in the details view for a single torrent
-  renderFileRow (torrentSummary, file, index) {
+  // Show a single imageSummary file in the details view for a single torrent
+  renderFileRow (imageSummary, file, index) {
     // First, find out how much of the file we've downloaded
     // Are we even torrenting it?
-    const isSelected = torrentSummary.selections && torrentSummary.selections[index]
+    const isSelected = imageSummary.selections && imageSummary.selections[index]
     let isDone = false // Are we finished torrenting it?
     let progress = ''
-    if (torrentSummary.progress && torrentSummary.progress.files &&
-        torrentSummary.progress.files[index]) {
-      const fileProg = torrentSummary.progress.files[index]
+    if (imageSummary.progress && imageSummary.progress.files &&
+        imageSummary.progress.files[index]) {
+      const fileProg = imageSummary.progress.files[index]
       isDone = fileProg.numPiecesPresent === fileProg.numPieces
       progress = Math.round(100 * fileProg.numPiecesPresent / fileProg.numPieces) + '%'
     }
@@ -323,8 +323,8 @@ module.exports = class TorrentList extends React.Component {
     }
 
     // Finally, render the file as a table row
-    const isPlayable = TorrentPlayer.isPlayable(file)
-    const infoHash = torrentSummary.infoHash
+    const isPlayable = ImagePlayer.isPlayable(file)
+    const infoHash = imageSummary.infoHash
     let icon
     let handleClick
     if (isPlayable) {
@@ -389,8 +389,8 @@ function stopPropagation (e) {
   e.stopPropagation()
 }
 
-function getErrorMessage (torrentSummary) {
-  const err = torrentSummary.error
+function getErrorMessage (imageSummary) {
+  const err = imageSummary.error
   if (err === 'path-missing') {
     return (
       <span>

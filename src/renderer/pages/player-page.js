@@ -3,8 +3,8 @@ const Bitfield = require("bitfield");
 const prettyBytes = require("prettier-bytes");
 const zeroFill = require("zero-fill");
 
-const TorrentSummary = require("../lib/torrent-summary");
-const Playlist = require("../lib/playlist");
+// const TorrentSummary = require("../lib/torrent-summary");
+// const Playlist = require("../lib/playlist");
 const { dispatch, dispatcher } = require("../lib/dispatcher");
 const path = require('path')
 const config = require("../../config");

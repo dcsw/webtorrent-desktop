@@ -2,8 +2,8 @@ module.exports = {
   isPlayable,
   isVideo,
   isAudio,
-  isTorrent,
-  isPlayableTorrentSummary
+  isImage,
+  isPlayableImageSummary
 }
 
 const path = require('path')
@@ -22,7 +22,7 @@ function isVideo (file) {
     '.mkv',
     '.mov',
     '.mp4',
-    '.mpg',
+    '.mpg', 
     '.ogv',
     '.webm',
     '.wmv'
@@ -43,13 +43,13 @@ function isAudio (file) {
 }
 
 // Checks if the argument is either:
-// - a string that's a valid filename ending in .torrent
-// - a file object where obj.name is ends in .torrent
+// - a string that's a valid filename ending in .image
+// - a file object where obj.name is ends in .image
 // - a string that's a magnet link (magnet://...)
-function isTorrent (file) {
-  const isTorrentFile = getFileExtension(file) === '.torrent'
+function isImage (file) {
+  const isImageFile = getFileExtension(file) === '.image'
   const isMagnet = typeof file === 'string' && /^(stream-)?magnet:/.test(file)
-  return isTorrentFile || isMagnet
+  return isImageFile || isMagnet
 }
 
 function getFileExtension (file) {
@@ -57,6 +57,6 @@ function getFileExtension (file) {
   return path.extname(name).toLowerCase()
 }
 
-function isPlayableTorrentSummary (torrentSummary) {
-  return torrentSummary.files && torrentSummary.files.some(isPlayable)
+function isPlayableImageSummary (imageSummary) {
+  return imageSummary.files && imageSummary.files.some(isPlayable)
 }
