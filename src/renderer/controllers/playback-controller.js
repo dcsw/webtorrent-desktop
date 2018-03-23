@@ -291,9 +291,10 @@ module.exports = class PlaybackController {
     // update state
     state.playing.infoHash = infoHash;
     state.playing.fileIndex = index;
-    state.playing.type = ImagePlayer.isVideo(fileSummary)
-      ? "video"
-      : ImagePlayer.isAudio(fileSummary) ? "audio" : "other";
+    // state.playing.type = ImagePlayer.isImage(fileSummary)
+    //   ? "video"
+    //   : ImagePlayer.isImage(fileSummary) ? "audio" : "other";
+      state.playing.type = ImagePlayer.isImage(fileSummary) ? "image"  : "other";
 
     // pick up where we left off
     let jumpToTime = 0;

@@ -6,8 +6,8 @@ module.exports = {
   getCurrentLocalURL
 }
 
-const TorrentSummary = require('./torrent-summary')
-const TorrentPlayer = require('./torrent-player')
+const ImageSummary = require('./image-summary')
+const ImagePlayer = require('./image-player')
 
 const cache = {
   infoHash: null,
@@ -71,17 +71,17 @@ function updateCache (state) {
 }
 
 function findPreviousIndex (state) {
-  const files = TorrentSummary.getByKey(state, state.playing.infoHash).files
+  const files = ImageSummary.getByKey(state, state.playing.infoHash).files
   for (let i = state.playing.fileIndex - 1; i >= 0; i--) {
-    if (TorrentPlayer.isPlayable(files[i])) return i
+    if (ImagePlayer.isPlayable(files[i])) return i
   }
   return null
 }
 
 function findNextIndex (state) {
-  const files = TorrentSummary.getByKey(state, state.playing.infoHash).files
+  const files = ImageSummary.getByKey(state, state.playing.infoHash).files
   for (let i = state.playing.fileIndex + 1; i < files.length; i++) {
-    if (TorrentPlayer.isPlayable(files[i])) return i
+    if (ImagePlayer.isPlayable(files[i])) return i
   }
   return null
 }
