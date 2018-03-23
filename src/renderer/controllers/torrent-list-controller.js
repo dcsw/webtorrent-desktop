@@ -38,7 +38,7 @@ module.exports = class TorrentListController {
     const torrentKey = this.state.nextTorrentKey++
     const path = this.state.saved.prefs.downloadPath
 
-    ipcRenderer.send('wt-start-torrenting', torrentKey, torrentId, path)
+    ipcRenderer.send('wt-start-playing-image', torrentKey, torrentId, path)
 
     dispatch('backToList')
   }
@@ -73,7 +73,7 @@ module.exports = class TorrentListController {
   createTorrent (options) {
     const state = this.state
     const torrentKey = state.nextTorrentKey++
-    ipcRenderer.send('wt-create-torrent', torrentKey, options)
+    ipcRenderer.send('wt-create-image', torrentKey, options)
     state.location.cancel()
   }
 
@@ -105,7 +105,7 @@ module.exports = class TorrentListController {
     })
 
     function start () {
-      ipcRenderer.send('wt-start-torrenting',
+      ipcRenderer.send('wt-start-playing-image',
         s.torrentKey,
         TorrentSummary.getTorrentId(s),
         s.path,
@@ -132,7 +132,7 @@ module.exports = class TorrentListController {
       if (torrentSummary.status === 'downloading' ||
           torrentSummary.status === 'seeding') {
         torrentSummary.status = 'paused'
-        ipcRenderer.send('wt-stop-torrenting', torrentSummary.infoHash)
+        ipcRenderer.send('wt-stop-playing-image', torrentSummary.infoHash)
       }
     })
     sound.play('DISABLE')
@@ -150,7 +150,7 @@ module.exports = class TorrentListController {
 
   pauseTorrent (torrentSummary, playSound) {
     torrentSummary.status = 'paused'
-    ipcRenderer.send('wt-stop-torrenting', torrentSummary.infoHash)
+    ipcRenderer.send('wt-stop-playing-image', torrentSummary.infoHash)
 
     if (playSound) sound.play('DISABLE')
   }
@@ -202,7 +202,7 @@ module.exports = class TorrentListController {
 
   // TODO: use torrentKey, not infoHash
   deleteTorrent (infoHash, deleteData) {
-    ipcRenderer.send('wt-stop-torrenting', infoHash)
+    ipcRenderer.send('wt-stop-playing-image', infoHash)
 
     const index = this.state.saved.torrents.findIndex((x) => x.infoHash === infoHash)
 

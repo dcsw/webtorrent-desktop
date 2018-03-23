@@ -75,15 +75,15 @@ init()
 function init () {
   listenToClientEvents()
 
-  ipc.on('wt-start-torrenting', (e, torrentKey, torrentID, path, fileModtimes, selections) =>
+  ipc.on('wt-start-playing-image', (e, torrentKey, torrentID, path, fileModtimes, selections) =>
     startTorrenting(torrentKey, torrentID, path, fileModtimes, selections))
-  ipc.on('wt-stop-torrenting', (e, infoHash) =>
+  ipc.on('wt-stop-playing-image', (e, infoHash) =>
     stopTorrenting(infoHash))
-  ipc.on('wt-create-torrent', (e, torrentKey, options) =>
+  ipc.on('wt-create-image', (e, torrentKey, options) =>
     createTorrent(torrentKey, options))
-  ipc.on('wt-save-torrent-file', (e, torrentKey) =>
+  ipc.on('wt-save-image-file', (e, torrentKey) =>
     saveTorrentFile(torrentKey))
-  ipc.on('wt-generate-torrent-poster', (e, torrentKey) =>
+  ipc.on('wt-generate-image-poster', (e, torrentKey) =>
     generateTorrentPoster(torrentKey))
   ipc.on('wt-get-audio-metadata', (e, infoHash, index) =>
     getAudioMetadata(infoHash, index))
@@ -94,7 +94,7 @@ function init () {
   ipc.on('wt-select-files', (e, infoHash, selections) =>
     selectFiles(infoHash, selections))
 
-  ipc.send('ipcReadyWebTorrent')
+  ipc.send('ipcReadyImagePlayer')
 
   window.addEventListener('error', (e) =>
     ipc.send('wt-uncaught-error', {message: e.error.message, stack: e.error.stack}),
@@ -140,7 +140,7 @@ function createTorrent (torrentKey, options) {
   const torrent = client.seed(paths, options)
   torrent.key = torrentKey
   addTorrentEvents(torrent)
-  ipc.send('wt-new-torrent')
+  ipc.send('wt-new-image')
 }
 
 function addTorrentEvents (torrent) {

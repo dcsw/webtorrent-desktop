@@ -30,8 +30,8 @@ function init () {
     app.emit('ipcReady')
   })
 
-  ipc.once('ipcReadyWebTorrent', function (e) {
-    app.ipcReadyWebTorrent = true
+  ipc.once('ipcReadyImagePlayer', function (e) {
+    app.ipcReadyImagePlayer = true
     log('sending %d queued messages from the main win to the webtorrent window',
       messageQueueMainToWebTorrent.length)
     messageQueueMainToWebTorrent.forEach(function (message) {
@@ -228,7 +228,7 @@ function init () {
         // Send message to main window
         windows.main.send(name, ...args)
         log('webtorrent: got %s', name)
-      } else if (app.ipcReadyWebTorrent) {
+      } else if (app.ipcReadyImagePlayer) {
         // Send message to webtorrent window
         windows.webtorrent.send(name, ...args)
         log('webtorrent: sent %s', name)

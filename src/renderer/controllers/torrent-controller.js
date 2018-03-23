@@ -20,7 +20,7 @@ module.exports = class TorrentController {
 
       // Check if an existing (non-active) torrent has the same info hash
       if (torrents.find((t) => t.infoHash === infoHash)) {
-        ipcRenderer.send('wt-stop-torrenting', infoHash)
+        ipcRenderer.send('wt-stop-playing-image', infoHash)
         return dispatch('error', 'Cannot add duplicate torrent')
       }
 
@@ -75,10 +75,10 @@ module.exports = class TorrentController {
     dispatch('update')
 
     // Save the .torrent file, if it hasn't been saved already
-    if (!torrentSummary.genericContentFileName) ipcRenderer.send('wt-save-torrent-file', torrentKey)
+    if (!torrentSummary.genericContentFileName) ipcRenderer.send('wt-save-image-file', torrentKey)
 
     // Auto-generate a poster image, if it hasn't been generated already
-    if (!torrentSummary.posterFileName) ipcRenderer.send('wt-generate-torrent-poster', torrentKey)
+    if (!torrentSummary.posterFileName) ipcRenderer.send('wt-generate-image-poster', torrentKey)
   }
 
   torrentDone (torrentKey, torrentInfo) {
