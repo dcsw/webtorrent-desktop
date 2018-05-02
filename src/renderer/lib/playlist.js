@@ -6,8 +6,8 @@ module.exports = {
   getCurrentLocalURL
 }
 
-const ImageSummary = require('./image-summary')
-const ImagePlayer = require('./image-player')
+const ContentSummary = require('./content-summary')
+const ContentPlayer = require('./content-player')
 
 const cache = {
   infoHash: null,
@@ -71,17 +71,17 @@ function updateCache (state) {
 }
 
 function findPreviousIndex (state) {
-  const files = ImageSummary.getByKey(state, state.playing.infoHash).files
+  const files = ContentSummary.getByKey(state, state.playing.infoHash).files
   for (let i = state.playing.fileIndex - 1; i >= 0; i--) {
-    if (ImagePlayer.isPlayable(files[i])) return i
+    if (ContentPlayer.isPlayable(files[i])) return i
   }
   return null
 }
 
 function findNextIndex (state) {
-  const files = ImageSummary.getByKey(state, state.playing.infoHash).files
+  const files = ContentSummary.getByKey(state, state.playing.infoHash).files
   for (let i = state.playing.fileIndex + 1; i < files.length; i++) {
-    if (ImagePlayer.isPlayable(files[i])) return i
+    if (ContentPlayer.isPlayable(files[i])) return i
   }
   return null
 }

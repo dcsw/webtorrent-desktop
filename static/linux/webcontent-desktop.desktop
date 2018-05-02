@@ -1,0 +1,33 @@
+[Desktop Entry]
+Name=$APP_NAME
+Version=1.0
+GenericName=BitContent Client
+X-GNOME-FullName=$APP_NAME
+Comment=Download and share files over BitContent
+Encoding=UTF-8
+Type=Application
+Icon=webcontent-desktop
+Terminal=false
+Path=$APP_PATH
+Exec=$EXEC_PATH %U
+TryExec=$TRY_EXEC_PATH
+StartupNotify=false
+Categories=Network;FileTransfer;P2P;
+MimeType=application/x-bitcontent;x-scheme-handler/magnet;x-scheme-handler/stream-magnet;
+
+Actions=CreateNewContent;OpenContentFile;OpenContentAddress;
+
+[Desktop Action CreateNewContent]
+Name=Create New Content...
+Exec=$EXEC_PATH -n
+Path=$APP_PATH
+
+[Desktop Action OpenContentFile]
+Name=Open Content File...
+Exec=$EXEC_PATH -o
+Path=$APP_PATH
+
+[Desktop Action OpenContentAddress]
+Name=Open Content Address...
+Exec=$EXEC_PATH -u
+Path=$APP_PATH

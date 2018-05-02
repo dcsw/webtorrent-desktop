@@ -1,5 +1,5 @@
 // Collects anonymous usage stats and uncaught errors
-// Reports back so that we can improve WebTorrent Desktop
+// Reports back so that we can improve WebContent Desktop
 module.exports = {
   init,
   send,
@@ -33,8 +33,8 @@ function send (state) {
   telemetry.localTime = now.toTimeString()
   telemetry.screens = getScreenInfo()
   telemetry.system = getSystemInfo()
-  telemetry.torrentStats = getTorrentStats(state)
-  telemetry.approxNumTorrents = telemetry.torrentStats.approxCount
+  telemetry.contentStats = getContentStats(state)
+  telemetry.approxNumContents = telemetry.contentStats.approxCount
 
   if (!config.IS_PRODUCTION) {
     // Development: telemetry used only for local debugging
@@ -94,9 +94,9 @@ function getSystemInfo () {
   }
 }
 
-// Get stats like the # of torrents currently active, # in list, total size
-function getTorrentStats (state) {
-  const count = state.saved.torrents.length
+// Get stats like the # of contents currently active, # in list, total size
+function getContentStats (state) {
+  const count = state.saved.contents.length
   let sizeMB = 0
   let byStatus = {
     new: { count: 0, sizeMB: 0 },
@@ -105,9 +105,9 @@ function getTorrentStats (state) {
     paused: { count: 0, sizeMB: 0 }
   }
 
-  // First, count torrents & total file size
+  // First, count contents & total file size
   for (let i = 0; i < count; i++) {
-    const t = state.saved.torrents[i]
+    const t = state.saved.contents[i]
     const stat = byStatus[t.status]
     if (!t || !t.files || !stat) continue
     stat.count++
@@ -121,17 +121,17 @@ function getTorrentStats (state) {
   }
 
   // Then, round all the counts and sums to the nearest power of 2
-  const ret = roundTorrentStats({count, sizeMB})
+  const ret = roundContentStats({count, sizeMB})
   ret.byStatus = {
-    new: roundTorrentStats(byStatus.new),
-    downloading: roundTorrentStats(byStatus.downloading),
-    seeding: roundTorrentStats(byStatus.seeding),
-    paused: roundTorrentStats(byStatus.paused)
+    new: roundContentStats(byStatus.new),
+    downloading: roundContentStats(byStatus.downloading),
+    seeding: roundContentStats(byStatus.seeding),
+    paused: roundContentStats(byStatus.paused)
   }
   return ret
 }
 
-function roundTorrentStats (stats) {
+function roundContentStats (stats) {
   return {
     approxCount: roundPow2(stats.count),
     approxSizeMB: roundPow2(stats.sizeMB)

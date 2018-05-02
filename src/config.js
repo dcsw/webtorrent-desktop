@@ -1,31 +1,31 @@
-const appConfig = require('application-config')('WebTorrent')
+const appConfig = require('application-config')('WebContent')
 const path = require('path')
 const electron = require('electron')
 const arch = require('arch')
 
-const APP_NAME = 'WebTorrent'
-const APP_TEAM = 'WebTorrent, LLC'
+const APP_NAME = 'WebContent'
+const APP_TEAM = 'WebContent, LLC'
 const APP_VERSION = require('../package.json').version
 
 const IS_TEST = isTest()
 const PORTABLE_PATH = IS_TEST
-  ? path.join(process.platform === 'win32' ? 'C:\\Windows\\Temp' : '/tmp', 'WebTorrentTest')
+  ? path.join(process.platform === 'win32' ? 'C:\\Windows\\Temp' : '/tmp', 'WebContentTest')
   : path.join(path.dirname(process.execPath), 'Portable Settings')
 const IS_PRODUCTION = isProduction()
 const IS_PORTABLE = isPortable()
 
 const UI_HEADER_HEIGHT = 38
-const UI_TORRENT_HEIGHT = 100
+const UI_CONTENT_HEIGHT = 100
 
 module.exports = {
-  ANNOUNCEMENT_URL: 'https://webtorrent.io/desktop/announcement',
-  AUTO_UPDATE_URL: 'https://webtorrent.io/desktop/update',
-  CRASH_REPORT_URL: 'https://webtorrent.io/desktop/crash-report',
-  TELEMETRY_URL: 'https://webtorrent.io/desktop/telemetry',
+  ANNOUNCEMENT_URL: 'https://webcontent.io/desktop/announcement',
+  AUTO_UPDATE_URL: 'https://webcontent.io/desktop/update',
+  CRASH_REPORT_URL: 'https://webcontent.io/desktop/crash-report',
+  TELEMETRY_URL: 'https://webcontent.io/desktop/telemetry',
 
   APP_COPYRIGHT: 'Copyright © 2014-2017 ' + APP_TEAM,
-  APP_FILE_ICON: path.join(__dirname, '..', 'static', 'WebTorrentFile'),
-  APP_ICON: path.join(__dirname, '..', 'static', 'WebTorrent'),
+  APP_FILE_ICON: path.join(__dirname, '..', 'static', 'WebContentFile'),
+  APP_ICON: path.join(__dirname, '..', 'static', 'WebContent'),
   APP_NAME: APP_NAME,
   APP_TEAM: APP_TEAM,
   APP_VERSION: APP_VERSION,
@@ -46,11 +46,11 @@ module.exports = {
 
   DEFAULT_DOWNLOAD_PATH: getDefaultDownloadPath(),
 
-  GITHUB_URL: 'https://github.com/webtorrent/webtorrent-desktop',
-  GITHUB_URL_ISSUES: 'https://github.com/webtorrent/webtorrent-desktop/issues',
-  GITHUB_URL_RAW: 'https://raw.githubusercontent.com/webtorrent/webtorrent-desktop/master',
+  GITHUB_URL: 'https://github.com/webcontent/webcontent-desktop',
+  GITHUB_URL_ISSUES: 'https://github.com/webcontent/webcontent-desktop/issues',
+  GITHUB_URL_RAW: 'https://raw.githubusercontent.com/webcontent/webcontent-desktop/master',
 
-  HOME_PAGE_URL: 'https://webtorrent.io',
+  HOME_PAGE_URL: 'https://webcontent.io',
 
   IS_PORTABLE: IS_PORTABLE,
   IS_PRODUCTION: IS_PRODUCTION,
@@ -61,21 +61,21 @@ module.exports = {
   POSTER_PATH: path.join(getConfigPath(), 'Posters'),
   ROOT_PATH: path.join(__dirname, '..'),
   STATIC_PATH: path.join(__dirname, '..', 'static'),
-  TORRENT_PATH: path.join(getConfigPath(), 'Torrents'),
+  CONTENT_PATH: path.join(getConfigPath(), 'Contents'),
 
   WINDOW_ABOUT: 'file://' + path.join(__dirname, '..', 'static', 'about.html'),
   WINDOW_MAIN: 'file://' + path.join(__dirname, '..', 'static', 'main.html'),
-  WINDOW_WEBTORRENT: 'file://' + path.join(__dirname, '..', 'static', 'webtorrent.html'),
+  WINDOW_WEBCONTENT: 'file://' + path.join(__dirname, '..', 'static', 'webcontent.html'),
 
   WINDOW_INITIAL_BOUNDS: {
     width: 500,
-    height: UI_HEADER_HEIGHT + (UI_TORRENT_HEIGHT * 6) // header + 6 torrents
+    height: UI_HEADER_HEIGHT + (UI_CONTENT_HEIGHT * 6) // header + 6 contents
   },
-  WINDOW_MIN_HEIGHT: UI_HEADER_HEIGHT + (UI_TORRENT_HEIGHT * 2), // header + 2 torrents
+  WINDOW_MIN_HEIGHT: UI_HEADER_HEIGHT + (UI_CONTENT_HEIGHT * 2), // header + 2 contents
   WINDOW_MIN_WIDTH: 425,
 
   UI_HEADER_HEIGHT: UI_HEADER_HEIGHT,
-  UI_TORRENT_HEIGHT: UI_TORRENT_HEIGHT
+  UI_CONTENT_HEIGHT: UI_CONTENT_HEIGHT
 }
 
 function getConfigPath () {

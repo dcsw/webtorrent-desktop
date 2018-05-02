@@ -1,6 +1,6 @@
 # Security Policies and Procedures
 
-This document outlines security procedures and general policies for the WebTorrent
+This document outlines security procedures and general policies for the WebContent
 project.
 
   * [Reporting a Bug](#reporting-a-bug)
@@ -9,8 +9,8 @@ project.
 
 ## Reporting a Bug
 
-The WebTorrent team and community take all security bugs in WebTorrent seriously.
-Thank you for improving the security of WebTorrent. We appreciate your efforts and
+The WebContent team and community take all security bugs in WebContent seriously.
+Thank you for improving the security of WebContent. We appreciate your efforts and
 responsible disclosure and will make every effort to acknowledge your
 contributions.
 

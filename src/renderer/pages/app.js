@@ -9,20 +9,20 @@ const MuiThemeProvider = require('material-ui/styles/MuiThemeProvider').default
 const Header = require('../components/header')
 
 // Perf optimization: Needed immediately, so do not lazy load it below
-const ImageListPage = require('./image-list-page')
+const ContentListPage = require('./content-list-page')
 
 const Views = {
-  'home': createGetter(() => ImageListPage),
+  'home': createGetter(() => ContentListPage),
   'player': createGetter(() => require('./player-page')),
-  'create-torrent': createGetter(() => require('./create-image-page')),
+  'create-content': createGetter(() => require('./create-content-page')),
   'preferences': createGetter(() => require('./preferences-page'))
 }
 
 const Modals = {
-  'open-torrent-address-modal': createGetter(
-    () => require('../components/open-torrent-address-modal')
+  'open-content-address-modal': createGetter(
+    () => require('../components/open-content-address-modal')
   ),
-  'remove-torrent-modal': createGetter(() => require('../components/remove-torrent-modal')),
+  'remove-content-modal': createGetter(() => require('../components/remove-content-modal')),
   'update-available-modal': createGetter(() => require('../components/update-available-modal')),
   'unsupported-media-modal': createGetter(() => require('../components/unsupported-media-modal'))
 }

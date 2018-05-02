@@ -6,19 +6,19 @@ const { dispatch } = require("../lib/dispatcher");
 const telemetry = require("../lib/telemetry");
 const {
   UnplayableFileError,
-  UnplayableTorrentError
+  UnplayableContentError
 } = require("../lib/errors");
 const sound = require("../lib/sound");
 
-const ImagePlayer = require("../lib/image-player");
-const ImageSummary = require("../lib/image-summary");
+const ContentPlayer = require("../lib/content-player");
+const ContentSummary = require("../lib/content-summary");
 
 const Playlist = require("../lib/playlist");
 const State = require("../lib/state");
 
 const ipcRenderer = electron.ipcRenderer;
 
-// Controls playback of torrents and files within torrents
+// Controls playback of contents and files within contents
 // both local (<video>,<audio>,external player) and remote (cast)
 module.exports = class PlaybackController {
   constructor(state, config, update) {
@@ -27,12 +27,12 @@ module.exports = class PlaybackController {
     this.update = update;
   }
 
-  // Play a file in a torrent.
-  // * Start torrenting, if necessary
+  // Play a file in a content.
+  // * Start contenting, if necessary
   // * Stream, if not already fully downloaded
   // * If no file index is provided, restore the most recently viewed file or autoplay the first
   playFile(infoHash, index /* optional */) {
-    this.pauseActiveTorrents(infoHash);
+    this.pauseActiveContents(infoHash);
 
     const state = this.state;
     if (state.location.url() === "player") {
@@ -46,13 +46,13 @@ module.exports = class PlaybackController {
         {
           url: "player",
           setup: cb => {
-            const imageSummary = ImageSummary.getByKey(state, infoHash);
+            const contentSummary = ContentSummary.getByKey(state, infoHash);
 
             if (index === undefined || initialized)
-              index = imageSummary.mostRecentFileIndex;
+              index = contentSummary.mostRecentFileIndex;
             if (index === undefined)
-              index = imageSummary.files.findIndex(ImagePlayer.isPlayable);
-            if (index === undefined) return cb(new UnplayableTorrentError());
+              index = contentSummary.files.findIndex(ContentPlayer.isPlayable);
+            if (index === undefined) return cb(new UnplayableContentError());
 
             initialized = true;
 
@@ -72,10 +72,10 @@ module.exports = class PlaybackController {
 
   // Open a file in OS default app.
   openItem(infoHash, index) {
-    const imageSummary = ImageSummary.getByKey(this.state, infoHash);
+    const contentSummary = ContentSummary.getByKey(this.state, infoHash);
     const filePath = path.join(
-      imageSummary.path,
-      imageSummary.files[index].path
+      contentSummary.path,
+      contentSummary.files[index].path
     );
     ipcRenderer.send("openItem", filePath);
   }
@@ -97,15 +97,15 @@ module.exports = class PlaybackController {
     else this.pause();
   }
 
-  pauseActiveTorrents(infoHash) {
-    // Playback Priority: pause all active torrents if needed.
+  pauseActiveContents(infoHash) {
+    // Playback Priority: pause all active contents if needed.
     if (!this.state.saved.prefs.highestPlaybackPriority) return;
 
-    // Do not pause active torrents if playing a fully downloaded torrent.
-    const imageSummary = ImageSummary.getByKey(this.state, infoHash);
-    if (imageSummary.status === "seeding") return;
+    // Do not pause active contents if playing a fully downloaded content.
+    const contentSummary = ContentSummary.getByKey(this.state, infoHash);
+    if (contentSummary.status === "seeding") return;
 
-    dispatch("prioritizeTorrent", infoHash);
+    dispatch("prioritizeContent", infoHash);
   }
 
   // Play next file in list (if any)
@@ -237,37 +237,37 @@ module.exports = class PlaybackController {
     return false;
   }
 
-  // Opens the video player to a specific torrent
+  // Opens the video player to a specific content
   openPlayer(infoHash, index, cb) {
     const state = this.state;
-    const imageSummary = ImageSummary.getByKey(state, infoHash);
+    const contentSummary = ContentSummary.getByKey(state, infoHash);
 
-    state.playing.infoHash = imageSummary.infoHash;
+    state.playing.infoHash = contentSummary.infoHash;
     state.playing.isReady = false;
 
     // update UI to show pending playback
     sound.play("PLAY");
 
-    this.startServer(imageSummary);
+    this.startServer(contentSummary);
     ipcRenderer.send("onPlayerOpen");
     this.updatePlayer(infoHash, index, true, cb);
   }
 
-  // Starts WebTorrent server for media streaming
-  startServer(imageSummary) {
+  // Starts WebContent server for media streaming
+  startServer(contentSummary) {
     const state = this.state;
 
-    if (imageSummary.status === "paused") {
-      dispatch("startTorrentingSummary", imageSummary.torrentKey);
-      ipcRenderer.once("wt-ready-" + imageSummary.infoHash, () =>
-        onTorrentReady()
+    if (contentSummary.status === "paused") {
+      dispatch("startContentingSummary", contentSummary.contentKey);
+      ipcRenderer.once("wt-ready-" + contentSummary.infoHash, () =>
+        onContentReady()
       );
     } else {
-      onTorrentReady();
+      onContentReady();
     }
 
-    function onTorrentReady() {
-      ipcRenderer.send("wt-start-server", imageSummary.infoHash);
+    function onContentReady() {
+      ipcRenderer.send("wt-start-server", contentSummary.infoHash);
       ipcRenderer.once("wt-server-running", () => {
         state.playing.isReady = true;
       });
@@ -278,23 +278,23 @@ module.exports = class PlaybackController {
   updatePlayer(infoHash, index, resume, cb) {
     const state = this.state;
 
-    const imageSummary = ImageSummary.getByKey(state, infoHash);
-    const fileSummary = imageSummary.files[index];
+    const contentSummary = ContentSummary.getByKey(state, infoHash);
+    const fileSummary = contentSummary.files[index];
 
-    if (!ImagePlayer.isPlayable(fileSummary)) {
-      imageSummary.mostRecentFileIndex = undefined;
+    if (!ContentPlayer.isPlayable(fileSummary)) {
+      contentSummary.mostRecentFileIndex = undefined;
       return cb(new UnplayableFileError());
     }
 
-    imageSummary.mostRecentFileIndex = index;
+    contentSummary.mostRecentFileIndex = index;
 
     // update state
     state.playing.infoHash = infoHash;
     state.playing.fileIndex = index;
-    // state.playing.type = ImagePlayer.isImage(fileSummary)
+    // state.playing.type = ContentPlayer.isContent(fileSummary)
     //   ? "video"
-    //   : ImagePlayer.isImage(fileSummary) ? "audio" : "other";
-      state.playing.type = ImagePlayer.isImage(fileSummary) ? "image"  : "other";
+    //   : ContentPlayer.isContent(fileSummary) ? "audio" : "other";
+      state.playing.type = ContentPlayer.isContent(fileSummary) ? "content"  : "other";
 
     // pick up where we left off
     let jumpToTime = 0;
@@ -308,15 +308,15 @@ module.exports = class PlaybackController {
     state.playing.jumpToTime = jumpToTime;
 
     // if it's audio, parse out the metadata (artist, title, etc)
-    if (imageSummary.status === "paused") {
-      ipcRenderer.once("wt-ready-" + imageSummary.infoHash, getAudioMetadata);
+    if (contentSummary.status === "paused") {
+      ipcRenderer.once("wt-ready-" + contentSummary.infoHash, getAudioMetadata);
     } else {
       getAudioMetadata();
     }
 
     function getAudioMetadata() {
       if (state.playing.type === "audio" && !fileSummary.audioInfo) {
-        ipcRenderer.send("wt-get-audio-metadata", imageSummary.infoHash, index);
+        ipcRenderer.send("wt-get-audio-metadata", contentSummary.infoHash, index);
       }
     }
 
@@ -376,14 +376,14 @@ module.exports = class PlaybackController {
     }
     restoreBounds(state);
 
-    // Tell the WebTorrent process to kill the torrent-to-HTTP server
+    // Tell the WebContent process to kill the content-to-HTTP server
     ipcRenderer.send("wt-stop-server");
 
     ipcRenderer.send("onPlayerClose");
 
     // Playback Priority: resume previously paused downloads.
     if (this.state.saved.prefs.highestPlaybackPriority) {
-      dispatch("resumePausedTorrents");
+      dispatch("resumePausedContents");
     }
 
     this.update();

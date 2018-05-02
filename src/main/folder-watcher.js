@@ -5,12 +5,12 @@ class FolderWatcher {
   constructor ({window, state}) {
     this.window = window
     this.state = state
-    this.torrentsFolderPath = null
+    this.contentsFolderPath = null
     this.watching = false
   }
 
   isEnabled () {
-    return this.state.saved.prefs.autoAddTorrents
+    return this.state.saved.prefs.autoAddContents
   }
 
   start () {
@@ -18,11 +18,11 @@ class FolderWatcher {
     // start watching a new one.
     if (this.watching) this.stop()
 
-    const torrentsFolderPath = this.state.saved.prefs.torrentsFolderPath
-    this.torrentsFolderPath = torrentsFolderPath
-    if (!torrentsFolderPath) return
+    const contentsFolderPath = this.state.saved.prefs.contentsFolderPath
+    this.contentsFolderPath = contentsFolderPath
+    if (!contentsFolderPath) return
 
-    const glob = `${torrentsFolderPath}/**/*.torrent`
+    const glob = `${contentsFolderPath}/**/*.content`
     log('Folder Watcher: watching: ', glob)
 
     const options = {
@@ -32,8 +32,8 @@ class FolderWatcher {
     this.watcher = chokidar.watch(glob, options)
     this.watcher
       .on('add', (path) => {
-        log('Folder Watcher: added torrent: ', path)
-        this.window.dispatch('addTorrent', path)
+        log('Folder Watcher: added content: ', path)
+        this.window.dispatch('addContent', path)
       })
 
     this.watching = true

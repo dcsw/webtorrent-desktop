@@ -11,8 +11,8 @@ const log = require('./log')
 const menu = require('./menu')
 const windows = require('./windows')
 
-// Messages from the main process, to be sent once the WebTorrent process starts
-const messageQueueMainToWebTorrent = []
+// Messages from the main process, to be sent once the WebContent process starts
+const messageQueueMainToWebContent = []
 
 // Will hold modules injected from the app that will be used on fired
 // IPC events.
@@ -30,13 +30,13 @@ function init () {
     app.emit('ipcReady')
   })
 
-  ipc.once('ipcReadyImagePlayer', function (e) {
-    app.ipcReadyImagePlayer = true
-    log('sending %d queued messages from the main win to the webtorrent window',
-      messageQueueMainToWebTorrent.length)
-    messageQueueMainToWebTorrent.forEach(function (message) {
-      windows.webtorrent.send(message.name, ...message.args)
-      log('webtorrent: sent queued %s', message.name)
+  ipc.once('ipcReadyContentPlayer', function (e) {
+    app.ipcReadyContentPlayer = true
+    log('sending %d queued messages from the main win to the webcontent window',
+      messageQueueMainToWebContent.length)
+    messageQueueMainToWebContent.forEach(function (message) {
+      windows.webcontent.send(message.name, ...message.args)
+      log('webcontent: sent queued %s', message.name)
     })
   })
 
@@ -44,9 +44,9 @@ function init () {
    * Dialog
    */
 
-  ipc.on('openTorrentFile', () => {
+  ipc.on('openContentFile', () => {
     const dialog = require('./dialog')
-    dialog.openTorrentFile()
+    dialog.openContentFile()
   })
   ipc.on('openFiles', () => {
     const dialog = require('./dialog')
@@ -222,23 +222,23 @@ function init () {
 
   const oldEmit = ipc.emit
   ipc.emit = function (name, e, ...args) {
-    // Relay messages between the main window and the WebTorrent hidden window
+    // Relay messages between the main window and the WebContent hidden window
     if (name.startsWith('wt-') && !app.isQuitting) {
-      if (e.sender.browserWindowOptions.title === 'webtorrent-hidden-window') {
+      if (e.sender.browserWindowOptions.title === 'webcontent-hidden-window') {
         // Send message to main window
         windows.main.send(name, ...args)
-        log('webtorrent: got %s', name)
-      } else if (app.ipcReadyImagePlayer) {
-        // Send message to webtorrent window
-        windows.webtorrent.send(name, ...args)
-        log('webtorrent: sent %s', name)
+        log('webcontent: got %s', name)
+      } else if (app.ipcReadyContentPlayer) {
+        // Send message to webcontent window
+        windows.webcontent.send(name, ...args)
+        log('webcontent: sent %s', name)
       } else {
-        // Queue message for webtorrent window, it hasn't finished loading yet
-        messageQueueMainToWebTorrent.push({
+        // Queue message for webcontent window, it hasn't finished loading yet
+        messageQueueMainToWebContent.push({
           name: name,
           args: args
         })
-        log('webtorrent: queueing %s', name)
+        log('webcontent: queueing %s', name)
       }
       return
     }

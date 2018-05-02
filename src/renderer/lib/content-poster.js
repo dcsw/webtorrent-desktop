@@ -1,31 +1,31 @@
-module.exports = torrentPoster
+module.exports = contentPoster
 
 const captureFrame = require('capture-frame')
 const path = require('path')
 
-function torrentPoster (torrent, cb) {
-  // First, try to use a poster image if available
-  const posterFile = torrent.files.filter(function (file) {
+function contentPoster (content, cb) {
+  // First, try to use a poster content if available
+  const posterFile = content.files.filter(function (file) {
     return /^poster\.(jpg|png|gif)$/.test(file.name)
   })[0]
-  if (posterFile) return torrentPosterFromImage(posterFile, torrent, cb)
+  if (posterFile) return contentPosterFromContent(posterFile, content, cb)
 
   // Second, try to use the largest video file
   // Filter out file formats that the <video> tag definitely can't play
-  const videoFile = getLargestFileByExtension(torrent, ['.mp4', '.m4v', '.webm', '.mov', '.mkv'])
-  if (videoFile) return torrentPosterFromVideo(videoFile, torrent, cb)
+  const videoFile = getLargestFileByExtension(content, ['.mp4', '.m4v', '.webm', '.mov', '.mkv'])
+  if (videoFile) return contentPosterFromVideo(videoFile, content, cb)
 
-  // Third, try to use the largest image file
-  const imgFile = getLargestFileByExtension(torrent, ['.gif', '.jpg', '.jpeg', '.png'])
-  if (imgFile) return torrentPosterFromImage(imgFile, torrent, cb)
+  // Third, try to use the largest content file
+  const imgFile = getLargestFileByExtension(content, ['.gif', '.jpg', '.jpeg', '.png'])
+  if (imgFile) return contentPosterFromContent(imgFile, content, cb)
 
   // TODO: generate a waveform from the largest sound file
   // Finally, admit defeat
-  return cb(new Error('Cannot generate a poster from any files in the torrent'))
+  return cb(new Error('Cannot generate a poster from any files in the content'))
 }
 
-function getLargestFileByExtension (torrent, extensions) {
-  const files = torrent.files.filter(function (file) {
+function getLargestFileByExtension (content, extensions) {
+  const files = content.files.filter(function (file) {
     const extname = path.extname(file.name).toLowerCase()
     return extensions.indexOf(extname) !== -1
   })
@@ -35,10 +35,10 @@ function getLargestFileByExtension (torrent, extensions) {
   })
 }
 
-function torrentPosterFromVideo (file, torrent, cb) {
-  const index = torrent.files.indexOf(file)
+function contentPosterFromVideo (file, content, cb) {
+  const index = content.files.indexOf(file)
 
-  const server = torrent.createServer(0)
+  const server = content.createServer(0)
   server.listen(0, onListening)
 
   function onListening () {
@@ -77,7 +77,7 @@ function torrentPosterFromVideo (file, torrent, cb) {
   }
 }
 
-function torrentPosterFromImage (file, torrent, cb) {
+function contentPosterFromContent (file, content, cb) {
   const extname = path.extname(file.name)
   file.getBuffer((err, buf) => cb(err, buf, extname))
 }

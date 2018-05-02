@@ -36,7 +36,7 @@ if (process.platform === 'win32') {
 if (!shouldQuit && !config.IS_PORTABLE) {
   // Prevent multiple instances of app from running at same time. New instances
   // signal this instance and quit. Note: This feature creates a lock file in
-  // %APPDATA%\Roaming\WebTorrent so we do not do it for the Portable App since
+  // %APPDATA%\Roaming\WebContent so we do not do it for the Portable App since
   // we want to be "silent" as well as "portable".
   shouldQuit = app.makeSingleInstance(onAppOpen)
   if (shouldQuit) {
@@ -75,7 +75,7 @@ function init () {
     const state = results.state
 
     windows.main.init(state, {hidden: hidden})
-    windows.webtorrent.init()
+    windows.webcontent.init()
     menu.init()
 
     // To keep app startup fast, some code is delayed.
@@ -153,7 +153,7 @@ function delayedInit (state) {
   }
 }
 
-function onOpen (e, torrentId) {
+function onOpen (e, contentId) {
   e.preventDefault()
 
   if (app.ipcReady) {
@@ -162,9 +162,9 @@ function onOpen (e, torrentId) {
     // Electron issue: https://github.com/atom/electron/issues/4338
     setTimeout(() => windows.main.show(), 100)
 
-    processArgv([ torrentId ])
+    processArgv([ contentId ])
   } else {
-    argv.push(torrentId)
+    argv.push(contentId)
   }
 }
 
@@ -182,7 +182,7 @@ function onAppOpen (newArgv) {
 }
 
 // Remove leading args.
-// Production: 1 arg, eg: /Applications/WebTorrent.app/Contents/MacOS/WebTorrent
+// Production: 1 arg, eg: /Applications/WebContent.app/Contents/MacOS/WebContent
 // Development: 2 args, eg: electron .
 // Test: 4 args, eg: electron -r .../mocks.js .
 function sliceArgv (argv) {
@@ -192,7 +192,7 @@ function sliceArgv (argv) {
 }
 
 function processArgv (argv) {
-  let torrentIds = []
+  let contentIds = []
   argv.forEach(function (arg) {
     if (arg === '-n' || arg === '-o' || arg === '-u') {
       // Critical path: Only load the 'dialog' package if it is needed
@@ -200,27 +200,27 @@ function processArgv (argv) {
       if (arg === '-n') {
         dialog.openSeedDirectory()
       } else if (arg === '-o') {
-        dialog.openTorrentFile()
+        dialog.openContentFile()
       } else if (arg === '-u') {
-        dialog.openTorrentAddress()
+        dialog.openContentAddress()
       }
     } else if (arg === '--hidden') {
       // Ignore hidden argument, already being handled
     } else if (arg.startsWith('-psn')) {
       // Ignore Mac launchd "process serial number" argument
-      // Issue: https://github.com/webtorrent/webtorrent-desktop/issues/214
+      // Issue: https://github.com/webcontent/webcontent-desktop/issues/214
     } else if (arg.startsWith('--')) {
       // Ignore Spectron flags
     } else if (arg === 'data:,') {
       // Ignore weird Spectron argument
     } else if (arg !== '.') {
-      // Ignore '.' argument, which gets misinterpreted as a torrent id, when a
-      // development copy of WebTorrent is started while a production version is
+      // Ignore '.' argument, which gets misinterpreted as a content id, when a
+      // development copy of WebContent is started while a production version is
       // running.
-      torrentIds.push(arg)
+      contentIds.push(arg)
     }
   })
-  if (torrentIds.length > 0) {
-    windows.main.dispatch('onOpen', torrentIds)
+  if (contentIds.length > 0) {
+    windows.main.dispatch('onOpen', contentIds)
   }
 }

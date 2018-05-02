@@ -4,18 +4,18 @@ const prettyBytes = require('prettier-bytes')
 const Checkbox = require('material-ui/Checkbox').default
 const LinearProgress = require('material-ui/LinearProgress').default
 
-const ImageSummary = require('../lib/image-summary')
-const ImagePlayer = require('../lib/image-player')
+const ContentSummary = require('../lib/content-summary')
+const ContentPlayer = require('../lib/content-player')
 const {dispatcher} = require('../lib/dispatcher')
 
-module.exports = class TorrentList extends React.Component {
+module.exports = class ContentList extends React.Component {
   render () {
     const state = this.props.state
 
     const contents = []
     if (state.downloadPathStatus === 'missing') {
       contents.push(
-        <div key='torrent-missing-path'>
+        <div key='content-missing-path'>
           <p>Download path missing: {state.saved.prefs.downloadPath}</p>
           <p>Check that all drives are connected?</p>
           <p>Alternatively, choose a new download path
@@ -24,74 +24,79 @@ module.exports = class TorrentList extends React.Component {
         </div>
       )
     }
-    const torrentElems = state.saved.torrents.map(
-      (imageSummary) => this.renderTorrent(imageSummary)
+    const contentElems = state.saved.contents.map(
+      (contentSummary) => this.renderContent(contentSummary)
     )
-    contents.push(...torrentElems)
+    contents.push(...contentElems)
     contents.push(
-      <div key='torrent-placeholder' className='torrent-placeholder'>
-        <span className='ellipsis'>Drop a torrent file here or paste a magnet link</span>
+      <div key='content-placeholder' className='content-placeholder'>
+        <span className='ellipsis'>Drop a content file here or paste a magnet link</span>
       </div>
     )
 
     return (
-      <div key='torrent-list' className='torrent-list'>
+      <div key='content-list' className='content-list'>
         {contents}
       </div>
     )
   }
 
-  renderTorrent (imageSummary) {
+  renderContent (contentSummary) {
     const state = this.props.state
-    const infoHash = imageSummary.infoHash
+    const infoHash = contentSummary.infoHash
     const isSelected = infoHash && state.selectedInfoHash === infoHash
 
-    // Background image: show some nice visuals, like a frame from the movie, if possible
+    // Background content: show some nice visuals, like a frame from the movie, if possible
     const style = {}
-    if (imageSummary.posterFileName) {
+    if (contentSummary.posterFileName) {
       const gradient = 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%)'
-      const posterPath = ImageSummary.getPosterPath(imageSummary)
-      style.backgroundImage = `${gradient}, url('${posterPath}')`
+      const posterPath = ContentSummary.getPosterPath(contentSummary)
+      style.backgroundContent = `${gradient}, url('${posterPath}')`
     }
 
-    // Foreground: name of the torrent, basic info like size, play button,
+    // Foreground: name of the content, basic info like size, play button,
     // cast buttons if available, and delete
-    const classes = ['torrent']
+    const classes = ['content']
     if (isSelected) classes.push('selected')
     if (!infoHash) classes.push('disabled')
-    if (!imageSummary.torrentKey) throw new Error('Missing torrentKey')
+    // FIXME: get this out of here...
+    console.log(`BART ${JSON.stringify(contentSummary)}`)
+    if (!contentSummary.contentKey) {
+      contentSummary.contentKey = 'yabbadabbadoo' + Math.random() * 1000000;
+    }
+    if (!contentSummary.contentKey) throw new Error('Missing contentKey')
     return (
       <div
-        id={imageSummary.testID && ('torrent-' + imageSummary.testID)}
-        key={imageSummary.torrentKey}
+        id={contentSummary.testID && ('content-' + contentSummary.testID)}
+        key={contentSummary.contentKey}
         style={style}
         className={classes.join(' ')}
-        onContextMenu={infoHash && dispatcher('openTorrentContextMenu', infoHash)}
-        onClick={infoHash && dispatcher('toggleSelectTorrent', infoHash)}>
-        {this.renderTorrentMetadata(imageSummary)}
-        {infoHash ? this.renderTorrentButtons(imageSummary) : null}
-        {isSelected ? this.renderTorrentDetails(imageSummary) : null}
+        onContextMenu={infoHash && dispatcher('openContentContextMenu', infoHash)}
+        onClick={infoHash && dispatcher('toggleSelectContent', infoHash)}>
+        {this.renderContentMetadata(contentSummary)}
+        {infoHash ? this.renderContentButtons(contentSummary) : null}
+        {isSelected ? this.renderContentDetails(contentSummary) : null}
         <hr />
       </div>
     )
   }
 
   // Show name, download status, % complete
-  renderTorrentMetadata (imageSummary) {
-    const name = imageSummary.name || 'Loading torrent...'
+  renderContentMetadata (contentSummary) {
+    const name = contentSummary.name || 'Loading content...'
     const elements = [(
       <div key='name' className='name ellipsis'>{name}</div>
     )]
 
     // If it's downloading/seeding then show progress info
-    const prog = imageSummary.progress
+    const prog = contentSummary.progress
     let progElems
-    if (imageSummary.error) {
-      progElems = [getErrorMessage(imageSummary)]
-    } else if (imageSummary.status !== 'paused' && prog) {
+    if (contentSummary.error) {
+      progElems = [getErrorMessage(contentSummary)]
+    } else if (contentSummary.status !== 'paused' && prog) {
       progElems = [
         renderDownloadCheckbox(),
-        renderTorrentStatus(),
+        renderContentStatus(),
         renderProgressBar(),
         renderPercentProgress(),
         renderTotalProgress(),
@@ -102,7 +107,7 @@ module.exports = class TorrentList extends React.Component {
     } else {
       progElems = [
         renderDownloadCheckbox(),
-        renderTorrentStatus()
+        renderContentStatus()
       ]
     }
     elements.push(
@@ -114,12 +119,12 @@ module.exports = class TorrentList extends React.Component {
     return (<div key='metadata' className='metadata'>{elements}</div>)
 
     function renderDownloadCheckbox () {
-      const infoHash = imageSummary.infoHash
-      const isActive = ['downloading', 'seeding'].includes(imageSummary.status)
+      const infoHash = contentSummary.infoHash
+      const isActive = ['downloading', 'seeding'].includes(contentSummary.status)
       return (
         <Checkbox
           key='download-button'
-          className={'control download ' + imageSummary.status}
+          className={'control download ' + contentSummary.status}
           style={{
             display: 'inline-block',
             width: 32
@@ -130,7 +135,7 @@ module.exports = class TorrentList extends React.Component {
           }}
           checked={isActive}
           onClick={stopPropagation}
-          onCheck={dispatcher('toggleTorrent', infoHash)} />
+          onCheck={dispatcher('toggleContent', infoHash)} />
       )
     }
 
@@ -203,31 +208,31 @@ module.exports = class TorrentList extends React.Component {
       return (<span>{hoursStr} {minutesStr} {secondsStr} remaining</span>)
     }
 
-    function renderTorrentStatus () {
+    function renderContentStatus () {
       let status
-      if (imageSummary.status === 'paused') {
-        if (!imageSummary.progress) status = ''
-        else if (imageSummary.progress.progress === 1) status = 'Not seeding'
+      if (contentSummary.status === 'paused') {
+        if (!contentSummary.progress) status = ''
+        else if (contentSummary.progress.progress === 1) status = 'Not seeding'
         else status = 'Paused'
-      } else if (imageSummary.status === 'downloading') {
+      } else if (contentSummary.status === 'downloading') {
         status = 'Downloading'
-      } else if (imageSummary.status === 'seeding') {
+      } else if (contentSummary.status === 'seeding') {
         status = 'Seeding'
-      } else { // imageSummary.status is 'new' or something unexpected
+      } else { // contentSummary.status is 'new' or something unexpected
         status = ''
       }
       return (<span>{status}</span>)
     }
   }
 
-  // Download button toggles between torrenting (DL/seed) and paused
-  // Play button starts streaming the torrent immediately, unpausing if needed
-  renderTorrentButtons (imageSummary) {
-    const infoHash = imageSummary.infoHash
+  // Download button toggles between contenting (DL/seed) and paused
+  // Play button starts streaming the content immediately, unpausing if needed
+  renderContentButtons (contentSummary) {
+    const infoHash = contentSummary.infoHash
 
-    // Only show the play/dowload buttons for torrents that contain playable media
+    // Only show the play/dowload buttons for contents that contain playable media
     let playButton
-    if (!imageSummary.error && ImagePlayer.isPlayableImageSummary(imageSummary)) {
+    if (!contentSummary.error && ContentPlayer.isPlayableContentSummary(contentSummary)) {
       playButton = (
         <i
           key='play-button'
@@ -240,13 +245,13 @@ module.exports = class TorrentList extends React.Component {
     }
 
     return (
-      <div className='torrent-controls'>
+      <div className='content-controls'>
         {playButton}
         <i
           key='delete-button'
           className='icon delete'
-          title='Remove torrent'
-          onClick={dispatcher('confirmDeleteTorrent', infoHash, false)}>
+          title='Remove content'
+          onClick={dispatcher('confirmDeleteContent', infoHash, false)}>
           close
         </i>
       </div>
@@ -254,22 +259,22 @@ module.exports = class TorrentList extends React.Component {
   }
 
   // Show files, per-file download status and play buttons, and so on
-  renderTorrentDetails (imageSummary) {
+  renderContentDetails (contentSummary) {
     let filesElement
-    if (imageSummary.error || !imageSummary.files) {
+    if (contentSummary.error || !contentSummary.files) {
       let message = ''
-      if (imageSummary.error === 'path-missing') {
-        // Special case error: this torrent's download dir or file is missing
-        message = 'Missing path: ' + ImageSummary.getFileOrFolder(imageSummary)
-      } else if (imageSummary.error) {
-        // General error for this torrent: just show the message
-        message = imageSummary.error.message || imageSummary.error
-      } else if (imageSummary.status === 'paused') {
+      if (contentSummary.error === 'path-missing') {
+        // Special case error: this content's download dir or file is missing
+        message = 'Missing path: ' + ContentSummary.getFileOrFolder(contentSummary)
+      } else if (contentSummary.error) {
+        // General error for this content: just show the message
+        message = contentSummary.error.message || contentSummary.error
+      } else if (contentSummary.status === 'paused') {
         // No file info, no infohash, and we're not trying to download from the DHT
-        message = 'Failed to load torrent info. Click the download button to try again...'
+        message = 'Failed to load content info. Click the download button to try again...'
       } else {
         // No file info, no infohash, trying to load from the DHT
-        message = 'Downloading torrent info...'
+        message = 'Downloading content info...'
       }
       filesElement = (
         <div key='files' className='files warning'>
@@ -278,10 +283,10 @@ module.exports = class TorrentList extends React.Component {
       )
     } else {
       // We do know the files. List them and show download stats for each one
-      const fileRows = imageSummary.files
+      const fileRows = contentSummary.files
         .filter((file) => !file.path.includes('/.____padding_file/'))
         .map((file, index) => ({ file, index }))
-        .map((object) => this.renderFileRow(imageSummary, object.file, object.index))
+        .map((object) => this.renderFileRow(contentSummary, object.file, object.index))
 
       filesElement = (
         <div key='files' className='files'>
@@ -295,22 +300,22 @@ module.exports = class TorrentList extends React.Component {
     }
 
     return (
-      <div key='details' className='torrent-details'>
+      <div key='details' className='content-details'>
         {filesElement}
       </div>
     )
   }
 
-  // Show a single imageSummary file in the details view for a single torrent
-  renderFileRow (imageSummary, file, index) {
+  // Show a single contentSummary file in the details view for a single content
+  renderFileRow (contentSummary, file, index) {
     // First, find out how much of the file we've downloaded
-    // Are we even torrenting it?
-    const isSelected = imageSummary.selections && imageSummary.selections[index]
-    let isDone = false // Are we finished torrenting it?
+    // Are we even contenting it?
+    const isSelected = contentSummary.selections && contentSummary.selections[index]
+    let isDone = false // Are we finished contenting it?
     let progress = ''
-    if (imageSummary.progress && imageSummary.progress.files &&
-        imageSummary.progress.files[index]) {
-      const fileProg = imageSummary.progress.files[index]
+    if (contentSummary.progress && contentSummary.progress.files &&
+        contentSummary.progress.files[index]) {
+      const fileProg = contentSummary.progress.files[index]
       isDone = fileProg.numPiecesPresent === fileProg.numPieces
       progress = Math.round(100 * fileProg.numPiecesPresent / fileProg.numPieces) + '%'
     }
@@ -323,8 +328,8 @@ module.exports = class TorrentList extends React.Component {
     }
 
     // Finally, render the file as a table row
-    const isPlayable = ImagePlayer.isPlayable(file)
-    const infoHash = imageSummary.infoHash
+    const isPlayable = ContentPlayer.isPlayable(file)
+    const infoHash = contentSummary.infoHash
     let icon
     let handleClick
     if (isPlayable) {
@@ -338,7 +343,7 @@ module.exports = class TorrentList extends React.Component {
     }
     // TODO: add a css 'disabled' class to indicate that a file cannot be opened/streamed
     let rowClass = ''
-    if (!isSelected) rowClass = 'disabled' // File deselected, not being torrented
+    if (!isSelected) rowClass = 'disabled' // File deselected, not being contented
     if (!isDone && !isPlayable) rowClass = 'disabled' // Can't open yet, can't stream
     return (
       <tr key={index} onClick={handleClick}>
@@ -356,7 +361,7 @@ module.exports = class TorrentList extends React.Component {
           {prettyBytes(file.length)}
         </td>
         <td className='col-select'
-          onClick={dispatcher('toggleTorrentFile', infoHash, index)}>
+          onClick={dispatcher('toggleContentFile', infoHash, index)}>
           <i className='icon deselect-file'>{isSelected ? 'close' : 'add'}</i>
         </td>
       </tr>
@@ -389,13 +394,13 @@ function stopPropagation (e) {
   e.stopPropagation()
 }
 
-function getErrorMessage (imageSummary) {
-  const err = imageSummary.error
+function getErrorMessage (contentSummary) {
+  const err = contentSummary.error
   if (err === 'path-missing') {
     return (
       <span>
         Path missing.<br />
-        Fix and restart the app, or delete the torrent.
+        Fix and restart the app, or delete the content.
       </span>
     )
   }

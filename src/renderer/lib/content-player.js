@@ -1,7 +1,7 @@
 module.exports = {
   isPlayable,
-  isImage,
-  isPlayableImageSummary
+  isContent,
+  isPlayableContentSummary
 }
 
 const path = require('path')
@@ -14,7 +14,7 @@ function isPlayable (file) {
 }
 
 // Checks whether a fileSummary or file path is playable video
-function isImage (file) {
+function isContent (file) {
   return [
     '.JPG',
     '.PNG',
@@ -33,6 +33,6 @@ function getFileExtension (file) {
   return path.extname(name).toLowerCase()
 }
 
-function isPlayableImageSummary (imageSummary) {
-  return imageSummary.files && imageSummary.files.some(isPlayable)
+function isPlayableContentSummary (contentSummary) {
+  return contentSummary.files && contentSummary.files.some(isPlayable)
 }

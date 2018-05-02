@@ -41,19 +41,19 @@ function setBadge (count) {
 function getMenuTemplate () {
   return [
     {
-      label: 'Create New Torrent...',
+      label: 'Create New Content...',
       accelerator: 'CmdOrCtrl+N',
       click: () => dialog.openSeedDirectory()
     },
     {
-      label: 'Open Torrent File...',
+      label: 'Open Content File...',
       accelerator: 'CmdOrCtrl+O',
-      click: () => dialog.openTorrentFile()
+      click: () => dialog.openContentFile()
     },
     {
-      label: 'Open Torrent Address...',
+      label: 'Open Content Address...',
       accelerator: 'CmdOrCtrl+U',
-      click: () => dialog.openTorrentAddress()
+      click: () => dialog.openContentAddress()
     }
   ]
 }

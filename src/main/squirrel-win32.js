@@ -40,7 +40,7 @@ function handleEvent (cmd) {
     // App was just uninstalled. Undo anything we did in the --squirrel-install and
     // --squirrel-updated handlers
 
-    // Uninstall .torrent file and magnet link handlers
+    // Uninstall .content file and magnet link handlers
     handlers.uninstall()
 
     // Remove desktop/start menu shortcuts.
@@ -124,7 +124,7 @@ function createShortcuts (cb) {
 function updateShortcuts (cb) {
   const homeDir = os.homedir()
   if (homeDir) {
-    const desktopShortcutPath = path.join(homeDir, 'Desktop', 'WebTorrent.lnk')
+    const desktopShortcutPath = path.join(homeDir, 'Desktop', 'WebContent.lnk')
     // If the desktop shortcut was deleted by the user, then keep it deleted.
     fs.access(desktopShortcutPath, function (err) {
       const desktopShortcutExists = !err

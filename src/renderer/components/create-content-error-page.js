@@ -2,12 +2,12 @@ const React = require('react')
 
 const {dispatcher} = require('../lib/dispatcher')
 
-module.exports = class CreateTorrentErrorPage extends React.Component {
+module.exports = class CreateContentErrorPage extends React.Component {
   render () {
     return (
-      <div className='create-torrent'>
-        <h2>Create torrent</h2>
-        <p className='torrent-info'>
+      <div className='create-content'>
+        <h2>Create content</h2>
+        <p className='content-info'>
           <p>
             Sorry, you must select at least one file that is not a hidden file.
           </p>

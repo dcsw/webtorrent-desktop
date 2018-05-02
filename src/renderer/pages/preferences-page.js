@@ -52,7 +52,7 @@ class PreferencesPage extends React.Component {
         <Checkbox
           className='control'
           checked={!this.props.state.unsaved.prefs.openExternalPlayer}
-          label={'Play torrent media files using WebTorrent'}
+          label={'Play content media files using WebContent'}
           onCheck={this.handleOpenExternalPlayerChange} />
       </Preference>
     )
@@ -71,7 +71,7 @@ class PreferencesPage extends React.Component {
           label={'Highest Playback Priority'}
           onCheck={this.handleHighestPlaybackPriorityChange}
         />
-        <p>Pauses all active torrents to allow playback to use all of the available bandwidth.</p>
+        <p>Pauses all active contents to allow playback to use all of the available bandwidth.</p>
       </Preference>
     )
   }
@@ -85,8 +85,8 @@ class PreferencesPage extends React.Component {
     const playerName = this.props.state.getExternalPlayerName()
 
     const description = this.props.state.unsaved.prefs.openExternalPlayer
-      ? `Torrent media files will always play in ${playerName}.`
-      : `Torrent media files will play in ${playerName} if WebTorrent cannot play them.`
+      ? `Content media files will always play in ${playerName}.`
+      : `Content media files will play in ${playerName} if WebContent cannot play them.`
 
     return (
       <Preference>
@@ -108,28 +108,28 @@ class PreferencesPage extends React.Component {
     dispatch('updatePreferences', 'externalPlayerPath', filePath)
   }
 
-  autoAddTorrentsCheckbox () {
+  autoAddContentsCheckbox () {
     return (
       <Preference>
         <Checkbox
           className='control'
-          checked={this.props.state.unsaved.prefs.autoAddTorrents}
-          label={'Watch for new .torrent files and add them immediately'}
-          onCheck={(e, value) => { this.handleAutoAddTorrentsChange(e, value) }}
+          checked={this.props.state.unsaved.prefs.autoAddContents}
+          label={'Watch for new .content files and add them immediately'}
+          onCheck={(e, value) => { this.handleAutoAddContentsChange(e, value) }}
         />
       </Preference>
     )
   }
 
-  handleAutoAddTorrentsChange (e, isChecked) {
-    const torrentsFolderPath = this.props.state.unsaved.prefs.torrentsFolderPath
-    if (isChecked && !torrentsFolderPath) {
-      alert('Select a torrents folder first.') // eslint-disable-line
+  handleAutoAddContentsChange (e, isChecked) {
+    const contentsFolderPath = this.props.state.unsaved.prefs.contentsFolderPath
+    if (isChecked && !contentsFolderPath) {
+      alert('Select a contents folder first.') // eslint-disable-line
       e.preventDefault()
       return
     }
 
-    dispatch('updatePreferences', 'autoAddTorrents', isChecked)
+    dispatch('updatePreferences', 'autoAddContents', isChecked)
 
     if (isChecked) {
       dispatch('startFolderWatcher', null)
@@ -139,26 +139,26 @@ class PreferencesPage extends React.Component {
     dispatch('stopFolderWatcher', null)
   }
 
-  torrentsFolderPathSelector () {
-    const torrentsFolderPath = this.props.state.unsaved.prefs.torrentsFolderPath
+  contentsFolderPathSelector () {
+    const contentsFolderPath = this.props.state.unsaved.prefs.contentsFolderPath
 
     return (
       <Preference>
         <PathSelector
           dialog={{
-            title: 'Select folder to watch for new torrents',
+            title: 'Select folder to watch for new contents',
             properties: [ 'openDirectory' ]
           }}
-          displayValue={torrentsFolderPath || ''}
-          onChange={this.handletorrentsFolderPathChange}
+          displayValue={contentsFolderPath || ''}
+          onChange={this.handlecontentsFolderPathChange}
           title='Folder to watch'
-          value={torrentsFolderPath ? path.dirname(torrentsFolderPath) : null} />
+          value={contentsFolderPath ? path.dirname(contentsFolderPath) : null} />
       </Preference>
     )
   }
 
-  handletorrentsFolderPathChange (filePath) {
-    dispatch('updatePreferences', 'torrentsFolderPath', filePath)
+  handlecontentsFolderPathChange (filePath) {
+    dispatch('updatePreferences', 'contentsFolderPath', filePath)
   }
 
   setDefaultAppButton () {
@@ -166,17 +166,17 @@ class PreferencesPage extends React.Component {
     if (isFileHandler) {
       return (
         <Preference>
-          <p>WebTorrent is your default torrent app. Hooray!</p>
+          <p>WebContent is your default content app. Hooray!</p>
         </Preference>
       )
     }
     return (
       <Preference>
-        <p>WebTorrent is not currently the default torrent app.</p>
+        <p>WebContent is not currently the default content app.</p>
         <RaisedButton
           className='control'
           onClick={this.handleSetDefaultApp}
-          label='Make WebTorrent the default' />
+          label='Make WebContent the default' />
       </Preference>
     )
   }
@@ -196,7 +196,7 @@ class PreferencesPage extends React.Component {
           <Checkbox
             className='control'
             checked={this.props.state.unsaved.prefs.startup}
-            label={'Open WebTorrent on startup.'}
+            label={'Open WebContent on startup.'}
             onCheck={this.handleStartupChange}
           />
         </Preference>
@@ -218,15 +218,15 @@ class PreferencesPage extends React.Component {
       <div style={style}>
         <PreferencesSection title='Folders'>
           {this.downloadPathSelector()}
-          {this.autoAddTorrentsCheckbox()}
-          {this.torrentsFolderPathSelector()}
+          {this.autoAddContentsCheckbox()}
+          {this.contentsFolderPathSelector()}
         </PreferencesSection>
         <PreferencesSection title='Playback'>
           {this.openExternalPlayerCheckbox()}
           {this.externalPlayerPathSelector()}
           {this.highestPlaybackPriorityCheckbox()}
         </PreferencesSection>
-        <PreferencesSection title='Default torrent app'>
+        <PreferencesSection title='Default content app'>
           {this.setDefaultAppButton()}
         </PreferencesSection>
         {this.setStartupSection()}

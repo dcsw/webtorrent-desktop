@@ -265,30 +265,30 @@ table {
   font-weight: bold;
 }
 
-.create-torrent {
+.create-content {
   padding: 10px 25px;
   overflow: hidden;
 }
 
-.create-torrent .torrent-attribute {
+.create-content .content-attribute {
   white-space: nowrap;
   margin: 8px 0;
 }
 
-.create-torrent .torrent-attribute>* {
+.create-content .content-attribute>* {
   display: inline-block;
 }
 
-.create-torrent .torrent-attribute label {
+.create-content .content-attribute label {
   width: 100px;
   vertical-align: top;
 }
 
-.create-torrent .torrent-attribute>div {
+.create-content .content-attribute>div {
   width: calc(100% - 100px);
 }
 
-.create-torrent .torrent-attribute div {
+.create-content .content-attribute div {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -319,10 +319,10 @@ textarea,
 }
 
 /*
- * TORRENT LIST
+ * CONTENT LIST
  */
 
-.torrent {
+.content {
   background: linear-gradient(to bottom right, #4B79A1, #283E51);
   background-repeat: no-repeat;
   background-size: cover;
@@ -332,16 +332,16 @@ textarea,
   animation: fadein 0.5s;
 }
 
-.torrent,
-.torrent-placeholder {
+.content,
+.content-placeholder {
   height: 100px;
 }
 
-.torrent:not(:last-child) {
+.content:not(:last-child) {
   border-bottom: 1px solid #282828;
 }
 
-.torrent .metadata {
+.content .metadata {
   position: absolute;
   top: 20px;
   left: 15px;
@@ -350,55 +350,55 @@ textarea,
   text-shadow: rgba(0, 0, 0, 0.5) 0 0 4px;
 }
 
-.torrent .metadata span:not(:last-child)::after {
+.content .metadata span:not(:last-child)::after {
   content: ' • ';
   opacity: 0.7;
   padding-left: 4px;
   padding-right: 4px;
 }
 
-.torrent:hover .metadata {
+.content:hover .metadata {
   width: calc(100% - 120px);
 }
 
-.torrent .torrent-controls {
+.content .content-controls {
   display: none;
 }
 
-.torrent:hover .torrent-controls {
+.content:hover .content-controls {
   display: block;
 }
 
-.torrent .play {
+.content .play {
   position: absolute;
   top: 23px;
   right: 45px;
   font-size: 55px;
 }
 
-.torrent .delete {
+.content .delete {
   position: absolute;
   top: 38px;
   right: 12px;
 }
 
-.torrent .download {
+.content .download {
   vertical-align: -0.4em;
   margin-left: -2px;
 }
 
-.torrent .buttons .radial-progress {
+.content .buttons .radial-progress {
   position: absolute;
 }
 
-.torrent .name {
+.content .name {
   font-size: 20px;
   font-weight: bold;
   line-height: 1.5em;
   margin-bottom: 6px;
 }
 
-.torrent hr {
+.content hr {
   position: absolute;
   bottom: 5px;
   left: calc(50% - 20px);
@@ -411,33 +411,33 @@ textarea,
   border: none;
 }
 
-.torrent:hover hr {
+.content:hover hr {
   display: block;
 }
 
 /*
- * TORRENT LIST: ERRORS
+ * CONTENT LIST: ERRORS
  */
 
-.torrent-list p {
+.content-list p {
   margin: 10px 20px;
 }
 
-.torrent-list a {
+.content-list a {
   color: #99f;
   text-decoration: none;
 }
 
 /*
- * TORRENT LIST: DRAG-DROP TARGET
+ * CONTENT LIST: DRAG-DROP TARGET
  */
 
-.torrent-placeholder {
+.content-placeholder {
   padding: 10px;
   font-size: 1.1em;
 }
 
-.torrent-placeholder span {
+.content-placeholder span {
   border: 5px #444 dashed;
   border-radius: 5px;
   color: #666;
@@ -447,7 +447,7 @@ textarea,
   justify-content: center;
 }
 
-body.drag .torrent-placeholder span {
+body.drag .content-placeholder span {
   border-color: #def;
   color: #def;
 }
@@ -464,71 +464,71 @@ body.drag .app::after {
 }
 
 /*
- * TORRENT LIST: EXPANDED TORRENT DETAILS
+ * CONTENT LIST: EXPANDED CONTENT DETAILS
  */
 
-.torrent.selected {
+.content.selected {
   height: auto;
 }
 
-.torrent-details {
+.content-details {
   padding: 8em 0 20px 0;
 }
 
-.torrent-details .warning {
+.content-details .warning {
   padding-left: 15px;
 }
 
-.torrent-details table {
+.content-details table {
   width: 100%;
   white-space: nowrap;
   border: none;
   border-spacing: 0;
 }
 
-.torrent-details tr {
+.content-details tr {
   height: 28px;
 }
 
-.torrent-details td {
+.content-details td {
   overflow: hidden;
   padding: 0;
   vertical-align: middle;
 }
 
-.torrent-details td .icon {
+.content-details td .icon {
   font-size: 18px;
   position: relative;
   top: 3px;
 }
 
-.torrent-details td.col-icon {
+.content-details td.col-icon {
   width: 45px;
   padding-left: 16px;
 }
 
-.torrent-details td.col-icon .radial-progress {
+.content-details td.col-icon .radial-progress {
   position: absolute;
   margin-top: 4px;
   margin-left: 0.5px;
 }
 
-.torrent-details td.col-name {
+.content-details td.col-name {
   width: auto;
   text-overflow: ellipsis;
 }
 
-.torrent-details td.col-progress {
+.content-details td.col-progress {
   width: 60px;
   text-align: right;
 }
 
-.torrent-details td.col-size {
+.content-details td.col-size {
   width: 60px;
   text-align: right;
 }
 
-.torrent-details td.col-select {
+.content-details td.col-select {
   width: 45px;
   padding-right: 13px;
   text-align: right;

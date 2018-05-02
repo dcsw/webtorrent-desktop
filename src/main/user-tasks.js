@@ -18,18 +18,18 @@ function getUserTasks () {
   return [
     {
       arguments: '-n',
-      title: 'Create New Torrent...',
-      description: 'Create a new torrent'
+      title: 'Create New Content...',
+      description: 'Create a new content'
     },
     {
       arguments: '-o',
-      title: 'Open Torrent File...',
-      description: 'Open a .torrent file'
+      title: 'Open Content File...',
+      description: 'Open a .content file'
     },
     {
       arguments: '-u',
-      title: 'Open Torrent Address...',
-      description: 'Open a torrent from a URL'
+      title: 'Open Content Address...',
+      description: 'Open a content from a URL'
     }
   ].map(getUserTasksItem)
 }

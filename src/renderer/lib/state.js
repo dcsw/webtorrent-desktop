@@ -45,7 +45,7 @@ function getDefaultState () {
       isFullScreen: false,
       title: config.APP_WINDOW_TITLE
     },
-    selectedInfoHash: null, /* the torrent we've selected to view details. see state.torrents */
+    selectedInfoHash: null, /* the content we've selected to view details. see state.contents */
     playing: getDefaultPlayState(), /* the media (audio or video) that we're currently playing */
     devices: {}, /* playback devices like Chromecast and AppleTV */
     dock: {
@@ -54,7 +54,7 @@ function getDefaultState () {
     },
     modal: null, /* modal popover */
     errors: [], /* user-facing errors */
-    nextTorrentKey: 1, /* identify torrents for IPC between the main and webtorrent windows */
+    nextTorrentKey: 1, /* identify contents for IPC between the main and webcontent windows */
 
     /*
      * Saved state is read from and written to a file every time the app runs.
@@ -86,8 +86,8 @@ function getDefaultState () {
 /* Whenever we stop playing video or audio, here's what we reset state.playing to */
 function getDefaultPlayState () {
   return {
-    infoHash: null, /* the info hash of the torrent we're playing */
-    fileIndex: null, /* the zero-based index within the torrent */
+    infoHash: null, /* the info hash of the content we're playing */
+    fileIndex: null, /* the zero-based index within the content */
     location: 'local', /* 'local', 'chromecast', 'airplay' */
     type: null, /* 'audio' or 'video', could be 'other' if ever support eg streaming to VLC */
     currentTime: 0, /* seconds */
@@ -123,17 +123,17 @@ function setupStateSaved (cb) {
       externalPlayerPath: null,
       startup: false,
       autoAddTorrents: false,
-      torrentsFolderPath: ''
+      contentsFolderPath: ''
     },
-    torrents: config.GENERIC_CONTENT_ITEMS.map(createTorrentObject),
-    torrentsToResume: [],
+    contents: config.GENERIC_CONTENT_ITEMS.map(createTorrentObject),
+    contentsToResume: [],
     version: config.APP_VERSION /* make sure we can upgrade gracefully later */
   }
 
   const tasks = []
 
   config.GENERIC_CONTENT_ITEMS.map(function (t, i) {
-    const infoHash = saved.torrents[i].infoHash
+    const infoHash = saved.contents[i].infoHash
     tasks.push(function (cb) {
       cpFile(
         path.join(config.STATIC_PATH, t.posterFileName),
@@ -143,7 +143,7 @@ function setupStateSaved (cb) {
     tasks.push(function (cb) {
       cpFile(
         path.join(config.STATIC_PATH, t.genericContentFileName),
-        path.join(config.TORRENT_PATH, infoHash + '.torrent')
+        path.join(config.CONTENT_PATH, infoHash + '.content')
       ).then(cb).catch(cb)
     })
   })
@@ -155,8 +155,8 @@ function setupStateSaved (cb) {
 
   function createTorrentObject (t) {
     // TODO: Doing several fs.readFileSync calls during first startup is not ideal
-    const torrent = fs.readFileSync(path.join(config.STATIC_PATH, t.genericContentFileName))
-    const parsedTorrent = parseTorrent(torrent)
+    const content = fs.readFileSync(path.join(config.STATIC_PATH, t.genericContentFileName))
+    const parsedTorrent = parseTorrent(content)
 
     return {
       status: 'paused',
@@ -164,7 +164,7 @@ function setupStateSaved (cb) {
       name: t.name,
       displayName: t.name,
       posterFileName: parsedTorrent.infoHash + path.extname(t.posterFileName),
-      genericContentFileName: parsedTorrent.infoHash + '.torrent',
+      genericContentFileName: parsedTorrent.infoHash + '.content',
       magnetURI: parseTorrent.toMagnetURI(parsedTorrent),
       files: parsedTorrent.files,
       selections: parsedTorrent.files.map((x) => true),
@@ -175,13 +175,13 @@ function setupStateSaved (cb) {
 
 function getPlayingTorrentSummary () {
   const infoHash = this.playing.infoHash
-  return this.saved.torrents.find((x) => x.infoHash === infoHash)
+  return this.saved.contents.find((x) => x.infoHash === infoHash)
 }
 
 function getPlayingFileSummary () {
-  const torrentSummary = this.getPlayingTorrentSummary()
-  if (!torrentSummary) return null
-  return torrentSummary.files[this.playing.fileIndex]
+  const contentSummary = this.getPlayingTorrentSummary()
+  if (!contentSummary) return null
+  return contentSummary.files[this.playing.fileIndex]
 }
 
 function getExternalPlayerName () {
@@ -231,22 +231,22 @@ function saveImmediate (state, cb) {
 
   // Clean up, so that we're not saving any pending state
   const copy = Object.assign({}, state.saved)
-  // Remove torrents pending addition to the list, where we haven't finished
-  // reading the torrent file or file(s) to seed & don't have an infohash
-  copy.torrents = copy.torrents
+  // Remove contents pending addition to the list, where we haven't finished
+  // reading the content file or file(s) to seed & don't have an infohash
+  copy.contents = copy.contents
     .filter((x) => x.infoHash)
     .map(function (x) {
-      const torrent = {}
+      const content = {}
       for (let key in x) {
-        if (key === 'progress' || key === 'torrentKey') {
-          continue // Don't save progress info or key for the webtorrent process
+        if (key === 'progress' || key === 'contentKey') {
+          continue // Don't save progress info or key for the webcontent process
         }
         if (key === 'error') {
           continue // Don't save error states
         }
-        torrent[key] = x[key]
+        content[key] = x[key]
       }
-      return torrent
+      return content
     })
 
   appConfig.write(copy, (err) => {

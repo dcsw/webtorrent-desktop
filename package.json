@@ -1,14 +1,14 @@
 {
-  "name": "webtorrent-desktop",
-  "description": "WebTorrent, the streaming torrent client. For Mac, Windows, and Linux.",
+  "name": "webcontent-desktop",
+  "description": "WebContent, the streaming content client. For Mac, Windows, and Linux.",
   "version": "0.18.0",
   "author": {
-    "name": "WebTorrent, LLC",
-    "email": "feross@webtorrent.io",
-    "url": "https://webtorrent.io"
+    "name": "WebContent, LLC",
+    "email": "feross@webcontent.io",
+    "url": "https://webcontent.io"
   },
   "bugs": {
-    "url": "https://github.com/webtorrent/webtorrent-desktop/issues"
+    "url": "https://github.com/webcontent/webcontent-desktop/issues"
   },
   "dependencies": {
     "airplayer": "^2.0.0",
@@ -20,7 +20,7 @@
     "chokidar": "^1.6.1",
     "chromecasts": "^1.8.0",
     "cp-file": "^4.0.1",
-    "create-torrent": "^3.24.5",
+    "create-content": "^3.24.5",
     "debounce": "^1.0.0",
     "deep-equal": "^1.0.1",
     "dlnacasts": "^0.1.0",
@@ -46,7 +46,7 @@
     "simple-get": "^2.0.0",
     "srt-to-vtt": "^1.1.1",
     "vlc-command": "^1.0.1",
-    "webtorrent": "0.x",
+    "webcontent": "0.x",
     "winreg": "^1.2.0",
     "zero-fill": "^2.2.3"
   },
@@ -74,16 +74,16 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "homepage": "https://webtorrent.io",
+  "homepage": "https://webcontent.io",
   "keywords": [
     "desktop",
     "electron",
     "electron-app",
-    "hybrid webtorrent client",
+    "hybrid webcontent client",
     "mad science",
-    "torrent",
-    "torrent client",
-    "webtorrent"
+    "content",
+    "content client",
+    "webcontent"
   ],
   "license": "MIT",
   "main": "index.js",
@@ -91,10 +91,10 @@
     "appdmg": "^0.4.3"
   },
   "private": true,
-  "productName": "WebTorrent",
+  "productName": "WebContent",
   "repository": {
     "type": "git",
-    "url": "git://github.com/webtorrent/webtorrent-desktop.git"
+    "url": "git://github.com/webcontent/webcontent-desktop.git"
   },
   "scripts": {
     "build": "buble src --output build",

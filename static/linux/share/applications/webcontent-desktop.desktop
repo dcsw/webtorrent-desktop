@@ -1,0 +1,33 @@
+[Desktop Entry]
+Name=WebContent
+Version=1.0
+GenericName=BitContent Client
+X-GNOME-FullName=WebContent
+Comment=Download and share files over BitContent
+Encoding=UTF-8
+Type=Application
+Icon=webcontent-desktop
+Terminal=false
+Path=/opt/webcontent-desktop
+Exec=/opt/webcontent-desktop/WebContent %U
+TryExec=/opt/webcontent-desktop/WebContent
+StartupNotify=false
+Categories=Network;FileTransfer;P2P;
+MimeType=application/x-bitcontent;x-scheme-handler/magnet;x-scheme-handler/stream-magnet;
+
+Actions=CreateNewContent;OpenContentFile;OpenContentAddress;
+
+[Desktop Action CreateNewContent]
+Name=Create New Content...
+Exec=/opt/webcontent-desktop/WebContent -n
+Path=/opt/webcontent-desktop
+
+[Desktop Action OpenContentFile]
+Name=Open Content File...
+Exec=/opt/webcontent-desktop/WebContent -o
+Path=/opt/webcontent-desktop
+
+[Desktop Action OpenContentAddress]
+Name=Open Content Address...
+Exec=/opt/webcontent-desktop/WebContent -u
+Path=/opt/webcontent-desktop

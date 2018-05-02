@@ -138,7 +138,7 @@ By making a contribution to this project, I certify that:
   ```
 
   Follow the URL to a newly created Github release page. Manually upload the binaries from
-  `webtorrent-desktop/dist/`. Open the previous release in another tab, and make sure that you
+  `webcontent-desktop/dist/`. Open the previous release in another tab, and make sure that you
   are uploading the same set of files, no more, no less.
 
 ### 3. Test it
@@ -151,7 +151,7 @@ By making a contribution to this project, I certify that:
   been downloaded, even though the files are byte for byte identical. This ensures that the
   codesigning worked and is valid.
 
-- Smoke test WebTorrent Desktop on each platform.
+- Smoke test WebContent Desktop on each platform.
 
   See Smoke Tests below for details. Open DevTools
   on Windows and Mac, and ensure that the auto updater is running. If the auto updater does not
@@ -161,28 +161,28 @@ By making a contribution to this project, I certify that:
 
 - Update the website
 
-  Create a pull request in [webtorrent.io](https://github.com/webtorrent/webtorrent.io). Update
+  Create a pull request in [webcontent.io](https://github.com/webcontent/webcontent.io). Update
   `config.js`, updating the desktop app version.
 
-  As soon as this PR is merged, Jenkins will automatically redeploy the WebTorrent website, and
+  As soon as this PR is merged, Jenkins will automatically redeploy the WebContent website, and
   hundreds of thousands of users around the world will start auto updating. **Merge with care.**
 
 ## Smoke Tests
 
 Before a release, check that the following basic use cases work correctly:
 
-1. Click "Play" to stream a built-in torrent (e.g. Sintel)
+1. Click "Play" to stream a built-in content (e.g. Sintel)
   - Ensure that seeking to undownloaded region works and plays immediately.
   - Ensure that sintel.mp4 gets downloaded to `~/Downloads`.
 
 2. Check that the auto-updater works
   - Open the console and check for the line "No update available" to indicate
 
-3. Add a new .torrent file via drag-and-drop.
+3. Add a new .content file via drag-and-drop.
   - Ensure that it gets added to the list and starts downloading
 
-4. Remove a torrent from the client
+4. Remove a content from the client
   - Ensure that the file is removed from `~/Downloads`
 
-5. Create and seed a new a torrent via drag-and-drop.
-  - Ensure that the torrent gets created and seeding begins.
+5. Create and seed a new a content via drag-and-drop.
+  - Ensure that the content gets created and seeding begins.

@@ -1,4 +1,4 @@
-const webtorrent = module.exports = {
+const webcontent = module.exports = {
   init,
   send,
   show,
@@ -11,7 +11,7 @@ const electron = require('electron')
 const config = require('../../config')
 
 function init () {
-  const win = webtorrent.win = new electron.BrowserWindow({
+  const win = webcontent.win = new electron.BrowserWindow({
     backgroundColor: '#1E1E1E',
     backgroundThrottling: false, // do not throttle animations/timers when page is background
     center: true,
@@ -23,14 +23,14 @@ function init () {
     resizable: false,
     show: false,
     skipTaskbar: true,
-    title: 'webtorrent-hidden-window',
+    title: 'webcontent-hidden-window',
     useContentSize: true,
     width: 150
   })
 
-  win.loadURL(config.WINDOW_WEBTORRENT)
+  win.loadURL(config.WINDOW_WEBCONTENT)
 
-  // Prevent killing the WebTorrent process
+  // Prevent killing the WebContent process
   win.on('close', function (e) {
     if (electron.app.isQuitting) {
       return
@@ -41,21 +41,21 @@ function init () {
 }
 
 function show () {
-  if (!webtorrent.win) return
-  webtorrent.win.show()
+  if (!webcontent.win) return
+  webcontent.win.show()
 }
 
 function send (...args) {
-  if (!webtorrent.win) return
-  webtorrent.win.send(...args)
+  if (!webcontent.win) return
+  webcontent.win.send(...args)
 }
 
 function toggleDevTools () {
-  if (!webtorrent.win) return
-  if (webtorrent.win.webContents.isDevToolsOpened()) {
-    webtorrent.win.webContents.closeDevTools()
-    webtorrent.win.hide()
+  if (!webcontent.win) return
+  if (webcontent.win.webContents.isDevToolsOpened()) {
+    webcontent.win.webContents.closeDevTools()
+    webcontent.win.hide()
   } else {
-    webtorrent.win.webContents.openDevTools({ detach: true })
+    webcontent.win.webContents.openDevTools({ detach: true })
   }
 }

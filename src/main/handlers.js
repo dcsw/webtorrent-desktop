@@ -56,24 +56,24 @@ function installWin32 () {
   const log = require('./log')
 
   const iconPath = path.join(
-    process.resourcesPath, 'app.asar.unpacked', 'static', 'WebTorrentFile.ico'
+    process.resourcesPath, 'app.asar.unpacked', 'static', 'WebContentFile.ico'
   )
   registerProtocolHandlerWin32(
     'magnet',
-    'URL:BitTorrent Magnet URL',
+    'URL:BitContent Magnet URL',
     iconPath,
     EXEC_COMMAND
   )
   registerProtocolHandlerWin32(
     'stream-magnet',
-    'URL:BitTorrent Stream-Magnet URL',
+    'URL:BitContent Stream-Magnet URL',
     iconPath,
     EXEC_COMMAND
   )
   registerFileHandlerWin32(
-    '.torrent',
-    'io.webtorrent.torrent',
-    'BitTorrent Document',
+    '.content',
+    'io.webcontent.content',
+    'BitContent Document',
     iconPath,
     EXEC_COMMAND
   )
@@ -209,7 +209,7 @@ function uninstallWin32 () {
 
   unregisterProtocolHandlerWin32('magnet', EXEC_COMMAND)
   unregisterProtocolHandlerWin32('stream-magnet', EXEC_COMMAND)
-  unregisterFileHandlerWin32('.torrent', 'io.webtorrent.torrent', EXEC_COMMAND)
+  unregisterFileHandlerWin32('.content', 'io.webcontent.content', EXEC_COMMAND)
 
   function unregisterProtocolHandlerWin32 (protocol, command) {
     getCommand()
@@ -288,7 +288,7 @@ function installLinux () {
 
   function installDesktopFile () {
     const templatePath = path.join(
-      config.STATIC_PATH, 'linux', 'webtorrent-desktop.desktop'
+      config.STATIC_PATH, 'linux', 'webcontent-desktop.desktop'
     )
     fs.readFile(templatePath, 'utf8', writeDesktopFile)
   }
@@ -310,7 +310,7 @@ function installLinux () {
       '.local',
       'share',
       'applications',
-      'webtorrent-desktop.desktop'
+      'webcontent-desktop.desktop'
     )
     fs.mkdirp(path.dirname(desktopFilePath))
     fs.writeFile(desktopFilePath, desktopFile, function (err) {
@@ -319,7 +319,7 @@ function installLinux () {
   }
 
   function installIconFile () {
-    const iconStaticPath = path.join(config.STATIC_PATH, 'WebTorrent.png')
+    const iconStaticPath = path.join(config.STATIC_PATH, 'WebContent.png')
     fs.readFile(iconStaticPath, writeIconFile)
   }
 
@@ -333,7 +333,7 @@ function installLinux () {
       '.local',
       'share',
       'icons',
-      'webtorrent-desktop.png'
+      'webcontent-desktop.png'
     )
     mkdirp(path.dirname(iconFilePath), (err) => {
       if (err) return log.error(err.message)
@@ -354,7 +354,7 @@ function uninstallLinux () {
     '.local',
     'share',
     'applications',
-    'webtorrent-desktop.desktop'
+    'webcontent-desktop.desktop'
   )
   rimraf(desktopFilePath)
 
@@ -363,7 +363,7 @@ function uninstallLinux () {
     '.local',
     'share',
     'icons',
-    'webtorrent-desktop.png'
+    'webcontent-desktop.png'
   )
   rimraf(iconFilePath)
 }

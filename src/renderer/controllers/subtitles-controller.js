@@ -67,14 +67,14 @@ module.exports = class SubtitlesController {
 
   checkForSubtitles () {
     if (this.state.playing.type !== 'video') return
-    const torrentSummary = this.state.getPlayingTorrentSummary()
-    if (!torrentSummary || !torrentSummary.progress) return
+    const contentSummary = this.state.getPlayingContentSummary()
+    if (!contentSummary || !contentSummary.progress) return
 
-    torrentSummary.progress.files.forEach((fp, ix) => {
+    contentSummary.progress.files.forEach((fp, ix) => {
       if (fp.numPieces !== fp.numPiecesPresent) return // ignore incomplete files
-      const file = torrentSummary.files[ix]
+      const file = contentSummary.files[ix]
       if (!this.isSubtitle(file.name)) return
-      const filePath = path.join(torrentSummary.path, file.path)
+      const filePath = path.join(contentSummary.path, file.path)
       this.addSubtitles([filePath], false)
     })
   }

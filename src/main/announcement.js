@@ -12,15 +12,15 @@ const ANNOUNCEMENT_URL = config.ANNOUNCEMENT_URL +
   '&platform=' + process.platform
 
 /**
- * In certain situations, the WebTorrent team may need to show an announcement to
- * all WebTorrent Desktop users. For example: a security notice, or an update
+ * In certain situations, the WebContent team may need to show an announcement to
+ * all WebContent Desktop users. For example: a security notice, or an update
  * notification (if the auto-updater stops working).
  *
  * When there is an announcement, the `ANNOUNCEMENT_URL` endpoint should return an
  * HTTP 200 status code with a JSON object like this:
  *
  *   {
- *     "title": "WebTorrent Desktop Announcement",
+ *     "title": "WebContent Desktop Announcement",
  *     "message": "Security Issue in v0.xx",
  *     "detail": "Please update to v0.xx as soon as possible..."
  *   }
@@ -39,7 +39,7 @@ function onResponse (err, res, data) {
   } catch (err) {
     // Support plaintext announcement messages, using a default title.
     data = {
-      title: 'WebTorrent Desktop Announcement',
+      title: 'WebContent Desktop Announcement',
       message: data.toString(),
       detail: data.toString()
     }

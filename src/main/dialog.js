@@ -1,8 +1,8 @@
 module.exports = {
   openSeedFile,
   openSeedDirectory,
-  openTorrentFile,
-  openTorrentAddress,
+  openContentFile,
+  openContentAddress,
   openFiles
 }
 
@@ -12,20 +12,20 @@ const log = require('./log')
 const windows = require('./windows')
 
 /**
- * Show open dialog to create a single-file torrent.
+ * Show open dialog to create a single-file content.
  */
 function openSeedFile () {
   if (!windows.main.win) return
   log('openSeedFile')
   const opts = {
-    title: 'Select a file for the torrent.',
+    title: 'Select a file for the content.',
     properties: [ 'openFile' ]
   }
   showOpenSeed(opts)
 }
 
 /*
- * Show open dialog to create a single-file or single-directory torrent. On
+ * Show open dialog to create a single-file or single-directory content. On
  * Windows and Linux, open dialogs are for files *or* directories only, not both,
  * so this function shows a directory dialog on those platforms.
  */
@@ -34,19 +34,19 @@ function openSeedDirectory () {
   log('openSeedDirectory')
   const opts = process.platform === 'darwin'
     ? {
-      title: 'Select a file or folder for the torrent.',
+      title: 'Select a file or folder for the content.',
       properties: [ 'openFile', 'openDirectory' ]
     }
     : {
-      title: 'Select a folder for the torrent.',
+      title: 'Select a folder for the content.',
       properties: [ 'openDirectory' ]
     }
   showOpenSeed(opts)
 }
 
 /*
- * Show flexible open dialog that supports selecting .torrent files to add, or
- * a file or folder to create a single-file or single-directory torrent.
+ * Show flexible open dialog that supports selecting .content files to add, or
+ * a file or folder to create a single-file or single-directory content.
  */
 function openFiles () {
   if (!windows.main.win) return
@@ -69,14 +69,14 @@ function openFiles () {
 }
 
 /*
- * Show open dialog to open a .torrent file.
+ * Show open dialog to open a .content file.
  */
-function openTorrentFile () {
+function openContentFile () {
   if (!windows.main.win) return
-  log('openTorrentFile')
+  log('openContentFile')
   const opts = {
-    title: 'Select a .torrent file.',
-    filters: [{ name: 'Torrent Files', extensions: ['torrent'] }],
+    title: 'Select a .content file.',
+    filters: [{ name: 'Content Files', extensions: ['content'] }],
     properties: [ 'openFile', 'multiSelections' ]
   }
   setTitle(opts.title)
@@ -84,17 +84,17 @@ function openTorrentFile () {
     resetTitle()
     if (!Array.isArray(selectedPaths)) return
     selectedPaths.forEach(function (selectedPath) {
-      windows.main.dispatch('addTorrent', selectedPath)
+      windows.main.dispatch('addContent', selectedPath)
     })
   })
 }
 
 /*
- * Show modal dialog to open a torrent URL (magnet uri, http torrent link, etc.)
+ * Show modal dialog to open a content URL (magnet uri, http content link, etc.)
  */
-function openTorrentAddress () {
-  log('openTorrentAddress')
-  windows.main.dispatch('openTorrentAddress')
+function openContentAddress () {
+  log('openContentAddress')
+  windows.main.dispatch('openContentAddress')
 }
 
 /**
@@ -112,13 +112,13 @@ function resetTitle () {
 
 /**
  * Pops up an Open File dialog with the given options.
- * After the user selects files / folders, shows the Create Torrent page.
+ * After the user selects files / folders, shows the Create Content page.
  */
 function showOpenSeed (opts) {
   setTitle(opts.title)
   electron.dialog.showOpenDialog(windows.main.win, opts, function (selectedPaths) {
     resetTitle()
     if (!Array.isArray(selectedPaths)) return
-    windows.main.dispatch('showCreateTorrent', selectedPaths)
+    windows.main.dispatch('showCreateContent', selectedPaths)
   })
 }

@@ -5,12 +5,12 @@ const ExtendableError = require('es6-error')
 class CastingError extends ExtendableError {}
 class PlaybackError extends ExtendableError {}
 class SoundError extends ExtendableError {}
-class TorrentError extends ExtendableError {}
+class ContentError extends ExtendableError {}
 
 /* Playback */
 
-class UnplayableTorrentError extends PlaybackError {
-  constructor () { super('Can\'t play any files in torrent') }
+class UnplayableContentError extends PlaybackError {
+  constructor () { super('Can\'t play any files in content') }
 }
 
 class UnplayableFileError extends PlaybackError {
@@ -23,19 +23,19 @@ class InvalidSoundNameError extends SoundError {
   constructor (name) { super(`Invalid sound name: ${name}`) }
 }
 
-/* Torrent */
+/* Content */
 
-class TorrentKeyNotFoundError extends TorrentError {
-  constructor (torrentKey) { super(`Can't resolve torrent key ${torrentKey}`) }
+class ContentKeyNotFoundError extends ContentError {
+  constructor (contentKey) { super(`Can't resolve content key ${contentKey}`) }
 }
 
 module.exports = {
   CastingError,
   PlaybackError,
   SoundError,
-  TorrentError,
-  UnplayableTorrentError,
+  ContentError,
+  UnplayableContentError,
   UnplayableFileError,
   InvalidSoundNameError,
-  TorrentKeyNotFoundError
+  ContentKeyNotFoundError
 }

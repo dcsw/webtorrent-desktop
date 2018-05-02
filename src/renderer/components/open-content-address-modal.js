@@ -4,16 +4,16 @@ const TextField = require('material-ui/TextField').default
 const ModalOKCancel = require('./modal-ok-cancel')
 const {dispatch, dispatcher} = require('../lib/dispatcher')
 
-module.exports = class OpenTorrentAddressModal extends React.Component {
+module.exports = class OpenContentAddressModal extends React.Component {
   render () {
     return (
-      <div className='open-torrent-address-modal'>
-        <p><label>Enter torrent address or magnet link</label></p>
+      <div className='open-content-address-modal'>
+        <p><label>Enter content address or magnet link</label></p>
         <div>
           <TextField
-            id='torrent-address-field'
+            id='content-address-field'
             className='control'
-            ref={(c) => { this.torrentURL = c }}
+            ref={(c) => { this.contentURL = c }}
             fullWidth
             onKeyDown={handleKeyDown.bind(this)} />
         </div>
@@ -27,7 +27,7 @@ module.exports = class OpenTorrentAddressModal extends React.Component {
   }
 
   componentDidMount () {
-    this.torrentURL.input.focus()
+    this.contentURL.input.focus()
   }
 }
 
@@ -37,5 +37,5 @@ function handleKeyDown (e) {
 
 function handleOK () {
   dispatch('exitModal')
-  dispatch('addTorrent', this.torrentURL.input.value)
+  dispatch('addContent', this.contentURL.input.value)
 }

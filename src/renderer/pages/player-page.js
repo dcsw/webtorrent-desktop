@@ -13,7 +13,7 @@ module.exports = class Player extends React.Component {
     return (
       <div className="content" onMouseMove={dispatcher("mediaMouseMoved")}
         className='player'>
-        {renderImage(state)}
+        {renderContent(state)}
       </div>
     );
   }
@@ -28,12 +28,12 @@ module.exports = class Player extends React.Component {
   }
 };
 
-function renderImage(state) {
+function renderContent(state) {
   // Show the media.
   const style = {}
   const gradient = 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%)'
   const posterPath = path.join(config.STATIC_PATH, "bigBuckBunny.jpg")
-  style.backgroundImage = `${gradient}, url('${posterPath}')`
+  style.backgroundContent = `${gradient}, url('${posterPath}')`
   return (
     <div
       key="letterbox"

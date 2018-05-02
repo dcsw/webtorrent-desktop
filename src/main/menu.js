@@ -54,10 +54,10 @@ function setWindowFocus (flag) {
 function setAllowNav (flag) {
   getMenuItem('Preferences').enabled = flag
   if (process.platform === 'darwin') {
-    getMenuItem('Create New Torrent...').enabled = flag
+    getMenuItem('Create New Content...').enabled = flag
   } else {
-    getMenuItem('Create New Torrent from Folder...').enabled = flag
-    getMenuItem('Create New Torrent from File...').enabled = flag
+    getMenuItem('Create New Content from Folder...').enabled = flag
+    getMenuItem('Create New Content from File...').enabled = flag
   }
 }
 
@@ -85,8 +85,8 @@ function getMenuTemplate () {
       submenu: [
         {
           label: process.platform === 'darwin'
-            ? 'Create New Torrent...'
-            : 'Create New Torrent from Folder...',
+            ? 'Create New Content...'
+            : 'Create New Content from Folder...',
           accelerator: 'CmdOrCtrl+N',
           click: () => {
             const dialog = require('./dialog')
@@ -94,19 +94,19 @@ function getMenuTemplate () {
           }
         },
         {
-          label: 'Open Torrent File...',
+          label: 'Open Content File...',
           accelerator: 'CmdOrCtrl+O',
           click: () => {
             const dialog = require('./dialog')
-            dialog.openTorrentFile()
+            dialog.openContentFile()
           }
         },
         {
-          label: 'Open Torrent Address...',
+          label: 'Open Content Address...',
           accelerator: 'CmdOrCtrl+U',
           click: () => {
             const dialog = require('./dialog')
-            dialog.openTorrentAddress()
+            dialog.openContentAddress()
           }
         },
         {
@@ -136,7 +136,7 @@ function getMenuTemplate () {
           role: 'copy'
         },
         {
-          label: 'Paste Torrent Address',
+          label: 'Paste Content Address',
           role: 'paste'
         },
         {
@@ -185,11 +185,11 @@ function getMenuTemplate () {
               click: () => windows.main.toggleDevTools()
             },
             {
-              label: 'Show WebTorrent Process',
+              label: 'Show WebContent Process',
               accelerator: process.platform === 'darwin'
                 ? 'Alt+Command+P'
                 : 'Ctrl+Shift+P',
-              click: () => windows.webtorrent.toggleDevTools()
+              click: () => windows.webcontent.toggleDevTools()
             }
           ]
         }
@@ -283,11 +283,11 @@ function getMenuTemplate () {
       submenu: [
         {
           label: 'Pause All',
-          click: () => windows.main.dispatch('pauseAllTorrents')
+          click: () => windows.main.dispatch('pauseAllContents')
         },
         {
           label: 'Resume All',
-          click: () => windows.main.dispatch('resumeAllTorrents')
+          click: () => windows.main.dispatch('resumeAllContents')
         }
       ]
     },
@@ -324,7 +324,7 @@ function getMenuTemplate () {
   ]
 
   if (process.platform === 'darwin') {
-    // WebTorrent menu (Mac)
+    // WebContent menu (Mac)
     template.unshift({
       label: config.APP_NAME,
       submenu: [
@@ -407,7 +407,7 @@ function getMenuTemplate () {
   if (process.platform === 'linux' || process.platform === 'win32') {
     // File menu (Windows, Linux)
     template[0].submenu.unshift({
-      label: 'Create New Torrent from File...',
+      label: 'Create New Content from File...',
       click: () => {
         const dialog = require('./dialog')
         dialog.openSeedFile()

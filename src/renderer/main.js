@@ -34,10 +34,10 @@ const ReactDOM = require('react-dom')
 const config = require('../config')
 const telemetry = require('./lib/telemetry')
 const sound = require('./lib/sound')
-const TorrentPlayer = require('./lib/torrent-player')
+const ContentPlayer = require('./lib/content-player')
 
 // Perf optimization: Needed immediately, so do not lazy load it below
-const TorrentListController = require('./controllers/torrent-list-controller')
+const ContentListController = require('./controllers/content-list-controller')
 
 // Required by Material UI -- adds `onTouchTap` event
 require('react-tap-event-plugin')()
@@ -67,11 +67,10 @@ let state
 let app
 
 // Called once when the application loads. (Not once per window.)
-// Connects to the torrent networks, sets up the UI and OS integrations like
+// Connects to the content networks, sets up the UI and OS integrations like
 // the dock icon and drag+drop.
 function onState (err, _state) {
   if (err) return onError(err)
-
   // Make available for easier debugging
   state = window.state = _state
   window.dispatch = dispatch
@@ -101,12 +100,12 @@ function onState (err, _state) {
       const SubtitlesController = require('./controllers/subtitles-controller')
       return new SubtitlesController(state)
     }),
-    torrent: createGetter(() => {
-      const TorrentController = require('./controllers/torrent-controller')
-      return new TorrentController(state)
+    content: createGetter(() => {
+      const ContentController = require('./controllers/content-controller')
+      return new ContentController(state)
     }),
-    torrentList: createGetter(() => {
-      return new TorrentListController(state)
+    contentList: createGetter(() => {
+      return new ContentListController(state)
     }),
     update: createGetter(() => {
       const UpdateController = require('./controllers/update-controller')
@@ -127,27 +126,27 @@ function onState (err, _state) {
     }
   })
 
-  // Restart everything we were torrenting last time the app ran
-  resumeTorrents()
+  // Restart everything we were contenting last time the app ran
+  resumeContents()
 
   // Initialize ReactDOM
   app = ReactDOM.render(<App state={state} />, document.querySelector('#body'))
 
   // Calling update() updates the UI given the current state
-  // Do this at least once a second to give every file in every torrentSummary
+  // Do this at least once a second to give every file in every contentSummary
   // a progress bar and to keep the cursor in sync when playing a video
   setInterval(update, 1000)
 
   // Listen for messages from the main process
   setupIpc()
 
-  // Drag and drop files/text to start torrenting or seeding
+  // Drag and drop files/text to start contenting or seeding
   dragDrop('body', {
     onDrop: onOpen,
     onDropText: onOpen
   })
 
-  // ...same thing if you paste a torrent
+  // ...same thing if you paste a content
   document.addEventListener('paste', onPaste)
 
   const debouncedFullscreenToggle = debounce(function () {
@@ -233,33 +232,33 @@ function updateElectron () {
 }
 
 const dispatchHandlers = {
-  // Torrent list: creating, deleting, selecting torrents
-  'openTorrentFile': () => ipcRenderer.send('openTorrentFile'),
+  // Content list: creating, deleting, selecting contents
+  'openContentFile': () => ipcRenderer.send('openContentFile'),
   'openFiles': () => ipcRenderer.send('openFiles'), /* shows the open file dialog */
-  'openTorrentAddress': () => { state.modal = { id: 'open-torrent-address-modal' } },
+  'openContentAddress': () => { state.modal = { id: 'open-content-address-modal' } },
 
-  'addTorrent': (torrentId) => controllers.torrentList().addTorrent(torrentId),
-  'showCreateTorrent': (paths) => controllers.torrentList().showCreateTorrent(paths),
-  'createTorrent': (options) => controllers.torrentList().createTorrent(options),
-  'toggleTorrent': (infoHash) => controllers.torrentList().toggleTorrent(infoHash),
-  'pauseAllTorrents': () => controllers.torrentList().pauseAllTorrents(),
-  'resumeAllTorrents': () => controllers.torrentList().resumeAllTorrents(),
-  'toggleTorrentFile': (infoHash, index) =>
-    controllers.torrentList().toggleTorrentFile(infoHash, index),
-  'confirmDeleteTorrent': (infoHash, deleteData) =>
-    controllers.torrentList().confirmDeleteTorrent(infoHash, deleteData),
-  'deleteTorrent': (infoHash, deleteData) =>
-    controllers.torrentList().deleteTorrent(infoHash, deleteData),
-  'toggleSelectTorrent': (infoHash) =>
-    controllers.torrentList().toggleSelectTorrent(infoHash),
-  'openTorrentContextMenu': (infoHash) =>
-    controllers.torrentList().openTorrentContextMenu(infoHash),
-  'startTorrentingSummary': (torrentKey) =>
-    controllers.torrentList().startTorrentingSummary(torrentKey),
-  'saveTorrentFileAs': (torrentKey) =>
-    controllers.torrentList().saveTorrentFileAs(torrentKey),
-  'prioritizeTorrent': (infoHash) => controllers.torrentList().prioritizeTorrent(infoHash),
-  'resumePausedTorrents': () => controllers.torrentList().resumePausedTorrents(),
+  'addContent': (contentId) => controllers.contentList().addContent(contentId),
+  'showCreateContent': (paths) => controllers.contentList().showCreateContent(paths),
+  'createContent': (options) => controllers.contentList().createContent(options),
+  'toggleContent': (infoHash) => controllers.contentList().toggleContent(infoHash),
+  'pauseAllContents': () => controllers.contentList().pauseAllContents(),
+  'resumeAllContents': () => controllers.contentList().resumeAllContents(),
+  'toggleContentFile': (infoHash, index) =>
+    controllers.contentList().toggleContentFile(infoHash, index),
+  'confirmDeleteContent': (infoHash, deleteData) =>
+    controllers.contentList().confirmDeleteContent(infoHash, deleteData),
+  'deleteContent': (infoHash, deleteData) =>
+    controllers.contentList().deleteContent(infoHash, deleteData),
+  'toggleSelectContent': (infoHash) =>
+    controllers.contentList().toggleSelectContent(infoHash),
+  'openContentContextMenu': (infoHash) =>
+    controllers.contentList().openContentContextMenu(infoHash),
+  'startContentingSummary': (contentKey) =>
+    controllers.contentList().startContentingSummary(contentKey),
+  'saveContentFileAs': (contentKey) =>
+    controllers.contentList().saveContentFileAs(contentKey),
+  'prioritizeContent': (infoHash) => controllers.contentList().prioritizeContent(infoHash),
+  'resumePausedContents': () => controllers.contentList().resumePausedContents(),
 
   // Playback
   'playFile': (infoHash, index) => controllers.playback().playFile(infoHash, index),
@@ -348,7 +347,7 @@ function dispatch (action, ...args) {
   }
 }
 
-// Listen to events from the main and webtorrent processes
+// Listen to events from the main and webcontent processes
 function setupIpc () {
   ipcRenderer.on('log', (e, ...args) => console.log(...args))
   ipcRenderer.on('error', (e, ...args) => console.error(...args))
@@ -358,34 +357,34 @@ function setupIpc () {
   ipcRenderer.on('fullscreenChanged', onFullscreenChanged)
   ipcRenderer.on('windowBoundsChanged', onWindowBoundsChanged)
 
-  const tc = controllers.torrent()
-  ipcRenderer.on('wt-infohash', (e, ...args) => tc.torrentInfoHash(...args))
-  ipcRenderer.on('wt-metadata', (e, ...args) => tc.torrentMetadata(...args))
-  ipcRenderer.on('wt-done', (e, ...args) => tc.torrentDone(...args))
-  ipcRenderer.on('wt-done', () => controllers.torrentList().resumePausedTorrents())
-  ipcRenderer.on('wt-warning', (e, ...args) => tc.torrentWarning(...args))
-  ipcRenderer.on('wt-error', (e, ...args) => tc.torrentError(...args))
+  const tc = controllers.content()
+  ipcRenderer.on('wt-infohash', (e, ...args) => tc.contentInfoHash(...args))
+  ipcRenderer.on('wt-metadata', (e, ...args) => tc.contentMetadata(...args))
+  ipcRenderer.on('wt-done', (e, ...args) => tc.contentDone(...args))
+  ipcRenderer.on('wt-done', () => controllers.contentList().resumePausedContents())
+  ipcRenderer.on('wt-warning', (e, ...args) => tc.contentWarning(...args))
+  ipcRenderer.on('wt-error', (e, ...args) => tc.contentError(...args))
 
-  ipcRenderer.on('wt-progress', (e, ...args) => tc.torrentProgress(...args))
-  ipcRenderer.on('wt-file-modtimes', (e, ...args) => tc.torrentFileModtimes(...args))
-  ipcRenderer.on('wt-file-saved', (e, ...args) => tc.torrentFileSaved(...args))
-  ipcRenderer.on('wt-poster', (e, ...args) => tc.torrentPosterSaved(...args))
-  ipcRenderer.on('wt-audio-metadata', (e, ...args) => tc.torrentAudioMetadata(...args))
-  ipcRenderer.on('wt-server-running', (e, ...args) => tc.torrentServerRunning(...args))
+  ipcRenderer.on('wt-progress', (e, ...args) => tc.contentProgress(...args))
+  ipcRenderer.on('wt-file-modtimes', (e, ...args) => tc.contentFileModtimes(...args))
+  ipcRenderer.on('wt-file-saved', (e, ...args) => tc.contentFileSaved(...args))
+  ipcRenderer.on('wt-poster', (e, ...args) => tc.contentPosterSaved(...args))
+  ipcRenderer.on('wt-audio-metadata', (e, ...args) => tc.contentAudioMetadata(...args))
+  ipcRenderer.on('wt-server-running', (e, ...args) => tc.contentServerRunning(...args))
 
-  ipcRenderer.on('wt-uncaught-error', (e, err) => telemetry.logUncaughtError('webtorrent', err))
+  ipcRenderer.on('wt-uncaught-error', (e, err) => telemetry.logUncaughtError('webcontent', err))
 
   ipcRenderer.send('ipcReady')
 
   State.on('stateSaved', () => ipcRenderer.send('stateSaved'))
 }
 
-// Quits any modal popovers and returns to the torrent list screen
+// Quits any modal popovers and returns to the content list screen
 function backToList () {
   // Exit any modals and screens with a back button
   state.modal = null
   state.location.backToFirst(function () {
-    // If we were already on the torrent list, scroll to the top
+    // If we were already on the content list, scroll to the top
     const contentTag = document.querySelector('.content')
     if (contentTag) contentTag.scrollTop = 0
   })
@@ -402,17 +401,17 @@ function escapeBack () {
   }
 }
 
-// Starts all torrents that aren't paused on program startup
-function resumeTorrents () {
-  state.saved.torrents
-    .map((torrentSummary) => {
-      // Torrent keys are ephemeral, reassigned each time the app runs.
-      // On startup, give all torrents a key, even the ones that are paused.
-      torrentSummary.torrentKey = state.nextTorrentKey++
-      return torrentSummary
+// Starts all contents that aren't paused on program startup
+function resumeContents () {
+  state.saved.contents
+    .map((contentSummary) => {
+      // Content keys are ephemeral, reassigned each time the app runs.
+      // On startup, give all contents a key, even the ones that are paused.
+      contentSummary.contentKey = state.nextContentKey++
+      return contentSummary
     })
     .filter((s) => s.status !== 'paused')
-    .forEach((s) => controllers.torrentList().startTorrentingSummary(s.torrentKey))
+    .forEach((s) => controllers.contentList().startContentingSummary(s.contentKey))
 }
 
 // Set window dimensions to match video dimensions or fill the screen
@@ -454,30 +453,30 @@ function setDimensions (dimensions) {
   state.playing.aspectRatio = aspectRatio
 }
 
-// Called when the user adds files (.torrent, files to seed, subtitles) to the app
+// Called when the user adds files (.content, files to seed, subtitles) to the app
 // via any method (drag-drop, drag to app icon, command line)
 function onOpen (files) {
   if (!Array.isArray(files)) files = [ files ]
 
   const url = state.location.url()
-  const allTorrents = files.every(TorrentPlayer.isTorrent)
+  const allContents = files.every(ContentPlayer.isContent)
   const allSubtitles = files.every(controllers.subtitles().isSubtitle)
 
-  if (allTorrents) {
-    // Drop torrents onto the app: go to home screen, add torrents, no matter what
+  if (allContents) {
+    // Drop contents onto the app: go to home screen, add contents, no matter what
     dispatch('backToList')
-    // All .torrent files? Add them.
-    files.forEach((file) => controllers.torrentList().addTorrent(file))
+    // All .content files? Add them.
+    files.forEach((file) => controllers.contentList().addContent(file))
   } else if (url === 'player' && allSubtitles) {
     // Drop subtitles onto a playing video: add subtitles
     controllers.subtitles().addSubtitles(files, true)
   } else if (url === 'home') {
-    // Drop files onto home screen: show Create Torrent
+    // Drop files onto home screen: show Create Content
     state.modal = null
-    controllers.torrentList().showCreateTorrent(files)
+    controllers.contentList().showCreateContent(files)
   } else {
     // Drop files onto any other screen: show error
-    return onError('Please go back to the torrent list before creating a new torrent.')
+    return onError('Please go back to the content list before creating a new content.')
   }
 
   update()
@@ -498,7 +497,7 @@ const editableHtmlTags = new Set(['input', 'textarea'])
 
 function onPaste (e) {
   if (editableHtmlTags.has(e.target.tagName.toLowerCase())) return
-  controllers.torrentList().addTorrent(electron.clipboard.readText())
+  controllers.contentList().addContent(electron.clipboard.readText())
 
   update()
 }
