@@ -74,7 +74,6 @@ function onState (err, _state) {
   // Make available for easier debugging
   state = window.state = _state
   window.dispatch = dispatch
-
   telemetry.init(state)
 
   // Log uncaught JS errors

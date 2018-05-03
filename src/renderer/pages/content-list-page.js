@@ -60,15 +60,14 @@ module.exports = class ContentList extends React.Component {
     if (isSelected) classes.push('selected')
     if (!infoHash) classes.push('disabled')
     // FIXME: get this out of here...
-    console.log(`BART ${JSON.stringify(contentSummary)}`)
-    if (!contentSummary.contentKey) {
-      contentSummary.contentKey = 'yabbadabbadoo' + Math.random() * 1000000;
-    }
-    if (!contentSummary.contentKey) throw new Error('Missing contentKey')
+    // if (!contentSummary.contentKey) {
+    //   contentSummary.contentKey = 'yabbadabbadoo' + Math.random() * 1000000;
+    // }
+    // if (!contentSummary.contentKey) throw new Error('Missing contentKey')
     return (
       <div
         id={contentSummary.testID && ('content-' + contentSummary.testID)}
-        key={contentSummary.contentKey}
+        // key={contentSummary.contentKey}
         style={style}
         className={classes.join(' ')}
         onContextMenu={infoHash && dispatcher('openContentContextMenu', infoHash)}

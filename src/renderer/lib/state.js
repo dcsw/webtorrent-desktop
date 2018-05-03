@@ -1,4 +1,4 @@
-const appConfig = require('application-config')('WebTorrent')
+const appConfig = require('application-config')('Electron-Generic-Content-App')
 const path = require('path')
 const {EventEmitter} = require('events')
 

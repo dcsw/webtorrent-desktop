@@ -13,7 +13,7 @@ const config = require('../../config')
 // Returns an absolute path to the content file, or null if unavailable
 function getContentPath (contentSummary) {
   if (!contentSummary || !contentSummary.genericContentFileName) return null
-  return path.join(config.content_PATH, contentSummary.genericContentFileName)
+  return path.join(config.CONFIG_PATH, contentSummary.genericContentFileName)
 }
 
 // Expects a contentSummary
@@ -40,9 +40,9 @@ function getContentId (contentSummary) {
 // Expects a contentKey or infoHash
 // Returns the corresponding contentSummary, or undefined
 function getByKey (state, contentKey) {
-
-console.log(`BARF! ${contentKey}`);
-console.log(JSON.stringify(state));
+  // state.saved.contents = state.saved.contents.map((x) => {x.contentKey = x.torrentKey; return x;});
+// console.log(`BARF! ${contentKey}`);
+// console.log(JSON.stringify(state));
   if (!contentKey) return undefined
   return state.saved.contents.find((x) =>
     x.contentKey === contentKey || x.infoHash === contentKey)
