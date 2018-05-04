@@ -40,9 +40,6 @@ function getContentId (contentSummary) {
 // Expects a contentKey or infoHash
 // Returns the corresponding contentSummary, or undefined
 function getByKey (state, contentKey) {
-  // state.saved.contents = state.saved.contents.map((x) => {x.contentKey = x.torrentKey; return x;});
-// console.log(`BARF! ${contentKey}`);
-// console.log(JSON.stringify(state));
   if (!contentKey) return undefined
   return state.saved.contents.find((x) =>
     x.contentKey === contentKey || x.infoHash === contentKey)
