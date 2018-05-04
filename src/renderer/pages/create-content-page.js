@@ -1,4 +1,4 @@
-const createContent = require('create-content')
+const createContent = require('create-torrent')
 const path = require('path')
 const prettyBytes = require('prettier-bytes')
 const React = require('react')
