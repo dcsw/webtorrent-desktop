@@ -31,8 +31,8 @@ function getDefaultState () {
      * Temporary state disappears once the program exits.
      * It can contain complex objects like open connections, etc.
      */
-    client: null, /* the WebTorrent client */
-    server: null, /* local WebTorrent-to-HTTP server */
+    client: null, /* the lient */
+    server: null, /* local server */
     prev: { /* used for state diffing in updateElectron() */
       title: null,
       progress: -1,
@@ -54,7 +54,7 @@ function getDefaultState () {
     },
     modal: null, /* modal popover */
     errors: [], /* user-facing errors */
-    nextTorrentKey: 1, /* identify contents for IPC between the main and webcontent windows */
+    nextContentKey: 1, /* identify contents for IPC between the main and webcontent windows */
 
     /*
      * Saved state is read from and written to a file every time the app runs.
@@ -63,20 +63,20 @@ function getDefaultState () {
      *
      * Config path:
      *
-     * Mac                  ~/Library/Application Support/WebTorrent/config.json
-     * Linux (XDG)          $XDG_CONFIG_HOME/WebTorrent/config.json
-     * Linux (Legacy)       ~/.config/WebTorrent/config.json
-     * Windows (> Vista)    %LOCALAPPDATA%/WebTorrent/config.json
-     * Windows (XP, 2000)   %USERPROFILE%/Local Settings/Application Data/WebTorrent/config.json
+     * Mac                  ~/Library/Application Support/Electron-Generic-Content-App/config.json
+     * Linux (XDG)          $XDG_CONFIG_HOME/Electron-Generic-Content-App/config.json
+     * Linux (Legacy)       ~/.config/Electron-Generic-Content-App/config.json
+     * Windows (> Vista)    %LOCALAPPDATA%/Electron-Generic-Content-App/config.json
+     * Windows (XP, 2000)   %USERPROFILE%/Local Settings/Application Data/Electron-Generic-Content-App/config.json
      *
-     * Also accessible via `require('application-config')('WebTorrent').filePath`
+     * Also accessible via `require('application-config')('Electron-Generic-Content-App').filePath`
      */
     saved: {},
 
     /*
      * Getters, for convenience
      */
-    getPlayingTorrentSummary,
+    getPlayingContentSummary,
     getPlayingFileSummary,
     getExternalPlayerName,
     shouldHidePlayerControls
@@ -112,7 +112,7 @@ function getDefaultPlayState () {
 function setupStateSaved (cb) {
   const cpFile = require('cp-file')
   const fs = require('fs')
-  const parseTorrent = require('parse-torrent')
+  const parseContent = require('parse-torrent')
   const parallel = require('run-parallel')
 
   const saved = {
@@ -122,10 +122,10 @@ function setupStateSaved (cb) {
       openExternalPlayer: false,
       externalPlayerPath: null,
       startup: false,
-      autoAddTorrents: false,
+      autoAddContents: false,
       contentsFolderPath: ''
     },
-    contents: config.GENERIC_CONTENT_ITEMS.map(createTorrentObject),
+    contents: config.GENERIC_CONTENT_ITEMS.map(createContentObject),
     contentsToResume: [],
     version: config.APP_VERSION /* make sure we can upgrade gracefully later */
   }
@@ -153,33 +153,33 @@ function setupStateSaved (cb) {
     cb(null, saved)
   })
 
-  function createTorrentObject (t) {
+  function createContentObject (t) {
     // TODO: Doing several fs.readFileSync calls during first startup is not ideal
     const content = fs.readFileSync(path.join(config.STATIC_PATH, t.genericContentFileName))
-    const parsedTorrent = parseTorrent(content)
+    const parsedContent = parseContent(content)
 
     return {
       status: 'paused',
-      infoHash: parsedTorrent.infoHash,
+      infoHash: parsedContent.infoHash,
       name: t.name,
       displayName: t.name,
-      posterFileName: parsedTorrent.infoHash + path.extname(t.posterFileName),
-      genericContentFileName: parsedTorrent.infoHash + '.content',
-      magnetURI: parseTorrent.toMagnetURI(parsedTorrent),
-      files: parsedTorrent.files,
-      selections: parsedTorrent.files.map((x) => true),
+      posterFileName: parsedContent.infoHash + path.extname(t.posterFileName),
+      genericContentFileName: parsedContent.infoHash + '.content',
+      magnetURI: parseContent.toMagnetURI(parsedContent),
+      files: parsedContent.files,
+      selections: parsedContent.files.map((x) => true),
       testID: t.testID
     }
   }
 }
 
-function getPlayingTorrentSummary () {
+function getPlayingContentSummary () {
   const infoHash = this.playing.infoHash
   return this.saved.contents.find((x) => x.infoHash === infoHash)
 }
 
 function getPlayingFileSummary () {
-  const contentSummary = this.getPlayingTorrentSummary()
+  const contentSummary = this.getPlayingContentSummary()
   if (!contentSummary) return null
   return contentSummary.files[this.playing.fileIndex]
 }
