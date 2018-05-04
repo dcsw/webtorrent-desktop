@@ -5,7 +5,6 @@ const colors = require('material-ui/styles/colors')
 
 class Heading extends React.Component {
   static get propTypes () {
-    console.log(React)
     return {
       level: PropTypes.number
     }
