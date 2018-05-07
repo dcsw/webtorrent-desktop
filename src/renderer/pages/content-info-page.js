@@ -29,7 +29,7 @@ module.exports = class Player extends React.Component {
 
     // Create React event handlers only once
     this.setUrl = (_, url) => this.setState({url})  // '_' is a convention for non-used parameter (click event in this case)
-    this.setName = (_, name) => this.setState({nameurl})
+    this.setName = (_, name) => this.setState({name})
     this.setDescription = (_, description) => this.setState({description})
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -59,27 +59,24 @@ module.exports = class Player extends React.Component {
     const posterPath = path.join(config.STATIC_PATH, "share-room-info-background.jpg");
     style.backgroundContent = `${gradient}, url('${posterPath}')`;
     // Align the text fields
-    const textFieldStyle = { width: "" };
-    const textareaStyle = { margin: 0 };
+    const textFieldStyle = {} // { width: "" };
+    const textareaStyle = {} // { margin: 0 };
     return (
       <div className="create-content">
         <Heading level={1}>Create content</Heading>
-        <div key="name" className="content-attribute">
+        <span key="name" className="content-attribute">
           <label>Name:</label>
           <TextField
             className="content-comment control"
             style={textFieldStyle}
             textareaStyle={textareaStyle}
-            hintText="URL to your content..."
-            multiLine
-            rows={2}
-            rowsMax={10}
+            hintText="Your content's name..."
             value={this.state.name}
             onChange={this.setName}
           />
-        </div>
+        </span>
         <div key="description" className="content-attribute">
-          <label>Comment URL:</label>
+          <label>Description:</label>
           <TextField
             className="content-comment control"
             style={textFieldStyle}
@@ -92,20 +89,17 @@ module.exports = class Player extends React.Component {
             onChange={this.setDescription}
           />
         </div>
-        <div key="url" className="content-attribute">
-          <label>Comment URL:</label>
+        <span key="url" className="content-attribute">
+          <label>URL:</label>
           <TextField
             className="content-comment control"
             style={textFieldStyle}
             textareaStyle={textareaStyle}
             hintText="URL to your content..."
-            multiLine
-            rows={2}
-            rowsMax={10}
             value={this.state.url}
             onChange={this.setUrl}
           />
-        </div>
+        </span>
         {
           // <ShowMore
           //   style={{
@@ -145,11 +139,10 @@ module.exports = class Player extends React.Component {
   }
 
   handleSubmit() {
-    const announceList = this.state.trackers
-      .split("\n")
-      .map(s => s.trim())
-      .filter(s => s !== "");
     const options = {
+      url: this.state.url,
+      name: this.state.name,
+      description: this.state.description
     };
     dispatch("createContent", options);
   }
