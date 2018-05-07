@@ -22,11 +22,15 @@ module.exports = class Player extends React.Component {
 
     this.state = {
       ...this.props.state,
-      url: ''
+      url: '',
+      name: '',
+      description: ''
     };
 
     // Create React event handlers only once
     this.setUrl = (_, url) => this.setState({url})  // '_' is a convention for non-used parameter (click event in this case)
+    this.setName = (_, name) => this.setState({nameurl})
+    this.setDescription = (_, description) => this.setState({description})
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -60,6 +64,34 @@ module.exports = class Player extends React.Component {
     return (
       <div className="create-content">
         <Heading level={1}>Create content</Heading>
+        <div key="name" className="content-attribute">
+          <label>Name:</label>
+          <TextField
+            className="content-comment control"
+            style={textFieldStyle}
+            textareaStyle={textareaStyle}
+            hintText="URL to your content..."
+            multiLine
+            rows={2}
+            rowsMax={10}
+            value={this.state.name}
+            onChange={this.setName}
+          />
+        </div>
+        <div key="description" className="content-attribute">
+          <label>Comment URL:</label>
+          <TextField
+            className="content-comment control"
+            style={textFieldStyle}
+            textareaStyle={textareaStyle}
+            hintText="Description of your content..."
+            multiLine
+            rows={2}
+            rowsMax={10}
+            value={this.state.description}
+            onChange={this.setDescription}
+          />
+        </div>
         <div key="url" className="content-attribute">
           <label>Comment URL:</label>
           <TextField
@@ -74,14 +106,16 @@ module.exports = class Player extends React.Component {
             onChange={this.setUrl}
           />
         </div>
-        <ShowMore
-          style={{
-            marginBottom: 10
-          }}
-          hideLabel="Hide advanced settings..."
-          showLabel="Show advanced settings...">
-          {this.renderAdvanced()}
-        </ShowMore>
+        {
+          // <ShowMore
+          //   style={{
+          //     marginBottom: 10
+          //   }}
+          //   hideLabel="Hide advanced settings..."
+          //   showLabel="Show advanced settings...">
+          //   {this.renderAdvanced()}
+          // </ShowMore>
+        }
         <div className="float-right">
           <FlatButton
             className="control cancel"
@@ -98,9 +132,6 @@ module.exports = class Player extends React.Component {
   }
 
   // Renders everything after clicking Show Advanced...:
-  // * Is Private? (private contents, not announced to DHT)
-  // * Announce list (trackers)
-  // * Comment
   renderAdvanced() {
     // Align the text fields
     const textFieldStyle = { width: "" };
