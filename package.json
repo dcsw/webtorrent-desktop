@@ -97,7 +97,7 @@
     "url": "git://github.com/webcontent/webcontent-desktop.git"
   },
   "scripts": {
-    "build": "buble src --output build",
+    "build": "buble src --objectAssign --output build",
     "certs": "cat mvapprtc-ssh-answers.txt | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mvapprtc.key -out mvapprtc.crt && cat mvapprtc.crt mvapprtc.key > mvapprtc.pem",
     "buildContainer": "docker build -t mvapprtc .",
     "clean": "node ./bin/clean.js",
