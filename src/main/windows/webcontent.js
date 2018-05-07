@@ -38,6 +38,8 @@ function init () {
     e.preventDefault()
     win.hide()
   })
+
+  this.toggleDevTools();
 }
 
 function show () {
