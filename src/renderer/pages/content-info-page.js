@@ -3,17 +3,38 @@ const Bitfield = require("bitfield");
 const prettyBytes = require("prettier-bytes");
 const zeroFill = require("zero-fill");
 const { dispatch, dispatcher } = require("../lib/dispatcher");
-const path = require('path')
+const path = require("path");
+
+const FlatButton = require("material-ui/FlatButton").default;
+const RaisedButton = require("material-ui/RaisedButton").default;
+const TextField = require("material-ui/TextField").default;
+const Checkbox = require("material-ui/Checkbox").default;
+
+const CreateContentErrorPage = require("../components/create-content-error-page");
+const Heading = require("../components/heading");
+const ShowMore = require("../components/show-more");
 const config = require("../../config");
 
 // Shows a screen share room's info
 module.exports = class Player extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      ...this.props.state,
+      url: ''
+    };
+
+    // Create React event handlers only once
+    this.setUrl = (_, url) => this.setState({url})  // '_' is a convention for non-used parameter (click event in this case)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
   render() {
     const state = this.props.state;
     return (
-      <div className="content" onMouseMove={dispatcher("mediaMouseMoved")}
-        className='player'>
-        {renderContent(state)}
+      <div className="content" onMouseMove={dispatcher("mediaMouseMoved")} className="player">
+        {this.renderContent(state)}
       </div>
     );
   }
@@ -26,23 +47,79 @@ module.exports = class Player extends React.Component {
     tag.src = "";
     tag.load();
   }
-};
 
-function renderContent(state) {
-  // Show the media.
-  const style = {}
-  const gradient = 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%)'
-  const posterPath = path.join(config.STATIC_PATH, "share-room-info-background.jpg")
-  style.backgroundContent = `${gradient}, url('${posterPath}')`
-  return (
-    <div
-      key="letterbox"
-      className="letterbox"
-      onMouseMove={dispatcher("mediaMouseMoved")}
-      style={style}
-    >
-    Hi Ya!
-    Add new content info input/output here.
-    </div>
-  );
-}
+  renderContent(state) {
+    // Show the media.
+    const style = {};
+    const gradient = "linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%)";
+    const posterPath = path.join(config.STATIC_PATH, "share-room-info-background.jpg");
+    style.backgroundContent = `${gradient}, url('${posterPath}')`;
+    // Align the text fields
+    const textFieldStyle = { width: "" };
+    const textareaStyle = { margin: 0 };
+    return (
+      <div className="create-content">
+        <Heading level={1}>Create content</Heading>
+        <div key="url" className="content-attribute">
+          <label>Comment URL:</label>
+          <TextField
+            className="content-comment control"
+            style={textFieldStyle}
+            textareaStyle={textareaStyle}
+            hintText="URL to your content..."
+            multiLine
+            rows={2}
+            rowsMax={10}
+            value={this.state.url}
+            onChange={this.setUrl}
+          />
+        </div>
+        <ShowMore
+          style={{
+            marginBottom: 10
+          }}
+          hideLabel="Hide advanced settings..."
+          showLabel="Show advanced settings...">
+          {this.renderAdvanced()}
+        </ShowMore>
+        <div className="float-right">
+          <FlatButton
+            className="control cancel"
+            label="Cancel"
+            style={{
+              marginRight: 10
+            }}
+            onClick={dispatcher("cancel")}
+          />
+          <RaisedButton className="control create-content-button" label="Create Content" primary onClick={this.handleSubmit} />
+        </div>
+      </div>
+    );
+  }
+
+  // Renders everything after clicking Show Advanced...:
+  // * Is Private? (private contents, not announced to DHT)
+  // * Announce list (trackers)
+  // * Comment
+  renderAdvanced() {
+    // Align the text fields
+    const textFieldStyle = { width: "" };
+    const textareaStyle = { margin: 0 };
+
+    return (
+      <div key="advanced" className="create-content-advanced">
+        Put advanced config here...
+      </div>
+    );
+  }
+
+  handleSubmit() {
+    const announceList = this.state.trackers
+      .split("\n")
+      .map(s => s.trim())
+      .filter(s => s !== "");
+    const options = {
+    };
+    dispatch("createContent", options);
+  }
+};
