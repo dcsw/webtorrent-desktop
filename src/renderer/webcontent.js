@@ -1,17 +1,20 @@
+// TODO: clean out torrent-related code throughout here
+// TODO: also arrange to save our data
+
 // To keep the UI snappy, we run WebContent in its own hidden window, a separate
 // process from the main window.
 console.time('init')
 
 const crypto = require('crypto')
 const deepEqual = require('deep-equal')
-const defaultAnnounceList = require('create-content').announceList
+const defaultAnnounceList = require('create-torrent').announceList
 const electron = require('electron')
 const fs = require('fs')
 const mkdirp = require('mkdirp')
 const musicmetadata = require('musicmetadata')
 const networkAddress = require('network-address')
 const path = require('path')
-const WebContent = require('webcontent')
+const WebContent = require('webtorrent')
 const zeroFill = require('zero-fill')
 
 const crashReporter = require('../crash-reporter')
@@ -63,6 +66,7 @@ const PEER_ID = Buffer.from(VERSION_PREFIX + crypto.randomBytes(9).toString('bas
 // Connect to the WebContent and BitContent networks. WebContent Desktop is a hybrid
 // client, as explained here: https://webcontent.io/faq
 let client = window.client = new WebContent({ peerId: PEER_ID })
+client.contents = [];
 
 // WebContent-to-HTTP streaming sever
 let server = null
@@ -136,11 +140,11 @@ function stopContenting (infoHash) {
 // Create a new content, start seeding
 function createContent (contentKey, options) {
   console.log('creating content', contentKey, options)
-  const paths = options.files.map((f) => f.path)
-  const content = client.seed(paths, options)
-  content.key = contentKey
-  addContentEvents(content)
-  ipc.send('wt-new-content')
+  // const paths = options.files.map((f) => f.path)
+  // const content = client.seed(paths, options)
+  // content.key = contentKey
+  // addContentEvents(content)
+  // ipc.send('wt-new-content')
 }
 
 function addContentEvents (content) {

@@ -20,7 +20,7 @@
     "chokidar": "^1.6.1",
     "chromecasts": "^1.8.0",
     "cp-file": "^4.0.1",
-    "create-content": "^3.24.5",
+    "create-torrent": "^3.24.5",
     "debounce": "^1.0.0",
     "deep-equal": "^1.0.1",
     "dlnacasts": "^0.1.0",
@@ -46,7 +46,7 @@
     "simple-get": "^2.0.0",
     "srt-to-vtt": "^1.1.1",
     "vlc-command": "^1.0.1",
-    "webcontent": "0.x",
+    "webtorrent": "0.x",
     "winreg": "^1.2.0",
     "zero-fill": "^2.2.3"
   },

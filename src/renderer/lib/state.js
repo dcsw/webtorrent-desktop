@@ -156,18 +156,18 @@ function setupStateSaved (cb) {
   function createContentObject (t) {
     // TODO: Doing several fs.readFileSync calls during first startup is not ideal
     const content = fs.readFileSync(path.join(config.STATIC_PATH, t.genericContentFileName))
-    const parsedContent = parseContent(content)
+    // const parsedContent = parseContent(content)
 
     return {
       status: 'paused',
-      infoHash: parsedContent.infoHash,
+      infoHash: '', // parsedContent.infoHash,
       name: t.name,
       displayName: t.name,
-      posterFileName: parsedContent.infoHash + path.extname(t.posterFileName),
-      genericContentFileName: parsedContent.infoHash + '.content',
-      magnetURI: parseContent.toMagnetURI(parsedContent),
-      files: parsedContent.files,
-      selections: parsedContent.files.map((x) => true),
+      posterFileName: '', // parsedContent.infoHash + path.extname(t.posterFileName),
+      genericContentFileName: '', // parsedContent.infoHash + '.content',
+      magnetURI: '', // parseContent.toMagnetURI(parsedContent),
+      files: [], // parsedContent.files,
+      selections: [], // parsedContent.files.map((x) => true),
       testID: t.testID
     }
   }
