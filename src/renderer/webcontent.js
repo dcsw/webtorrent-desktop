@@ -80,7 +80,7 @@ function init () {
   listenToClientEvents()
 
   ipc.on('wt-start-playing-content', (e, contentKey, contentID, path, fileModtimes, selections) =>
-    startContenting(contentKey, contentID, path, fileModtimes, selections))
+    startPlayingContent(contentKey, contentID, path, fileModtimes, selections))
   ipc.on('wt-stop-playing-content', (e, infoHash) =>
     stopContenting(infoHash))
   ipc.on('wt-create-content', (e, contentKey, options) =>
@@ -115,7 +115,7 @@ function listenToClientEvents () {
 
 // Starts a given ContentID, which can be an infohash, magnet URI, etc.
 // Returns a WebContent object. See https://git.io/vik9M
-function startContenting (contentKey, contentID, path, fileModtimes, selections) {
+function startPlayingContent (contentKey, contentID, path, fileModtimes, selections) {
   console.log('starting content %s: %s', contentKey, contentID)
 
   const content = client.add(contentID, {

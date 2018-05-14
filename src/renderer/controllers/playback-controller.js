@@ -258,7 +258,7 @@ module.exports = class PlaybackController {
     const state = this.state;
 
     if (contentSummary.status === "paused") {
-      dispatch("startContentingSummary", contentSummary.contentKey);
+      dispatch("startPlayingContentSummary", contentSummary.contentKey);
       ipcRenderer.once("wt-ready-" + contentSummary.infoHash, () =>
         onContentReady()
       );

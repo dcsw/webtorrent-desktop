@@ -252,8 +252,8 @@ const dispatchHandlers = {
     controllers.contentList().toggleSelectContent(infoHash),
   'openContentContextMenu': (infoHash) =>
     controllers.contentList().openContentContextMenu(infoHash),
-  'startContentingSummary': (contentKey) =>
-    controllers.contentList().startContentingSummary(contentKey),
+  'startPlayingContentSummary': (contentKey) =>
+    controllers.contentList().startPlayingContentSummary(contentKey),
   'saveContentFileAs': (contentKey) =>
     controllers.contentList().saveContentFileAs(contentKey),
   'prioritizeContent': (infoHash) => controllers.contentList().prioritizeContent(infoHash),
@@ -410,7 +410,7 @@ function resumeContents () {
       return contentSummary
     })
     .filter((s) => s.status !== 'paused')
-    .forEach((s) => controllers.contentList().startContentingSummary(s.contentKey))
+    .forEach((s) => controllers.contentList().startPlayingContentSummary(s.contentKey))
 }
 
 // Set window dimensions to match video dimensions or fill the screen

@@ -20,20 +20,24 @@ module.exports = class ContentListController {
   // Adds a content to the list, starts downloading/seeding.
   // ContentID can be a magnet URI, infohash, or content file: https://git.io/vik9M
   addContent (contentId) {
-    if (contentId.path) {
+    // if (contentId.path) {
+    //   // Use path string instead of W3C File object
+    //   contentId = contentId.path
+    // }
+    if (contentId.url) {
       // Use path string instead of W3C File object
-      contentId = contentId.path
+      contentId = contentId.url
     }
 
-    // Trim extra spaces off pasted magnet links
-    if (typeof contentId === 'string') {
-      contentId = contentId.trim()
-    }
+    // // Trim extra spaces off pasted magnet links
+    // if (typeof contentId === 'string') {
+    //   contentId = contentId.trim()
+    // }
 
-    // Allow a instant.io link to be pasted
-    if (typeof contentId === 'string' && instantIoRegex.test(contentId)) {
-      contentId = contentId.slice(contentId.indexOf('#') + 1)
-    }
+    // // Allow a instant.io link to be pasted
+    // if (typeof contentId === 'string' && instantIoRegex.test(contentId)) {
+    //   contentId = contentId.slice(contentId.indexOf('#') + 1)
+    // }
 
     const contentKey = this.state.nextContentKey++
     const path = this.state.saved.prefs.downloadPath
@@ -78,7 +82,7 @@ module.exports = class ContentListController {
   }
 
   // Starts downloading and/or seeding a given contentSummary.
-  startContentingSummary (contentKey) {
+  startPlayingContentSummary (contentKey) {
     const s = ContentSummary.getByKey(this.state, contentKey)
     if (!s) throw new ContentKeyNotFoundError(contentKey)
 
@@ -119,7 +123,7 @@ module.exports = class ContentListController {
     const contentSummary = ContentSummary.getByKey(this.state, infoHash)
     if (contentSummary.status === 'paused') {
       contentSummary.status = 'new'
-      this.startContentingSummary(contentSummary.contentKey)
+      this.startPlayingContentSummary(contentSummary.contentKey)
       sound.play('ENABLE')
       return
     }
@@ -142,7 +146,7 @@ module.exports = class ContentListController {
     this.state.saved.contents.forEach((contentSummary) => {
       if (contentSummary.status === 'paused') {
         contentSummary.status = 'downloading'
-        this.startContentingSummary(contentSummary.contentKey)
+        this.startPlayingContentSummary(contentSummary.contentKey)
       }
     })
     sound.play('ENABLE')

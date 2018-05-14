@@ -154,6 +154,6 @@ module.exports = class Player extends React.Component {
     // private: false, //this.state.isPrivate,
     // comment: '' //this.state.comment.trim()
     };
-    dispatch('createContent', options);
+    dispatch('addContent', options);
   }
 };
