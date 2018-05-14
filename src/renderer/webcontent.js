@@ -82,7 +82,7 @@ function init () {
   ipc.on('wt-start-playing-content', (e, contentKey, contentID, path, fileModtimes, selections) =>
     startPlayingContent(contentKey, contentID, path, fileModtimes, selections))
   ipc.on('wt-stop-playing-content', (e, infoHash) =>
-    stopContenting(infoHash))
+    stopPlayingContent(infoHash))
   ipc.on('wt-create-content', (e, contentKey, options) =>
     createContent(contentKey, options))
   ipc.on('wt-save-content-file', (e, contentKey) =>
@@ -131,7 +131,7 @@ function startPlayingContent (contentKey, contentID, path, fileModtimes, selecti
   content.once('ready', () => selectFiles(content, selections))
 }
 
-function stopContenting (infoHash) {
+function stopPlayingContent (infoHash) {
   console.log('--- STOP CONTENTING: ', infoHash)
   const content = client.get(infoHash)
   if (content) content.destroy()
