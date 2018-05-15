@@ -143,16 +143,6 @@ module.exports = class Player extends React.Component {
       url: this.state.url,
       name: this.state.name,
       description: this.state.description,
-
-
-    // We can't let the user choose their own name if we want WebContent
-    // to use the files in place rather than creating a new folder.
-    // name: this.state.defaultName,
-    // path: '', // this.state.basePath,
-    files: [], //this.state.files,
-    // announce: null, //announceList,
-    // private: false, //this.state.isPrivate,
-    // comment: '' //this.state.comment.trim()
     };
     dispatch('addContent', options);
   }

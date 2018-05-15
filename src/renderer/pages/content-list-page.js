@@ -82,7 +82,7 @@ module.exports = class ContentList extends React.Component {
 
   // Show name, download status, % complete
   renderContentMetadata (contentSummary) {
-    const name = contentSummary.name || 'Loading content...'
+    const name = contentSummary.name || 'Loading name...'
     const elements = [(
       <div key='name' className='name ellipsis'>{name}</div>
     )]
@@ -113,6 +113,11 @@ module.exports = class ContentList extends React.Component {
       <div key='progress-info' className='ellipsis'>
         {progElems}
       </div>
+    )
+
+    const url = contentSummary.url || 'Loading url...'
+    elements.push(
+      <div key='url' className='ellipsis'>{url}</div>
     )
 
     return (<div key='metadata' className='metadata'>{elements}</div>)
@@ -301,6 +306,9 @@ module.exports = class ContentList extends React.Component {
     return (
       <div key='details' className='content-details'>
         {filesElement}
+        <div key='description' className='content-details'>
+          {contentSummary.description}
+        </div>
       </div>
     )
   }

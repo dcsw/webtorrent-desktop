@@ -26,7 +26,8 @@ module.exports = class ContentListController {
     // }
 
     this.state.saved.contents.push(contentId)
-    ipcRenderer.send('stateSaveImmediate', this.state)
+    // ipcRenderer.send('stateSaveImmediate', this.state)
+    // dispatch('stateSaveImmediate', this.state)
 
     // // Trim extra spaces off pasted magnet links
     // if (typeof contentId === 'string') {
