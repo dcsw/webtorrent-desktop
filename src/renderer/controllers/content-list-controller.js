@@ -24,13 +24,9 @@ module.exports = class ContentListController {
     //   // Use path string instead of W3C File object
     //   contentId = contentId.path
     // }
-    if (contentId.url) {
-      // Use path string instead of W3C File object
-      contentId = contentId.url
-    }
 
     this.state.saved.contents.push(contentId)
-    ipcRenderer.send('stateSaveImmediate', this.state.saved.contents)
+    ipcRenderer.send('stateSaveImmediate', this.state)
 
     // // Trim extra spaces off pasted magnet links
     // if (typeof contentId === 'string') {
