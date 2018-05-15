@@ -118,17 +118,18 @@ function listenToClientEvents () {
 function startPlayingContent (contentKey, contentID, path, fileModtimes, selections) {
   console.log('starting content %s: %s', contentKey, contentID)
 
-  const content = client.add(contentID, {
-    path: path,
-    fileModtimes: fileModtimes
-  })
-  content.key = contentKey
+  // const content = client.add(contentID, {
+  //   path: path,
+  //   fileModtimes: fileModtimes
+  // })
+  // content.key = contentKey
 
-  // Listen for ready event, progress notifications, etc
-  addContentEvents(content)
+  // // Listen for ready event, progress notifications, etc
+  // addContentEvents(content)
 
-  // Only download the files the user wants, not necessarily all files
-  content.once('ready', () => selectFiles(content, selections))
+  // // Only download the files the user wants, not necessarily all files
+  // content.once('ready', () => selectFiles(content, selections))
+  
 }
 
 function stopPlayingContent (infoHash) {

@@ -29,6 +29,9 @@ module.exports = class ContentListController {
       contentId = contentId.url
     }
 
+    this.state.saved.contents.push(contentId)
+    ipcRenderer.send('stateSaveImmediate', this.state.saved.contents)
+
     // // Trim extra spaces off pasted magnet links
     // if (typeof contentId === 'string') {
     //   contentId = contentId.trim()

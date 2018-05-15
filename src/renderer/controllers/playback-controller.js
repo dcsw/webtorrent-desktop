@@ -42,6 +42,7 @@ module.exports = class PlaybackController {
       });
     } else {
       let initialized = false;
+      console.log(`barf`)
       state.location.go(
         {
           url: "player",

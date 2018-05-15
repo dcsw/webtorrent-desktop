@@ -168,7 +168,11 @@ function setupStateSaved (cb) {
       magnetURI: '', // parseContent.toMagnetURI(parsedContent),
       files: [], // parsedContent.files,
       selections: [], // parsedContent.files.map((x) => true),
-      testID: t.testID
+      testID: t.testID,
+
+      url: '',
+      name: t.name,
+      description: '',
     }
   }
 }

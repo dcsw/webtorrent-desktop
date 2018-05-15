@@ -38,7 +38,12 @@ module.exports = {
       testID: 'bbb',
       name: 'Big Buck Bunny',
       posterFileName: 'bigBuckBunny.jpg',
-      genericContentFileName: 'bigBuckBunny.torrent'
+      genericContentFileName: 'bigBuckBunny.torrent',
+
+
+      url: 'http://portfolios.risd.edu/gallery/60588389/Decay-Ceramic-Composter',
+      name: 'Decay',
+      description: 'Imagining reviving soil ecostructures beneath cities. An installation in which the unpredictable organic shatters the architectural shell. Inspired by composting processes, a fancifully functioning composter unit. To employ organic processes as performance art.'
     }
   ],
 
