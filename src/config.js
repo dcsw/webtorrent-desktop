@@ -37,7 +37,8 @@ module.exports = {
     {
       url: 'http://portfolios.risd.edu/gallery/60588389/Decay-Ceramic-Composter',
       name: 'Decay',
-      description: 'Imagining reviving soil ecostructures beneath cities. An installation in which the unpredictable organic shatters the architectural shell. Inspired by composting processes, a fancifully functioning composter unit. To employ organic processes as performance art.'
+      description: 'Imagining reviving soil ecostructures beneath cities. An installation in which the unpredictable organic shatters the architectural shell. Inspired by composting processes, a fancifully functioning composter unit. To employ organic processes as performance art.',
+      infoHash: '0'
     }
   ],
 

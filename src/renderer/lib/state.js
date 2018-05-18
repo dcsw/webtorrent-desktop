@@ -173,6 +173,7 @@ function setupStateSaved (cb) {
       url: '',
       name: t.name,
       description: '',
+      infoHash: t.infoHash
     }
   }
 }
