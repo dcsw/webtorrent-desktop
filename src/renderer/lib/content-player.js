@@ -34,5 +34,5 @@ function getFileExtension (file) {
 }
 
 function isPlayableContentSummary (contentSummary) {
-  return contentSummary.files && contentSummary.files.some(isPlayable)
+  return true
 }
