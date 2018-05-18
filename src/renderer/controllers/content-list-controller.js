@@ -25,10 +25,6 @@ module.exports = class ContentListController {
     //   contentId = contentId.path
     // }
 
-    this.state.saved.contents.push(contentId)
-    // ipcRenderer.send('stateSaveImmediate', this.state)
-    // dispatch('stateSaveImmediate', this.state)
-
     // // Trim extra spaces off pasted magnet links
     // if (typeof contentId === 'string') {
     //   contentId = contentId.trim()
@@ -40,9 +36,15 @@ module.exports = class ContentListController {
     // }
 
     const contentKey = this.state.nextContentKey++
-    const path = this.state.saved.prefs.downloadPath
+    contentId.infoHash = contentKey
+    this.state.saved.contents.push(contentId)
+    // ipcRenderer.send('stateSaveImmediate')
+    // ipcRenderer.send('stateSaveImmediate', this.state)
+    // dispatch('stateSaveImmediate', this.state)
+    dispatch('stateSaveImmediate')
 
-    ipcRenderer.send('wt-start-playing-content', contentKey, contentId, path)
+    // const path = this.state.saved.prefs.downloadPath
+    // ipcRenderer.send('wt-start-playing-content', contentKey, contentId, path)
 
     dispatch('backToList')
   }
