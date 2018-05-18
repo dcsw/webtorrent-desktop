@@ -324,8 +324,7 @@ const dispatchHandlers = {
   'error': onError,
   'uncaughtError': (proc, err) => telemetry.logUncaughtError(proc, err),
   'stateSave': () => State.save(state),
-  'stateSaveImmediate': () => { console.log('barfeee save', state)
-    State.saveImmediate(state)},
+  'stateSaveImmediate': () => State.saveImmediate(state),
   'update': () => {} // No-op, just trigger an update
 }
 

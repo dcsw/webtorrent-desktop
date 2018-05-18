@@ -14,7 +14,6 @@ const ContentListPage = require('./content-list-page')
 const Views = {
   'home': createGetter(() => ContentListPage),
   'player': createGetter(() => require('./player-page')),
-  'content-info': createGetter(() => require('./content-info-page')),
   'create-content': createGetter(() => require('./create-content-page')),
   'preferences': createGetter(() => require('./preferences-page'))
 }

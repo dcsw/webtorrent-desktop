@@ -20,27 +20,9 @@ module.exports = class ContentListController {
   // Adds a content to the list, starts downloading/seeding.
   // ContentID can be a magnet URI, infohash, or content file: https://git.io/vik9M
   addContent (contentId) {
-    // if (contentId.path) {
-    //   // Use path string instead of W3C File object
-    //   contentId = contentId.path
-    // }
-
-    // // Trim extra spaces off pasted magnet links
-    // if (typeof contentId === 'string') {
-    //   contentId = contentId.trim()
-    // }
-
-    // // Allow a instant.io link to be pasted
-    // if (typeof contentId === 'string' && instantIoRegex.test(contentId)) {
-    //   contentId = contentId.slice(contentId.indexOf('#') + 1)
-    // }
-
     const contentKey = this.state.nextContentKey++
     contentId.infoHash = contentKey
     this.state.saved.contents.push(contentId)
-    // ipcRenderer.send('stateSaveImmediate')
-    // ipcRenderer.send('stateSaveImmediate', this.state)
-    // dispatch('stateSaveImmediate', this.state)
     dispatch('stateSaveImmediate')
 
     // const path = this.state.saved.prefs.downloadPath

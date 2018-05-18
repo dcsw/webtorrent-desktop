@@ -37,7 +37,7 @@ class Header extends React.Component {
         onClick={() => {
           state.location.go(
             {
-              url: "content-info",
+              url: "create-content",
               setup: cb => {cb(null);},
               destroy: () => {}
             },
