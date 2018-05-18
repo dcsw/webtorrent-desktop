@@ -17,7 +17,6 @@ const State = module.exports = Object.assign(new EventEmitter(), {
     const debounce = require('debounce')
     // After first State.save() invokation, future calls go straight to the
     // debounced function
-    console.log('barf save', ...arguments)
     State.save = debounce(saveImmediate, SAVE_DEBOUNCE_INTERVAL)
     State.save(...arguments)
   },
@@ -207,7 +206,6 @@ function shouldHidePlayerControls () {
 
 function load (cb) {
   appConfig.read(function (err, saved) {
-console.log('barfo load', saved)
     if (err || !saved.version) {
       console.log('Missing config file: Creating new one')
       setupStateSaved(onSavedState)
