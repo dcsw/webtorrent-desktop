@@ -132,44 +132,13 @@ function setupStateSaved (cb) {
 
   const tasks = []
 
-  // config.GENERIC_CONTENT_ITEMS.map(function (t, i) {
-  //   const infoHash = saved.contents[i].infoHash
-  //   tasks.push(function (cb) {
-  //     cpFile(
-  //       path.join(config.STATIC_PATH, t.posterFileName),
-  //       path.join(config.POSTER_PATH, infoHash + path.extname(t.posterFileName))
-  //     ).then(cb).catch(cb)
-  //   })
-  //   tasks.push(function (cb) {
-  //     cpFile(
-  //       path.join(config.STATIC_PATH, t.genericContentFileName),
-  //       path.join(config.CONTENT_PATH, infoHash + '.content')
-  //     ).then(cb).catch(cb)
-  //   })
-  // })
-
   parallel(tasks, function (err) {
     if (err) return cb(err)
     cb(null, saved)
   })
 
   function createContentObject (t) {
-    // TODO: Doing several fs.readFileSync calls during first startup is not ideal
-    // const content = fs.readFileSync(path.join(config.STATIC_PATH, t.genericContentFileName))
-    // const parsedContent = parseContent(content)
-
     return {
-      // status: 'paused',
-      // infoHash: '', // parsedContent.infoHash,
-      // name: t.name,
-      // displayName: t.name,
-      // posterFileName: '', // parsedContent.infoHash + path.extname(t.posterFileName),
-      // genericContentFileName: '', // parsedContent.infoHash + '.content',
-      // magnetURI: '', // parseContent.toMagnetURI(parsedContent),
-      // files: [], // parsedContent.files,
-      // selections: [], // parsedContent.files.map((x) => true),
-      // testID: t.testID,
-
       url: '',
       name: t.name,
       description: '',
