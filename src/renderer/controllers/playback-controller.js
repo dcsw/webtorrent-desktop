@@ -50,8 +50,8 @@ module.exports = class PlaybackController {
 
             if (index === undefined || initialized)
               index = contentSummary.mostRecentFileIndex;
-            if (index === undefined)
-              index = contentSummary.files.findIndex(ContentPlayer.isPlayable);
+            // if (index === undefined)
+            //   index = contentSummary.files.findIndex(ContentPlayer.isPlayable);
             if (index === undefined) return cb(new UnplayableContentError());
 
             initialized = true;
@@ -73,9 +73,12 @@ module.exports = class PlaybackController {
   // Open a file in OS default app.
   openItem(infoHash, index) {
     const contentSummary = ContentSummary.getByKey(this.state, infoHash);
+    // const filePath = path.join(
+    //   contentSummary.path,
+    //   contentSummary.files[index].path
+    // );
     const filePath = path.join(
-      contentSummary.path,
-      contentSummary.files[index].path
+      contentSummary.path
     );
     ipcRenderer.send("openItem", filePath);
   }
@@ -279,56 +282,56 @@ module.exports = class PlaybackController {
     const state = this.state;
 
     const contentSummary = ContentSummary.getByKey(state, infoHash);
-    const fileSummary = contentSummary.files[index];
+    // const fileSummary = contentSummary.files[index];
 
-    if (!ContentPlayer.isPlayable(fileSummary)) {
-      contentSummary.mostRecentFileIndex = undefined;
-      return cb(new UnplayableFileError());
-    }
+    // if (!ContentPlayer.isPlayable(fileSummary)) {
+    //   contentSummary.mostRecentFileIndex = undefined;
+    //   return cb(new UnplayableFileError());
+    // }
 
-    contentSummary.mostRecentFileIndex = index;
+    // contentSummary.mostRecentFileIndex = index;
 
-    // update state
-    state.playing.infoHash = infoHash;
-    state.playing.fileIndex = index;
-    // state.playing.type = ContentPlayer.isContent(fileSummary)
-    //   ? "video"
-    //   : ContentPlayer.isContent(fileSummary) ? "audio" : "other";
-      state.playing.type = ContentPlayer.isContent(fileSummary) ? "content"  : "other";
+    // // update state
+    // state.playing.infoHash = infoHash;
+    // state.playing.fileIndex = index;
+    // // state.playing.type = ContentPlayer.isContent(fileSummary)
+    // //   ? "video"
+    // //   : ContentPlayer.isContent(fileSummary) ? "audio" : "other";
+    //   state.playing.type = ContentPlayer.isContent(fileSummary) ? "content"  : "other";
 
-    // pick up where we left off
-    let jumpToTime = 0;
-    if (resume && fileSummary.currentTime) {
-      const fraction = fileSummary.currentTime / fileSummary.duration;
-      const secondsLeft = fileSummary.duration - fileSummary.currentTime;
-      if (fraction < 0.9 && secondsLeft > 10) {
-        jumpToTime = fileSummary.currentTime;
-      }
-    }
-    state.playing.jumpToTime = jumpToTime;
+    // // pick up where we left off
+    // let jumpToTime = 0;
+    // if (resume && fileSummary.currentTime) {
+    //   const fraction = fileSummary.currentTime / fileSummary.duration;
+    //   const secondsLeft = fileSummary.duration - fileSummary.currentTime;
+    //   if (fraction < 0.9 && secondsLeft > 10) {
+    //     jumpToTime = fileSummary.currentTime;
+    //   }
+    // }
+    // state.playing.jumpToTime = jumpToTime;
 
-    // if it's audio, parse out the metadata (artist, title, etc)
-    if (contentSummary.status === "paused") {
-      ipcRenderer.once("wt-ready-" + contentSummary.infoHash, getAudioMetadata);
-    } else {
-      getAudioMetadata();
-    }
+    // // if it's audio, parse out the metadata (artist, title, etc)
+    // if (contentSummary.status === "paused") {
+    //   ipcRenderer.once("wt-ready-" + contentSummary.infoHash, getAudioMetadata);
+    // } else {
+    //   getAudioMetadata();
+    // }
 
-    function getAudioMetadata() {
-      if (state.playing.type === "audio" && !fileSummary.audioInfo) {
-        ipcRenderer.send("wt-get-audio-metadata", contentSummary.infoHash, index);
-      }
-    }
+    // function getAudioMetadata() {
+    //   if (state.playing.type === "audio" && !fileSummary.audioInfo) {
+    //     ipcRenderer.send("wt-get-audio-metadata", contentSummary.infoHash, index);
+    //   }
+    // }
 
-    // if it's video, check for subtitles files that are done downloading
-    dispatch("checkForSubtitles");
+    // // if it's video, check for subtitles files that are done downloading
+    // dispatch("checkForSubtitles");
 
-    // enable previously selected subtitle track
-    if (fileSummary.selectedSubtitle) {
-      dispatch("addSubtitles", [fileSummary.selectedSubtitle], true);
-    }
+    // // enable previously selected subtitle track
+    // if (fileSummary.selectedSubtitle) {
+    //   dispatch("addSubtitles", [fileSummary.selectedSubtitle], true);
+    // }
 
-    state.window.title = fileSummary.name;
+    // state.window.title = fileSummary.name;
 
     // play in VLC if set as default player (Preferences / Playback / Play in VLC)
     if (this.state.saved.prefs.openExternalPlayer) {

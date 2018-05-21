@@ -25,7 +25,7 @@ module.exports = class ContentList extends React.Component {
       )
     }
     const contentElems = state.saved.contents.map(
-      (contentSummary) => this.renderContent(contentSummary)
+      (contentSummary, index) => this.renderContent(contentSummary, index)
     )
     contents.push(...contentElems)
     contents.push(
@@ -41,7 +41,7 @@ module.exports = class ContentList extends React.Component {
     )
   }
 
-  renderContent (contentSummary) {
+  renderContent (contentSummary, index) {
     const state = this.props.state
     const infoHash = contentSummary.infoHash
     const isSelected = infoHash && state.selectedInfoHash === infoHash
@@ -73,7 +73,7 @@ module.exports = class ContentList extends React.Component {
         onContextMenu={infoHash && dispatcher('openContentContextMenu', infoHash)}
         onClick={infoHash && dispatcher('toggleSelectContent', infoHash)}>
         {this.renderContentMetadata(contentSummary)}
-        {infoHash ? this.renderContentButtons(contentSummary) : null}
+        {infoHash ? this.renderContentButtons(contentSummary, index) : null}
         {isSelected ? this.renderContentDetails(contentSummary) : null}
         <hr />
       </div>
@@ -231,7 +231,7 @@ module.exports = class ContentList extends React.Component {
 
   // Download button toggles between contenting (DL/seed) and paused
   // Play button starts streaming the content immediately, unpausing if needed
-  renderContentButtons (contentSummary) {
+  renderContentButtons (contentSummary, index) {
     const infoHash = contentSummary.infoHash
 
     // Only show the play/dowload buttons for contents that contain playable media
@@ -242,7 +242,7 @@ module.exports = class ContentList extends React.Component {
           key='play-button'
           title='Start streaming'
           className={'icon play'}
-          onClick={dispatcher('playFile', infoHash)}>
+          onClick={dispatcher('playFile', infoHash, index)}>
           play_circle_outline
         </i>
       )

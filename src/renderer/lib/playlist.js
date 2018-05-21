@@ -4,84 +4,86 @@ module.exports = {
   hasPrevious,
   getPreviousIndex,
   getCurrentLocalURL
-}
+};
 
-const ContentSummary = require('./content-summary')
-const ContentPlayer = require('./content-player')
+const ContentSummary = require("./content-summary");
+const ContentPlayer = require("./content-player");
 
 const cache = {
   infoHash: null,
   previousIndex: null,
   currentIndex: null,
   nextIndex: null
+};
+
+function hasNext(state) {
+  updateCache(state);
+  return cache.nextIndex !== null;
 }
 
-function hasNext (state) {
-  updateCache(state)
-  return cache.nextIndex !== null
+function getNextIndex(state) {
+  updateCache(state);
+  return cache.nextIndex;
 }
 
-function getNextIndex (state) {
-  updateCache(state)
-  return cache.nextIndex
+function hasPrevious(state) {
+  updateCache(state);
+  return cache.previousIndex !== null;
 }
 
-function hasPrevious (state) {
-  updateCache(state)
-  return cache.previousIndex !== null
+function getPreviousIndex(state) {
+  updateCache(state);
+  return cache.previousIndex;
 }
 
-function getPreviousIndex (state) {
-  updateCache(state)
-  return cache.previousIndex
+function getCurrentLocalURL(state) {
+  return state.server ? state.server.localURL + "/" + state.playing.fileIndex : "";
 }
 
-function getCurrentLocalURL (state) {
-  return state.server
-    ? state.server.localURL + '/' + state.playing.fileIndex
-    : ''
-}
-
-function updateCache (state) {
-  const infoHash = state.playing.infoHash
-  const fileIndex = state.playing.fileIndex
+function updateCache(state) {
+  const infoHash = state.playing.infoHash;
+  const fileIndex = state.playing.fileIndex;
 
   if (infoHash === cache.infoHash) {
     switch (fileIndex) {
       case cache.currentIndex:
-        return
+        return;
       case cache.nextIndex:
-        cache.previousIndex = cache.currentIndex
-        cache.currentIndex = fileIndex
-        cache.nextIndex = findNextIndex(state)
-        return
+        cache.previousIndex = cache.currentIndex;
+        cache.currentIndex = fileIndex;
+        cache.nextIndex = findNextIndex(state);
+        return;
       case cache.previousIndex:
-        cache.previousIndex = findPreviousIndex(state)
-        cache.nextIndex = cache.currentIndex
-        cache.currentIndex = fileIndex
-        return
+        cache.previousIndex = findPreviousIndex(state);
+        cache.nextIndex = cache.currentIndex;
+        cache.currentIndex = fileIndex;
+        return;
     }
   } else {
-    cache.infoHash = infoHash
+    cache.infoHash = infoHash;
   }
 
-  cache.previousIndex = findPreviousIndex(state)
-  cache.currentIndex = fileIndex
-  cache.nextIndex = findNextIndex(state)
+  cache.previousIndex = findPreviousIndex(state);
+  cache.currentIndex = fileIndex;
+  cache.nextIndex = findNextIndex(state);
 }
 
-function findPreviousIndex (state) {
-  const files = ContentSummary.getByKey(state, state.playing.infoHash).files
-  for (let i = state.playing.fileIndex - 1; i >= 0; i--) {
-    if (ContentPlayer.isPlayable(files[i])) return i
+function findPreviousIndex(state) {
+  const files = ContentSummary.getByKey(state, state.playing.infoHash).files;
+  if (!!files) {
+    for (let i = state.playing.fileIndex - 1; i >= 0; i--) {
+      if (ContentPlayer.isPlayable(files[i])) return i;
+    }
   }
-  return null
+  return null;
 }
 
-function findNextIndex (state) {
-  const files = ContentSummary.getByKey(state, state.playing.infoHash).files
-  for (let i = state.playing.fileIndex + 1; i < files.length; i++) {
-    if (ContentPlayer.isPlayable(files[i])) return i
+function findNextIndex(state) {
+  const files = ContentSummary.getByKey(state, state.playing.infoHash).files;
+  if (!!files) {
+    for (let i = state.playing.fileIndex + 1; i < files.length; i++) {
+      if (ContentPlayer.isPlayable(files[i])) return i;
+    }
   }
-  return null
+  return null;
 }

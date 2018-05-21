@@ -309,29 +309,29 @@ function getContentProgress () {
 }
 
 function startServer (infoHash) {
-  const content = client.get(infoHash)
-  if (content.ready) startServerFromReadyContent(content)
-  else content.once('ready', () => startServerFromReadyContent(content))
+  // const content = client.get(infoHash)
+  // if (content.ready) startServerFromReadyContent(content)
+  // else content.once('ready', () => startServerFromReadyContent(content))
 }
 
-function startServerFromReadyContent (content, cb) {
-  if (server) return
+// function startServerFromReadyContent (content, cb) {
+//   if (server) return
 
-  // start the streaming content-to-http server
-  server = content.createServer()
-  server.listen(0, function () {
-    const port = server.address().port
-    const urlSuffix = ':' + port
-    const info = {
-      contentKey: content.key,
-      localURL: 'http://localhost' + urlSuffix,
-      networkURL: 'http://' + networkAddress() + urlSuffix
-    }
+//   // start the streaming content-to-http server
+//   server = content.createServer()
+//   server.listen(0, function () {
+//     const port = server.address().port
+//     const urlSuffix = ':' + port
+//     const info = {
+//       contentKey: content.key,
+//       localURL: 'http://localhost' + urlSuffix,
+//       networkURL: 'http://' + networkAddress() + urlSuffix
+//     }
 
-    ipc.send('wt-server-running', info)
-    ipc.send('wt-server-' + content.infoHash, info)
-  })
-}
+//     ipc.send('wt-server-running', info)
+//     ipc.send('wt-server-' + content.infoHash, info)
+//   })
+// }
 
 function stopServer () {
   if (!server) return
