@@ -139,7 +139,8 @@ function setupStateSaved (cb) {
 
   function createContentObject (t) {
     return {
-      url: '',
+      url: t.url,
+      img: t.img,
       name: t.name,
       description: '',
       infoHash: t.infoHash

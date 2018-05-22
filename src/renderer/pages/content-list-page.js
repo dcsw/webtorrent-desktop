@@ -48,11 +48,13 @@ module.exports = class ContentList extends React.Component {
 
     // Background content: show some nice visuals, like a frame from the movie, if possible
     const style = {}
-    if (contentSummary.posterFileName) {
+    // if (contentSummary.posterFileName) {
       const gradient = 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%)'
-      const posterPath = ContentSummary.getPosterPath(contentSummary)
-      style.backgroundContent = `${gradient}, url('${posterPath}')`
-    }
+      // const posterPath = ContentSummary.getPosterPath(contentSummary)
+      const posterPath = contentSummary.img
+      // style.backgroundContent = `${gradient}, url('${posterPath}')`
+      style.backgroundImage = `${gradient}, url('${posterPath}')`
+    // }
 
     // Foreground: name of the content, basic info like size, play button,
     // cast buttons if available, and delete
@@ -92,20 +94,20 @@ module.exports = class ContentList extends React.Component {
     let progElems
     if (contentSummary.error) {
       progElems = [getErrorMessage(contentSummary)]
-    } else if (contentSummary.status !== 'paused' && prog) {
-      progElems = [
-        renderDownloadCheckbox(),
-        renderContentStatus(),
-        renderProgressBar(),
-        renderPercentProgress(),
-        renderTotalProgress(),
-        renderPeers(),
-        renderSpeeds(),
-        renderEta()
-      ]
+    // } else if (contentSummary.status !== 'paused' && prog) {
+    //   progElems = [
+    //     renderDownloadCheckbox(),
+    //     renderContentStatus(),
+    //     renderProgressBar(),
+    //     renderPercentProgress(),
+    //     renderTotalProgress(),
+    //     renderPeers(),
+    //     renderSpeeds(),
+    //     renderEta()
+    //   ]
     } else {
       progElems = [
-        renderDownloadCheckbox(),
+        // renderDownloadCheckbox(),
         renderContentStatus()
       ]
     }
@@ -116,8 +118,11 @@ module.exports = class ContentList extends React.Component {
     )
 
     const url = contentSummary.url || 'Loading url...'
+    const img = contentSummary.img
+    const imgStyle = { width: "100%", height: "100%"}
     elements.push(
       <div key='url' className='ellipsis'>{url}</div>
+      // <img src={img} style={imgStyle}/>
     )
 
     return (<div key='metadata' className='metadata'>{elements}</div>)

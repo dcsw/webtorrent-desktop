@@ -36,9 +36,38 @@ module.exports = {
   GENERIC_CONTENT_ITEMS: [
     {
       url: 'http://portfolios.risd.edu/gallery/60588389/Decay-Ceramic-Composter',
+      img: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/1066b660588389.5a52eeedb0328.jpg',
       name: 'Decay',
       description: 'Imagining reviving soil ecostructures beneath cities. An installation in which the unpredictable organic shatters the architectural shell. Inspired by composting processes, a fancifully functioning composter unit. To employ organic processes as performance art.',
       infoHash: '0'
+    },
+    {
+      url: 'http://portfolios.risd.edu/gallery/60633641/Cradle-Ceramic-Hydroponics',
+      img: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a2d51860633641.5a91e5aa9c224.jpg',
+      name: 'Cradle',
+      description: 'Cradle: Ceramic Hydroponics',
+      infoHash: '1'
+    },
+    {
+      url: 'http://portfolios.risd.edu/gallery/63190115/Test-Slides',
+      img: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/861c4d63190115.5aa8bb05ec5b2.jpg',
+      name: 'Test Slides',
+      description: 'Bringing intentionality to the test tiles necessary for ceramics by adding to an ever-growing collection of ceramic test slides.',
+      infoHash: '2'
+    },
+    {
+      url: 'http://portfolios.risd.edu/gallery/62492355/Acequia-Erosion-Module',
+      img: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/ca98ae62492355.5a922b0fb45a7.jpg',
+      name: 'Acequia Erosion Module',
+      description: 'Creating modules to mitigate erosion on the Ditch system of the Rio Grande, New Mexico.',
+      infoHash: '3'
+    },
+    {
+      url: 'http://portfolios.risd.edu/gallery/62566427/Vegetable-Dyes',
+      img: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/46937f62566427.5a94a03ceb374.jpg',
+      name: 'Vegetable Dyes',
+      description: 'Ceramic cups and Eggshells dyed with Beet, Cabbage, and Turmeric dyes, set with vinegar. Experimental organic finishes to clay.',
+      infoHash: '4'
     }
   ],
 
