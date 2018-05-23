@@ -332,6 +332,7 @@ module.exports = class PlaybackController {
     // }
 
     // state.window.title = fileSummary.name;
+    state.window.title = contentSummary.name;
 
     // play in VLC if set as default player (Preferences / Playback / Play in VLC)
     if (this.state.saved.prefs.openExternalPlayer) {
