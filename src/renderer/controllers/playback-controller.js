@@ -28,7 +28,7 @@ module.exports = class PlaybackController {
   }
 
   // Play a file in a content.
-  // * Start contenting, if necessary
+  // * Start playing content, if necessary
   // * Stream, if not already fully downloaded
   // * If no file index is provided, restore the most recently viewed file or autoplay the first
   playFile(infoHash, index /* optional */) {

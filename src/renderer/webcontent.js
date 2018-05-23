@@ -133,7 +133,7 @@ function startPlayingContent (contentKey, contentID, path, fileModtimes, selecti
 }
 
 function stopPlayingContent (infoHash) {
-  console.log('--- STOP CONTENTING: ', infoHash)
+  console.log('--- STOP PLAYING CONTENT: ', infoHash)
   const content = client.get(infoHash)
   if (content) content.destroy()
 }
@@ -393,7 +393,7 @@ function selectFiles (contentOrInfoHash, selections) {
 }
 
 // Gets a WebContent handle by contentKey
-// Throws an Error if we're not currently contenting anything w/ that key
+// Throws an Error if we're not currently playing content anything w/ that key
 function getContent (contentKey) {
   const ret = client.contents.find((x) => x.key === contentKey)
   if (!ret) throw new ContentKeyNotFoundError(contentKey)

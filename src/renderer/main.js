@@ -125,7 +125,7 @@ function onState (err, _state) {
     }
   })
 
-  // Restart everything we were contenting last time the app ran
+  // Restart everything we were playing content last time the app ran
   resumeContents()
 
   // Initialize ReactDOM
@@ -139,7 +139,7 @@ function onState (err, _state) {
   // Listen for messages from the main process
   setupIpc()
 
-  // Drag and drop files/text to start contenting or seeding
+  // Drag and drop files/text to start playing content or seeding
   dragDrop('body', {
     onDrop: onOpen,
     onDropText: onOpen

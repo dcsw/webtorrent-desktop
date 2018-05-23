@@ -247,7 +247,7 @@ module.exports = class ContentList extends React.Component {
     }
   }
 
-  // Download button toggles between contenting (DL/seed) and paused
+  // Download button toggles between playing content (DL/seed) and paused
   // Play button starts streaming the content immediately, unpausing if needed
   renderContentButtons(contentSummary, index) {
     const infoHash = contentSummary.infoHash;
@@ -338,9 +338,9 @@ module.exports = class ContentList extends React.Component {
   // Show a single contentSummary file in the details view for a single content
   renderFileRow(contentSummary, file, index) {
     // First, find out how much of the file we've downloaded
-    // Are we even contenting it?
+    // Are we even playing content it?
     const isSelected = contentSummary.selections && contentSummary.selections[index];
-    let isDone = false; // Are we finished contenting it?
+    let isDone = false; // Are we finished playing content it?
     let progress = "";
     if (contentSummary.progress && contentSummary.progress.files && contentSummary.progress.files[index]) {
       const fileProg = contentSummary.progress.files[index];
