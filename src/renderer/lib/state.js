@@ -142,7 +142,7 @@ function setupStateSaved (cb) {
       url: t.url,
       img: t.img,
       name: t.name,
-      description: '',
+      description: t.description,
       infoHash: t.infoHash
     }
   }
