@@ -34,7 +34,7 @@ function renderContent(state) {
   // const gradient = 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%)'
   // const posterPath = path.join(config.STATIC_PATH, "bigBuckBunny.jpg")
   // style.backgroundContent = `${gradient}, url('${posterPath}')`
-  const imgStyle = { width: "100%", height: "100%"}
+  const imgStyle = { height: "100%"}
   return (
     <div
       key="letterbox"
