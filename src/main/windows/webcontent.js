@@ -28,18 +28,18 @@ function init () {
     width: 150
   })
 
-  win.loadURL(config.WINDOW_WEBCONTENT)
+  // win.loadURL(config.WINDOW_WEBCONTENT)
 
-  // Prevent killing the WebContent process
-  win.on('close', function (e) {
-    if (electron.app.isQuitting) {
-      return
-    }
-    e.preventDefault()
-    win.hide()
-  })
+  // // Prevent killing the WebContent process
+  // win.on('close', function (e) {
+  //   if (electron.app.isQuitting) {
+  //     return
+  //   }
+  //   e.preventDefault()
+  //   win.hide()
+  // })
 
-  this.toggleDevTools();
+  // this.toggleDevTools();
 }
 
 function show () {

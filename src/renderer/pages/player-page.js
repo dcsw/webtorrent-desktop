@@ -37,7 +37,12 @@ function renderContent(state) {
       className="letterbox"
       onMouseMove={dispatcher("mediaMouseMoved")}
     >
-    <img src={state.getPlayingContentSummary().img} style={imgStyle}/>
+    <img src={state.getPlayingContentSummary().img} style={imgStyle}
+    onLoad={(evt) => {
+        dispatch('setDimensions', { width: evt.currentTarget.naturalWidth, height: evt.currentTarget.naturalHeight })
+        } 
+      }
+    />
     </div>
   );
 }

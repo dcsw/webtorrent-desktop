@@ -238,13 +238,6 @@ module.exports = {
       infoHash: "27"
     },
     {
-      name: "Copulating rats with peanut effigy bottle\n450-600 AD",
-      img:
-        "https://instagram.fbed1-1.fna.fbcdn.net/vp/078dafa231b7aeda3e14f3a867603680/5BB119D1/t51.2885-15/s640x640/sh0.08/e35/17268046_396838480696674_6423554792999616512_n.jpg",
-      description: "Copulating rats with peanut effigy bottle\n450-600 AD",
-      infoHash: "28"
-    },
-    {
       name: "Some skull stuff\n@somie_ssom @kylestrack31",
       img: "https://instagram.fbed1-1.fna.fbcdn.net/vp/30002762d8524c16c9d3f552419cdf21/5B18522F/t51.2885-15/s640x640/e15/17075846_276335466136358_2345748654167425024_n.jpg",
       description: "Some skull stuff\n@somie_ssom @kylestrack31",
@@ -305,13 +298,6 @@ module.exports = {
       img: "https://instagram.fbed1-1.fna.fbcdn.net/vp/ba80b3de56038fca05f1d126cef8f089/5B182447/t51.2885-15/s640x640/e15/14723722_1838385079707502_1012505279805259776_n.jpg",
       description: "Enclosed tunnel book coming together tho\n🍳\n#artistbook #bookbinding #bookmaking #accordion",
       infoHash: "37"
-    },
-    {
-      name: "... math sucks\n🍳🍳🍳\n#artistbook #bookbinding #bookmaking #accordion #fuck",
-      img:
-        "https://instagram.fbed1-1.fna.fbcdn.net/vp/ea7dbc93e9b752ff8ad363222ff85db1/5BBBA8A2/t51.2885-15/s640x640/sh0.08/e35/16464252_348162842249448_3445391415884906496_n.jpg",
-      description: "... math sucks\n🍳🍳🍳\n#artistbook #bookbinding #bookmaking #accordion #fuck",
-      infoHash: "38"
     },
     {
       name: "Aaand done ! Learned so much this winter 🌻🌻🌻\n#bookmaking #bookbinding #artistbook #traditional",
