@@ -468,6 +468,336 @@ module.exports = {
         "https://instagram.fbed1-1.fna.fbcdn.net/vp/f0134f51fd2d6a63e638546fe96b3ef6/5BBF502C/t51.2885-15/s640x640/sh0.08/e35/15403347_1138814149572754_7382920516920672256_n.jpg",
       description: "🚀\n.\n.\n.\n.\n#rocketship #ceramic #cup",
       infoHash: "61"
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/472379_orig.jpg",
+      name: "Untitled",
+      description: "",
+      infoHash: 0
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/7218287_orig.jpg",
+      name: "Untitled",
+      description: "",
+      infoHash: 100
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/2623942_orig.jpg",
+      name: "For The Home​",
+      description: "",
+      infoHash: 200
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9811351_orig.jpg",
+      name: "Wearable Porcelain Mushrooms",
+      description: "",
+      infoHash: 300
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/6409425_orig.jpg",
+      name: "Wearable Porcelain Mushrooms",
+      description: "",
+      infoHash: 301
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/1678689_orig.jpg",
+      name: "Slipcasting molds",
+      description: "",
+      infoHash: 400
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9716237_orig.jpg",
+      name: "Flexible",
+      description: "",
+      infoHash: 500
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/2058813_orig.jpg",
+      name: "Fish Diptych  [Collaboration]",
+      description: "",
+      infoHash: 600
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/2670512.jpg",
+      name: "2 Hour Paintings",
+      description: "",
+      infoHash: 700
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9521691.jpg",
+      name: "2 Hour Paintings",
+      description: "",
+      infoHash: 701
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/87344.jpg",
+      name: "2 Hour Paintings",
+      description: "",
+      infoHash: 702
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/6766857.jpg",
+      name: "2 Hour Paintings",
+      description: "",
+      infoHash: 703
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9830053.jpg",
+      name: "2 Hour Paintings",
+      description: "",
+      infoHash: 704
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/6487056.jpg",
+      name: "2 Hour Paintings",
+      description: "",
+      infoHash: 705
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/5942837.jpg",
+      name: "2 Hour Paintings",
+      description: "",
+      infoHash: 706
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9368894.jpg",
+      name: "2 Hour Paintings",
+      description: "",
+      infoHash: 707
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/6240865.jpg",
+      name: "2 Hour Paintings",
+      description: "",
+      infoHash: 708
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/7508009.jpg",
+      name: "Still Life Introduction",
+      description: "Still life of pepper.  Acrylic on canvas board.  12 x 9 inches. March, 2015.",
+      infoHash: 800
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9887389.jpg",
+      name: "Still Life Introduction",
+      description: "Pairs.  Acrylic on canvas board.  9 x 12 inches.  March, 2015.",
+      infoHash: 801
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/3485365.jpg?647",
+      name: "Estranged",
+      description: "",
+      infoHash: 900
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/8432005.jpg?878",
+      name: "rotten hearing gerome",
+      description: "",
+      infoHash: 1000
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/8414598_orig.jpg",
+      name: "Waste",
+      description: "",
+      infoHash: 1100
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/6454870.jpg",
+      name: "Self Portrait  [Front and Back]",
+      description: "",
+      infoHash: 1200
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/1035075.jpg",
+      name: "Self Portrait  [Front and Back]",
+      description: "",
+      infoHash: 1201
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9968303_orig.jpg",
+      name: "UNTITLED",
+      description: "",
+      infoHash: 1300
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/8902298.jpg",
+      name: "Collage, Surrealism",
+      description: "1800s woodblock open-source print photocopy collage.  6 x 9 inches.",
+      infoHash: 1400
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/3013304.jpg",
+      name: "Collage, Surrealism",
+      description: "Glossy paper mounted on matte board.  5 x 3.75 inches.",
+      infoHash: 1401
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/3279863.jpg",
+      name: "Collage, Surrealism",
+      description: "Glossy paper mounted on matte board.  6 x 6.25 inches",
+      infoHash: 1402
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/3486905.jpg",
+      name: "Collage, Surrealism",
+      description: "Glossy paper mounted on matte board.  5 x 6.5 inches",
+      infoHash: 1403
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/8680010.jpg",
+      name: "Collage, Surrealism",
+      description: "Glossy paper mounted on matte board.  5.5 x 12 inches.",
+      infoHash: 1404
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/7134191.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "This is a selection from a total of 10 abstractions on a small tricycle.  This sort of abstraction was difficult for me to impute at first, I began very literally.  The first few sequential abstractions simplified the gradient while holding onto the overall shape.  After a time, I felt like I was running out of places to go because, compared to the original form, I had already reduced the image to critical contours.  I realized at this point that I did not need to feel limited to the literal form of the tricycle simply because I had begun with it.  I, as the artist, had and have the ability to manipulate form while still capturing its essence with integrity.  After exploring a different route, I restarted from the middle and became partial to this pair because their angular and swooping aesthetics hold true to the voice of the whole assemblage.",
+      infoHash: 1500
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/188586.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "For this, I layered the last version of my bike digression over a drawing made with water and charcoal powder.  The original purpose of this piece was to see how far from the still life my digression had come.  To me, the piece itself surpasses that aim.  The clear division of tone creates a sense of depth, and the movement of the marks in the midground complements that of the foreground in a way that visually locks the tempera in place.  I have chosen to separate it from the digression because to me it has a charge that allows it to stand on its own.",
+      infoHash: 1501
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9645022.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "I found this to be a strange abstracting process, I had never tried to mimic existing form with other form so closely before.  For reference, I had four flat images of my own head where I had traced out the basic surface forms.  I was using flat representations of curvaceous form to create form with flat planes.  But the flat images only accounted for the outermost layer.  I inferred the spherical shape of the back of a skull, and created a frequency 2 geodome.  That cranium structure is now entirely covered with a representation of the surface forms depicted by the flat images.",
+      infoHash: 1502
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/8103214.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "This is a found book whose pages I glued into 14 sections to create 30 separate pages that I whitewashed on both sides.  On October 15th, I began adding a colored-pencil self portrait daily, as the last action of the night before turning off the lights and falling asleep.  At the time this scan was taken, the daily portion had been going on for 13 days.  As a work in progress I do not feel ready to analyze the take away from the experience yet, as to keep my lens unfiltered through to the end and allow myself to focus on the process rather than the result.  This is a small study of the self, and my first formal quotidian time lapse project.  ",
+      infoHash: 1503
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/2987523.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "Before Drawing Naturalism my sophomore year, I hadn’t taken any formal drawing for fear of frustration.  In retrospect, it wouldn’t be an exaggeration to say that this class changed the way I think of and see the world every day.  For me, it was not a class about how to make something look realistic so much as it was about understanding what I am looking at.  The retina perceives only flat images at any given moment, and it is the brain that uses a combination of visual cues and memory from different angles and times to create the illusion of the depth we feel.  Naturally, it is impossible to create a dimensional object on a flat paper because a flat paper does not allow for the dimension of time.  For this reason, every naturalistic drawing is a stationary illusion of tone and proportions that aim to trick the eye into perceiving the depth that is lacking on the physical paper.  When drawing naturalistically in the past, I have more often than not drawn an incoherent mix between the flattened retinal image that I see at one given time, and an empty knowledge of how gradient creates the illusion of depth.  Meaning more of a representation of the three dimensional object than an observation.  I’ve carried out of the classroom two notions that have remained relevant ever since.  First, an understanding of proportional and shading techniques I can use to my advantage when communicating depth to the brain.  Last, that the integrity of my drawings increases when I remember to view my subject as a figure in time and space instead of an already flat image.",
+      infoHash: 1504
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/7184475.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "*repeat*\nBefore Drawing Naturalism my sophomore year, I hadn’t taken any formal drawing for fear of frustration.  In retrospect, it wouldn’t be an exaggeration to say that this class changed the way I think of and see the world every day.  For me, it was not a class about how to make something look realistic so much as it was about understanding what I am looking at.  The retina perceives only flat images at any given moment, and it is the brain that uses a combination of visual cues and memory from different angles and times to create the illusion of the depth we feel.  Naturally, it is impossible to create a dimensional object on a flat paper because a flat paper does not allow for the dimension of time.  For this reason, every naturalistic drawing is a stationary illusion of tone and proportions that aim to trick the eye into perceiving the depth that is lacking on the physical paper.  When drawing naturalistically in the past, I have more often than not drawn an incoherent mix between the flattened retinal image that I see at one given time, and an empty knowledge of how gradient creates the illusion of depth.  Meaning more of a representation of the three dimensional object than an observation.  I’ve carried out of the classroom two notions that have remained relevant ever since.  First, an understanding of proportional and shading techniques I can use to my advantage when communicating depth to the brain.  Last, that the integrity of my drawings increases when I remember to view my subject as a figure in time and space instead of an already flat image.",
+      infoHash: 1505
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/6423726.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "*repeat*\nBefore Drawing Naturalism my sophomore year, I hadn’t taken any formal drawing for fear of frustration.  In retrospect, it wouldn’t be an exaggeration to say that this class changed the way I think of and see the world every day.  For me, it was not a class about how to make something look realistic so much as it was about understanding what I am looking at.  The retina perceives only flat images at any given moment, and it is the brain that uses a combination of visual cues and memory from different angles and times to create the illusion of the depth we feel.  Naturally, it is impossible to create a dimensional object on a flat paper because a flat paper does not allow for the dimension of time.  For this reason, every naturalistic drawing is a stationary illusion of tone and proportions that aim to trick the eye into perceiving the depth that is lacking on the physical paper.  When drawing naturalistically in the past, I have more often than not drawn an incoherent mix between the flattened retinal image that I see at one given time, and an empty knowledge of how gradient creates the illusion of depth.  Meaning more of a representation of the three dimensional object than an observation.  I’ve carried out of the classroom two notions that have remained relevant ever since.  First, an understanding of proportional and shading techniques I can use to my advantage when communicating depth to the brain.  Last, that the integrity of my drawings increases when I remember to view my subject as a figure in time and space instead of an already flat image.",
+      infoHash: 1506
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/296287.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "Through this project, I was introduced to the balance of Wabi Sabi.  Wabi speaks to the beauty of imperfection, and Sabi is the beauty of age and wear that exposes the impermanence of things.  Over the course of a week I methodically started 30 basic Japanese Tea Bowls.  For each one, I pinched a fist-sized ball of mineral-laden Raku clay into a small pot, then returned 24 hours later to embark on the tedious task of shaving it down to a delicate shell.  This was where I broke the most bowls because the more I shaved them down the easier it became to apply too much pressure and shatter the wall.  It was this stage in which I began to understand the essence of Wabi Sabi.  I realized I had to release preconceived visions of a final product as they tarnish the entire process, putting a disproportional amount of weight on the importance of having produced versus the beauty of creating the production.  I knew this had honestly settled with me when my ultimate absence of control over the clay and glaze reaction didn’t rattle me.  As a final test and tribute, I chose to make the ultimate sacrifice in this project, and smash the bowl I felt was most beautiful after all had been glazed, and scatter its pieces among others in the woods.  I now think back on this project as being an important primer to more recent experiments in abstraction and abstract expressionism.",
+      infoHash: 1507
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/1768336.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "These raku water buckets were made with a different construction technique from that of the Tea Bowls, but the essential teachings relating to the balance of Wabi Sabi remained an extension of the same, as both projects progressed simultaneously.  ",
+      infoHash: 1508
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/519751.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "Bowling for Merry-Go-Round\n\nThis is a piece made in three layers where I grew accustomed to using semi discernable objective images as tools to layer abstractly.  I took multiple days drawing a monochromatic still life in green colored pencil, and upon completion, I made the cut.  To combine them one once again, I painted in a contour of a moving subject with an aim of sending the eye around the page to notice more.  While the eye then had more places to go, the image felt rather shallow. As a final layer, I chose to censor a few areas of small detail by adding large bold spheres, the result ultimately worth the sacrifice as it pushed the other layers far back and added understandable depth.  I consider this project a notable bridge between being able to represent form on paper and being able to manipulate it.",
+      infoHash: 1509
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/936330.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "For this non-objective diptych, I worked in layers on two 18 in x 24 in pages.  I focused on observation, constantly responding intuitively to what was already put down.  In each case, I began with layers of small detailed work, designs growing bigger with each overlapping addition.  When they grew dark and chaotic, I mixed colors to match the energy of the drawings, and blocked everything else out with many coats.  I alternated between drying the pieces with a heat gun and washing or sanding them to etch away the paint and give an effect of semi-transparency none of the other censoring layers had.  Finally, I sliced each part in half and re-assembled them in the orientation that sparked the most effective dialogue between the two.",
+      infoHash: 1510
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/1258760.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "Missing\n\nThis is a mixed media drawing created from the remaining two pieces after Diptych 3.  With a detailed overdrawing, I united the two images in a single drawing.  The final result is a map of important relationships that exist for me and what the ghost or essence of each looks like to me with distance.",
+      infoHash: 1511
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/4573814.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "I find that when I carry spiral bound sketchbooks with me, I am more likely to make entries in image form, whereas when my sketchbook is bound I more often scrawl in prose or list form.  \nThese are four entries from two different spiral bound books.  The top left was made with a borrowed set of watercolors and the Mediterranean Sea, the salt is a little course on the page.  The top right is a slightly longer duration form drawing of a statue in the Musée d'Orsay.  The bottom two are commemorations of more fleeting moments, a passing stranger portrait with leftover paint and a fast collage of leaves and litter from a fall walk.",
+      infoHash: 1512
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/3606259.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "This is an assembly of clippings collected from various found discarded items.  Being in the jar frames its phrases without their original context, so they are free to be inspiring.  Through their collection, my own small moments are made.  Specific strips hold tiny recollections, like passing a house with a particularly large collection of garden statues on a comfortable Autumn morning, finding a newspaper leaf blowing against a tree, and snipping it later in the privacy of the train station.  There must be hundreds of tiny texts and tiny moments sealed up in my jar now, and it continues to grow.",
+      infoHash: 1513
+    },
+    {
+      url: "https://kaitlyncirielliportfolio.weebly.com/",
+      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9414782.jpg",
+      name: "High School Senior Portfolio",
+      description:
+        "Ugly Devil\n\nThis was not a pretty piece to make.  The number seven correlates to the superstition that breaking a mirror brings on seven years of bad luck.  This is a broken self portrait, broken reflection, of the ugly devils I have, maybe anyone has that normally I and others excuse to the self as natural.  It’s uncomfortable to think about the true difference between naive imminent human nature and thinly veiled ugly devils.  Maybe the difference between them is a layer of narcissism and self forgiveness.  By the end, the making had me in a shaken state, my sense of security inside my protective natural narcissism shell was broken.  I documented this posture by rewriting my full name until I could do so smoothly again.",
+      infoHash: 1514
     }
   ],
 
