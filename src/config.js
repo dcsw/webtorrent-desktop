@@ -85,15 +85,6 @@ module.exports = {
       description: "Variations on a theme 😱\n#lifesculpture #clay #ceramic #ceramicsculpture #terracotta #risd #ceramics",
       infoHash: "15"
     },
-    {
-      name:
-        "13% shrinkage on this beautiful porcelain body\nAmazing difference between greenware and vitrified 🙀\n. #greenware #porcelain #vitrified #shrinkage #white #red #black #clay #ceramics #ceramic #mug #planter #glaze #galaxy #platelets #surprise",
-      img:
-        "https://instagram.fbed1-1.fna.fbcdn.net/vp/7986aaf51130e2e53a411b93157f2e7a/5BC2A23D/t51.2885-15/s640x640/sh0.08/e35/18096271_105871003311481_1170569701319770112_n.jpg",
-      description:
-        "13% shrinkage on this beautiful porcelain body\nAmazing difference between greenware and vitrified 🙀\n. #greenware #porcelain #vitrified #shrinkage #white #red #black #clay #ceramics #ceramic #mug #planter #glaze #galaxy #platelets #surprise",
-      infoHash: "18"
-    },
 
     {
       url: "https://kaitlyncirielliportfolio.weebly.com/",
@@ -211,31 +202,10 @@ module.exports = {
     },
     {
       url: "https://kaitlyncirielliportfolio.weebly.com/",
-      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/6454870.jpg",
-      name: "Self Portrait  [Front and Back]",
-      description: "Found paper collage, cut with scissors.  Approximately 14 x 12 inches.  January-February 2015.",
-      infoHash: 181
-    },
-    {
-      url: "https://kaitlyncirielliportfolio.weebly.com/",
-      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/1035075.jpg",
-      name: "Self Portrait  [Front and Back]",
-      description: "Found paper collage, cut with scissors.  Approximately 14 x 12 inches.  January-February 2015.",
-      infoHash: 182
-    },
-    {
-      url: "https://kaitlyncirielliportfolio.weebly.com/",
       img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9968303_orig.jpg",
       name: "UNTITLED",
       description: "​Glossy paper mounted on matte board.  6.25 x 12.75 inches.  January 2015.",
       infoHash: 191
-    },
-    {
-      url: "https://kaitlyncirielliportfolio.weebly.com/",
-      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/8902298.jpg",
-      name: "Collage, Surrealism",
-      description: "1800s woodblock open-source print photocopy collage.  6 x 9 inches.",
-      infoHash: 201
     },
     {
       url: "https://kaitlyncirielliportfolio.weebly.com/",
@@ -291,38 +261,6 @@ module.exports = {
     },
     {
       url: "https://kaitlyncirielliportfolio.weebly.com/",
-      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/8103214.jpg",
-      name: "Portfolio Item",
-      description:
-        "This is a found book whose pages I glued into 14 sections to create 30 separate pages that I whitewashed on both sides.  On October 15th, I began adding a colored-pencil self portrait daily, as the last action of the night before turning off the lights and falling asleep.  At the time this scan was taken, the daily portion had been going on for 13 days.  As a work in progress I do not feel ready to analyze the take away from the experience yet, as to keep my lens unfiltered through to the end and allow myself to focus on the process rather than the result.  This is a small study of the self, and my first formal quotidian time lapse project.  ",
-      infoHash: 214
-    },
-    {
-      url: "https://kaitlyncirielliportfolio.weebly.com/",
-      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/2987523.jpg",
-      name: "Portfolio Item",
-      description:
-        "Before Drawing Naturalism my sophomore year, I hadn’t taken any formal drawing for fear of frustration.  In retrospect, it wouldn’t be an exaggeration to say that this class changed the way I think of and see the world every day.  For me, it was not a class about how to make something look realistic so much as it was about understanding what I am looking at.  The retina perceives only flat images at any given moment, and it is the brain that uses a combination of visual cues and memory from different angles and times to create the illusion of the depth we feel.  Naturally, it is impossible to create a dimensional object on a flat paper because a flat paper does not allow for the dimension of time.  For this reason, every naturalistic drawing is a stationary illusion of tone and proportions that aim to trick the eye into perceiving the depth that is lacking on the physical paper.  When drawing naturalistically in the past, I have more often than not drawn an incoherent mix between the flattened retinal image that I see at one given time, and an empty knowledge of how gradient creates the illusion of depth.  Meaning more of a representation of the three dimensional object than an observation.  I’ve carried out of the classroom two notions that have remained relevant ever since.  First, an understanding of proportional and shading techniques I can use to my advantage when communicating depth to the brain.  Last, that the integrity of my drawings increases when I remember to view my subject as a figure in time and space instead of an already flat image.",
-      infoHash: 215
-    },
-    {
-      url: "https://kaitlyncirielliportfolio.weebly.com/",
-      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/7184475.jpg",
-      name: "Portfolio Item",
-      description:
-        "*repeat*\nBefore Drawing Naturalism my sophomore year, I hadn’t taken any formal drawing for fear of frustration.  In retrospect, it wouldn’t be an exaggeration to say that this class changed the way I think of and see the world every day.  For me, it was not a class about how to make something look realistic so much as it was about understanding what I am looking at.  The retina perceives only flat images at any given moment, and it is the brain that uses a combination of visual cues and memory from different angles and times to create the illusion of the depth we feel.  Naturally, it is impossible to create a dimensional object on a flat paper because a flat paper does not allow for the dimension of time.  For this reason, every naturalistic drawing is a stationary illusion of tone and proportions that aim to trick the eye into perceiving the depth that is lacking on the physical paper.  When drawing naturalistically in the past, I have more often than not drawn an incoherent mix between the flattened retinal image that I see at one given time, and an empty knowledge of how gradient creates the illusion of depth.  Meaning more of a representation of the three dimensional object than an observation.  I’ve carried out of the classroom two notions that have remained relevant ever since.  First, an understanding of proportional and shading techniques I can use to my advantage when communicating depth to the brain.  Last, that the integrity of my drawings increases when I remember to view my subject as a figure in time and space instead of an already flat image.",
-      infoHash: 216
-    },
-    {
-      url: "https://kaitlyncirielliportfolio.weebly.com/",
-      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/6423726.jpg",
-      name: "Portfolio Item",
-      description:
-        "*repeat*\nBefore Drawing Naturalism my sophomore year, I hadn’t taken any formal drawing for fear of frustration.  In retrospect, it wouldn’t be an exaggeration to say that this class changed the way I think of and see the world every day.  For me, it was not a class about how to make something look realistic so much as it was about understanding what I am looking at.  The retina perceives only flat images at any given moment, and it is the brain that uses a combination of visual cues and memory from different angles and times to create the illusion of the depth we feel.  Naturally, it is impossible to create a dimensional object on a flat paper because a flat paper does not allow for the dimension of time.  For this reason, every naturalistic drawing is a stationary illusion of tone and proportions that aim to trick the eye into perceiving the depth that is lacking on the physical paper.  When drawing naturalistically in the past, I have more often than not drawn an incoherent mix between the flattened retinal image that I see at one given time, and an empty knowledge of how gradient creates the illusion of depth.  Meaning more of a representation of the three dimensional object than an observation.  I’ve carried out of the classroom two notions that have remained relevant ever since.  First, an understanding of proportional and shading techniques I can use to my advantage when communicating depth to the brain.  Last, that the integrity of my drawings increases when I remember to view my subject as a figure in time and space instead of an already flat image.",
-      infoHash: 217
-    },
-    {
-      url: "https://kaitlyncirielliportfolio.weebly.com/",
       img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/296287.jpg",
       name: "Portfolio Item",
       description:
@@ -360,30 +298,6 @@ module.exports = {
       description:
         "Missing\n\nThis is a mixed media drawing created from the remaining two pieces after Diptych 3.  With a detailed overdrawing, I united the two images in a single drawing.  The final result is a map of important relationships that exist for me and what the ghost or essence of each looks like to me with distance.",
       infoHash: 222
-    },
-    {
-      url: "https://kaitlyncirielliportfolio.weebly.com/",
-      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/4573814.jpg",
-      name: "Portfolio Item",
-      description:
-        "I find that when I carry spiral bound sketchbooks with me, I am more likely to make entries in image form, whereas when my sketchbook is bound I more often scrawl in prose or list form.  \nThese are four entries from two different spiral bound books.  The top left was made with a borrowed set of watercolors and the Mediterranean Sea, the salt is a little course on the page.  The top right is a slightly longer duration form drawing of a statue in the Musée d'Orsay.  The bottom two are commemorations of more fleeting moments, a passing stranger portrait with leftover paint and a fast collage of leaves and litter from a fall walk.",
-      infoHash: 223
-    },
-    {
-      url: "https://kaitlyncirielliportfolio.weebly.com/",
-      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/3606259.jpg",
-      name: "Portfolio Item",
-      description:
-        "This is an assembly of clippings collected from various found discarded items.  Being in the jar frames its phrases without their original context, so they are free to be inspiring.  Through their collection, my own small moments are made.  Specific strips hold tiny recollections, like passing a house with a particularly large collection of garden statues on a comfortable Autumn morning, finding a newspaper leaf blowing against a tree, and snipping it later in the privacy of the train station.  There must be hundreds of tiny texts and tiny moments sealed up in my jar now, and it continues to grow.",
-      infoHash: 224
-    },
-    {
-      url: "https://kaitlyncirielliportfolio.weebly.com/",
-      img: "https://kaitlyncirielliportfolio.weebly.com/uploads/5/7/6/4/57646795/9414782.jpg",
-      name: "Portfolio Item",
-      description:
-        "Ugly Devil\n\nThis was not a pretty piece to make.  The number seven correlates to the superstition that breaking a mirror brings on seven years of bad luck.  This is a broken self portrait, broken reflection, of the ugly devils I have, maybe anyone has that normally I and others excuse to the self as natural.  It’s uncomfortable to think about the true difference between naive imminent human nature and thinly veiled ugly devils.  Maybe the difference between them is a layer of narcissism and self forgiveness.  By the end, the making had me in a shaken state, my sense of security inside my protective natural narcissism shell was broken.  I documented this posture by rewriting my full name until I could do so smoothly again.",
-      infoHash: 225
     }
   ],
 
