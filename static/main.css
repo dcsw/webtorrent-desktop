@@ -772,7 +772,7 @@ video::-webkit-media-text-track-container {
 }
 
 /*
- * MEDIA OVERLAY / AUDIO DETAILS
+ * MEDIA OVERLAY DETAILS
  */
 
 .media-overlay-background {
@@ -807,23 +807,6 @@ video::-webkit-media-text-track-container {
   font-size: 18px;
   font-weight: normal;
   text-align: center;
-}
-
-.audio-metadata div {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.audio-metadata .audio-title {
-  font-size: 32px;
-}
-
-.audio-metadata label {
-  display:inline-block;
-  width: 100px;
-  text-align: right;
-  font-weight: normal;
-  margin-right: 25px;
 }
 
 /*

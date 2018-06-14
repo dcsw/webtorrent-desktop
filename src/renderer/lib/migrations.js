@@ -143,9 +143,9 @@ function migrate_0_17_0 (saved) {
   saved.contents.forEach(function (ts) {
     if (!ts.files) return
     ts.files.forEach(function (file) {
-      if (!file.audioInfo || !file.audioInfo.picture) return
-      // This contained a Buffer, which 30x'd in size when serialized to JSON
-      delete file.audioInfo.picture
+      // if (!file.audioInfo || !file.audioInfo.picture) return
+      // // This contained a Buffer, which 30x'd in size when serialized to JSON
+      // delete file.audioInfo.picture
     })
   })
 }

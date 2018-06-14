@@ -20,11 +20,11 @@ module.exports = class Player extends React.Component {
 
   onComponentWillUnmount() {
     // Unload the media element so that Chromium stops trying to fetch data
-    const tag = document.querySelector("audio,video");
-    if (!tag) return;
-    tag.pause();
-    tag.src = "";
-    tag.load();
+    // const tag = document.querySelector("audio,video");
+    // if (!tag) return;
+    // tag.pause();
+    // tag.src = "";
+    // tag.load();
   }
 };
 

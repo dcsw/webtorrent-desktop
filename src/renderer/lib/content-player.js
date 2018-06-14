@@ -6,11 +6,9 @@ module.exports = {
 
 const path = require('path')
 
-// Checks whether a fileSummary or file path is audio/video that we can play,
-// based on the file extension
+// Checks whether a fileSummary or file path is playable based on the file extension
 function isPlayable (file) {
-  // return isVideo(file)
-  return true
+  return isContent(file)
 }
 
 // Checks whether a fileSummary or file path is playable video

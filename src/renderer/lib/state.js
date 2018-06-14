@@ -46,7 +46,7 @@ function getDefaultState () {
       title: config.APP_WINDOW_TITLE
     },
     selectedInfoHash: null, /* the content we've selected to view details. see state.contents */
-    playing: getDefaultPlayState(), /* the media (audio or video) that we're currently playing */
+    playing: getDefaultPlayState(), /* the content that we're currently playing */
     devices: {}, /* playback devices like Chromecast and AppleTV */
     dock: {
       badge: 0,
@@ -83,13 +83,13 @@ function getDefaultState () {
   }
 }
 
-/* Whenever we stop playing video or audio, here's what we reset state.playing to */
+/* Whenever we stop playing content, here's what we reset state.playing to */
 function getDefaultPlayState () {
   return {
     infoHash: null, /* the info hash of the content we're playing */
     fileIndex: null, /* the zero-based index within the content */
     location: 'local', /* 'local', 'chromecast', 'airplay' */
-    type: null, /* 'audio' or 'video', could be 'other' if ever support eg streaming to VLC */
+    type: null, /* content, could be 'other' if ever support eg streaming to VLC */
     currentTime: 0, /* seconds */
     duration: 1, /* seconds */
     isReady: false,

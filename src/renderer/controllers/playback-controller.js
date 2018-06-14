@@ -19,7 +19,6 @@ const State = require("../lib/state");
 const ipcRenderer = electron.ipcRenderer;
 
 // Controls playback of contents and files within contents
-// both local (<video>,<audio>,external player) and remote (cast)
 module.exports = class PlaybackController {
   constructor(state, config, update) {
     this.state = state;
@@ -90,11 +89,11 @@ module.exports = class PlaybackController {
 
     // force rerendering if window is hidden,
     // in order to bypass `raf` and play/pause media immediately
-    const mediaTag = document.querySelector("video,audio");
-    if (!state.window.isVisible && mediaTag) {
-      if (state.playing.isPaused) mediaTag.play();
-      else mediaTag.pause();
-    }
+    // const mediaTag = document.querySelector("video,audio");
+    // if (!state.window.isVisible && mediaTag) {
+    //   if (state.playing.isPaused) mediaTag.play();
+    //   else mediaTag.pause();
+    // }
 
     if (state.playing.isPaused) this.play();
     else this.pause();
@@ -282,56 +281,6 @@ module.exports = class PlaybackController {
     const state = this.state;
 
     const contentSummary = ContentSummary.getByKey(state, infoHash);
-    // const fileSummary = contentSummary.files[index];
-
-    // if (!ContentPlayer.isPlayable(fileSummary)) {
-    //   contentSummary.mostRecentFileIndex = undefined;
-    //   return cb(new UnplayableFileError());
-    // }
-
-    // contentSummary.mostRecentFileIndex = index;
-
-    // // update state
-    // state.playing.infoHash = infoHash;
-    // state.playing.fileIndex = index;
-    // // state.playing.type = ContentPlayer.isContent(fileSummary)
-    // //   ? "video"
-    // //   : ContentPlayer.isContent(fileSummary) ? "audio" : "other";
-    //   state.playing.type = ContentPlayer.isContent(fileSummary) ? "content"  : "other";
-
-    // // pick up where we left off
-    // let jumpToTime = 0;
-    // if (resume && fileSummary.currentTime) {
-    //   const fraction = fileSummary.currentTime / fileSummary.duration;
-    //   const secondsLeft = fileSummary.duration - fileSummary.currentTime;
-    //   if (fraction < 0.9 && secondsLeft > 10) {
-    //     jumpToTime = fileSummary.currentTime;
-    //   }
-    // }
-    // state.playing.jumpToTime = jumpToTime;
-
-    // // if it's audio, parse out the metadata (artist, title, etc)
-    // if (contentSummary.status === "paused") {
-    //   ipcRenderer.once("wt-ready-" + contentSummary.infoHash, getAudioMetadata);
-    // } else {
-    //   getAudioMetadata();
-    // }
-
-    // function getAudioMetadata() {
-    //   if (state.playing.type === "audio" && !fileSummary.audioInfo) {
-    //     ipcRenderer.send("wt-get-audio-metadata", contentSummary.infoHash, index);
-    //   }
-    // }
-
-    // // if it's video, check for subtitles files that are done downloading
-    // dispatch("checkForSubtitles");
-
-    // // enable previously selected subtitle track
-    // if (fileSummary.selectedSubtitle) {
-    //   dispatch("addSubtitles", [fileSummary.selectedSubtitle], true);
-    // }
-
-    // state.window.title = fileSummary.name;
     state.window.title = contentSummary.name;
 
     // play in VLC if set as default player (Preferences / Playback / Play in VLC)

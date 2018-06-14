@@ -145,13 +145,6 @@ module.exports = class ContentController {
     dispatch('stateSave')
   }
 
-  contentAudioMetadata (infoHash, index, info) {
-    const contentSummary = this.getContentSummary(infoHash)
-    const fileSummary = contentSummary.files[index]
-    fileSummary.audioInfo = info
-    dispatch('update')
-  }
-
   contentServerRunning (serverInfo) {
     this.state.server = serverInfo
   }

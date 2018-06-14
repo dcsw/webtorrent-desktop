@@ -2,8 +2,6 @@ const {ipcRenderer} = require('electron')
 const telemetry = require('../lib/telemetry')
 const Playlist = require('../lib/playlist')
 
-// Controls local play back: the <video>/<audio> tag and VLC
-// Does not control remote casting (Chromecast etc)
 module.exports = class MediaController {
   constructor (state) {
     this.state = state

@@ -278,7 +278,7 @@ const dispatchHandlers = {
   'checkForSubtitles': () => controllers.subtitles().checkForSubtitles(),
   'addSubtitles': (files, autoSelect) => controllers.subtitles().addSubtitles(files, autoSelect),
 
-  // Local media: <video>, <audio>, external players
+  // Local media: external players
   'mediaStalled': () => controllers.media().mediaStalled(),
   'mediaError': (err) => controllers.media().mediaError(err),
   'mediaSuccess': () => controllers.media().mediaSuccess(),
@@ -368,7 +368,6 @@ function setupIpc () {
   ipcRenderer.on('wt-file-modtimes', (e, ...args) => tc.contentFileModtimes(...args))
   ipcRenderer.on('wt-file-saved', (e, ...args) => tc.contentFileSaved(...args))
   ipcRenderer.on('wt-poster', (e, ...args) => tc.contentPosterSaved(...args))
-  ipcRenderer.on('wt-audio-metadata', (e, ...args) => tc.contentAudioMetadata(...args))
   ipcRenderer.on('wt-server-running', (e, ...args) => tc.contentServerRunning(...args))
 
   ipcRenderer.on('wt-uncaught-error', (e, err) => telemetry.logUncaughtError('webcontent', err))

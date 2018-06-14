@@ -89,8 +89,6 @@ function init () {
     saveContentFile(contentKey))
   ipc.on('wt-generate-content-poster', (e, contentKey) =>
     generateContentPoster(contentKey))
-  ipc.on('wt-get-audio-metadata', (e, infoHash, index) =>
-    getAudioMetadata(infoHash, index))
   ipc.on('wt-start-server', (e, infoHash) =>
     startServer(infoHash))
   ipc.on('wt-stop-server', (e) =>
@@ -337,18 +335,6 @@ function stopServer () {
   if (!server) return
   server.destroy()
   server = null
-}
-
-function getAudioMetadata (infoHash, index) {
-  const content = client.get(infoHash)
-  const file = content.files[index]
-  musicmetadata(file.createReadStream(), function (err, info) {
-    if (err) return console.log('error getting audio metadata for ' + infoHash + ':' + index, err)
-    const { artist, album, albumartist, title, year, track, disk, genre } = info
-    const importantInfo = { artist, album, albumartist, title, year, track, disk, genre }
-    console.log('got audio metadata for %s: %o', file.name, importantInfo)
-    ipc.send('wt-audio-metadata', infoHash, index, importantInfo)
-  })
 }
 
 function selectFiles (contentOrInfoHash, selections) {
