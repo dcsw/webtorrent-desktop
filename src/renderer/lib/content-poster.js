@@ -29,10 +29,61 @@ function getLargestFileByExtension (content, extensions) {
     const extname = path.extname(file.name).toLowerCase()
     return extensions.indexOf(extname) !== -1
   })
-  if (files.length === 0) return undefined
-  return files.reduce(function (a, b) {
-    return a.length > b.length ? a : b
+}
+
+/**
+ * Returns a score how likely the file is suitable as a poster
+ * @param imgFile File object of an image
+ * @returns {number} Score, higher score is a better match
+ */
+function scoreAudioCoverFile (imgFile) {
+  const fileName = path.basename(imgFile.name, path.extname(imgFile.name)).toLowerCase()
+  const relevanceScore = {
+    cover: 80,
+    folder: 80,
+    album: 80,
+    front: 80,
+    back: 20,
+    spectrogram: -80
+  }
+
+  for (let keyword in relevanceScore) {
+    if (fileName === keyword) {
+      return relevanceScore[keyword]
+    }
+    if (fileName.indexOf(keyword) !== -1) {
+      return relevanceScore[keyword]
+    }
+  }
+  return 0
+}
+
+function torrentPosterFromAudio (torrent, cb) {
+  const imageFiles = filterOnExtension(torrent, mediaExtensions.image)
+
+  const bestCover = imageFiles.map(file => {
+    return {
+      file: file,
+      score: scoreAudioCoverFile(file)
+    }
+  }).reduce((a, b) => {
+    if (a.score > b.score) {
+      return a
+    }
+    if (b.score > a.score) {
+      return b
+    }
+    // If score is equal, pick the largest file, aiming for highest resolution
+    if (a.file.length > b.file.length) {
+      return a
+    }
+    return b
   })
+
+  if (!bestCover) return cb(new Error('Generated poster contains no data'))
+
+  const extname = path.extname(bestCover.file.name)
+  bestCover.file.getBuffer((err, buf) => cb(err, buf, extname))
 }
 
 function contentPosterFromVideo (file, content, cb) {
@@ -79,5 +130,5 @@ function contentPosterFromVideo (file, content, cb) {
 
 function contentPosterFromContent (file, content, cb) {
   const extname = path.extname(file.name)
-  file.getBuffer((err, buf) => cb(err, buf, extname))
+  file.getBuffer((err, buf) => { return cb(err, buf, extname) })
 }

@@ -456,6 +456,13 @@ function setDimensions (dimensions) {
 function onOpen (files) {
   if (!Array.isArray(files)) files = [ files ]
 
+  // File API seems to transform "magnet:?foo" in "magnet:///?foo"
+  // this is a sanitization
+  files = files.map(file => {
+    if (typeof file !== 'string') return file
+    return file.replace(/^magnet:\/+\?/i, 'magnet:?')
+  })
+
   const url = state.location.url()
   const allContents = files.every(ContentPlayer.isContent)
   const allSubtitles = files.every(controllers.subtitles().isSubtitle)

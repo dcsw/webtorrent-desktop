@@ -115,14 +115,10 @@ module.exports = class PlaybackController {
     const state = this.state;
     if (Playlist.hasNext(state) && state.playing.location !== "external") {
       this.updatePlayer(
-        state.playing.infoHash,
-        Playlist.getNextIndex(state),
-        false,
-        err => {
-          if (err) dispatch("error", err);
-          else this.play();
-        }
-      );
+        state.playing.infoHash, Playlist.getNextIndex(state), false, (err) => {
+          if (err) dispatch('error', err)
+          else this.play()
+        })
     }
   }
 
